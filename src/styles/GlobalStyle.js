@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import Vars from "~/styles/Variables"
 
 const GlobalStyle = createGlobalStyle`
   // font
@@ -33,21 +34,36 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
-  // reset
-
-
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    font-size: 1px;
+    ${Vars.media.l`
+      font-size: ${100/Vars.sizes.l}vw;
+    `};
+    ${Vars.media.md`
+      font-size: ${100/Vars.sizes.md}vw;
+    `};
+  }
   body {
     font-family: 'cafe';
     line-height: 1.5;
-
     margin: 0;
     padding: 0;
-    background: #0f4c81;
-    color: transparent;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    background: ${Vars.color.background};
   }
+  .container {
+    padding: ${Vars.gap};
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: ${Vars.gap};
+  }
+
 `;
 
 export default GlobalStyle;
