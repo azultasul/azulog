@@ -1,16 +1,17 @@
 import { css } from 'styled-components'
 
+const frame = '24px';
 const gap = '16px';
 
 const color = {
-  background: '#f5f5f5',
-  black: '#252525',
-  blue: '#4e639e',
-  yellow: '#d49a51',
+  white: '#f5f5f5',
   wine: '#720e01',
-  skyblue: '#7ab7d4',
   peach: '#f59477',
+  yellow: '#d49a51',
+  skyblue: '#7ab7d4',
+  blue: '#4e639e',
   purple: '#504ca8',
+  black: '#252525',
 }
 
 const test = color.purple;
@@ -51,4 +52,4 @@ const media = {
   `, 
 }
 
-export default { gap, color, test, sizes, media }
+export default { frame, gap, color, test, sizes, media }

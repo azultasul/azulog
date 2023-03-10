@@ -1,8 +1,8 @@
-import { createGlobalStyle } from "styled-components";
+import { css, createGlobalStyle } from "styled-components";
 import Vars from "~/styles/Variables"
 
 const GlobalStyle = createGlobalStyle`
-  // font
+  /* font */
   @font-face {
     font-family: 'elice';
     src: url('/fonts/EliceDigitalCodingOTF_Regular.woff2') format('woff2');
@@ -34,6 +34,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
 
+  /* common */
   * {
     box-sizing: border-box;
   }
@@ -53,15 +54,60 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: ${Vars.color.background};
+    background: ${Vars.color.white};
   }
+  button {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  /* color mode (palette) */
+  ${
+    Object.keys(Vars.color).filter(el => el !== 'white').map(el => `
+      body[data-theme-color=${el}] {
+        color: ${Vars.color[el]};
+        .line {
+          background: ${Vars.color[el]};
+        }
+      }
+    `)
+  }
+
+  /* layout */
   .container {
-    padding: ${Vars.gap};
+    padding: ${Vars.frame};
   }
   .grid-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: ${Vars.gap};
+    // gap: ${Vars.gap};
+  }
+
+  .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    &--top {
+      width: 100%;
+      height: 2px;
+    }
+    &--right {
+      left: auto;
+      right: 0;
+      width: 2px;
+      height: 100%;
+    }
+    &--bottom {
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+    }
+    &--left {
+      width: 2px;
+      height: 100%;
+    }
   }
 
 `;

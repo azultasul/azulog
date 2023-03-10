@@ -1,9 +1,12 @@
 import Head from 'next/head'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
-import Layout from '~/components/Layout';
+import Layout from '~/components/layout/Layout';
+import { useState, useEffect } from 'react';
+import Palette from '~/components/Palette'
 
 export default function App({ Component, pageProps }) {
+
   return (
     <>
       <Head>
@@ -16,7 +19,8 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Layout>
         <Component {...pageProps} />
-      </Layout> 
+      </Layout>
+      <Palette></Palette>
     </>
   )
 }

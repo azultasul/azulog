@@ -1,21 +1,26 @@
 import styled from  'styled-components';
 import Vars from "~/styles/Variables"
+import GridRow from '~/components/layout/GridRow'
 
 const Test = styled.div`
-  div {
-    width: 100%;
-    color: ${Vars.test};
-    font-family: 'cafe';
-    font-size: 50rem;
-    font-weight: bold;
-  }
+  width: 100%;
+  font-size: 70rem;
+  font-weight: bold;
 `
 
 const Work = () => {
   return (
     <Test>
-      <div>안녕하세요. 유다솔 </div>
-      <div>Hello Im Dasol Yoo</div>
+      <div className='grid-container'>
+          <GridRow grid={4} className='dhdhdh'>
+            <div>안녕안녕</div>
+            <div>하이하이</div>
+            <div>바아이</div>
+          </GridRow>
+          <GridRow grid={8}>
+            <div>영역2</div>
+          </GridRow>
+      </div>
     </Test>
   )
 }

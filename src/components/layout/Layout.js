@@ -7,7 +7,7 @@ const FrameStyle = styled.div`
   height: 100%;
   left: 0;
   top: 0;
-  padding: ${Vars.gap};
+  padding: ${Vars.frame};
   pointer-events: none;
 
   div {
@@ -16,37 +16,15 @@ const FrameStyle = styled.div`
     height: 100%;
   }
 
-  .line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: ${Vars.test};
-    &--right {
-      left: auto;
-      right: 0;
-    }
-    &--bottom {
-      top: auto;
-      bottom: 0;
-    }
-  }
-  .line--top, .line--bottom {
-    width: 100%;
-    height: 2px;
-  }
-  .line--right, .line--left {
-    width: 2px;
-    height: 100%;
-  }
   .line--top:before, .line--bottom:before {
     content: '';
     position: absolute;
-    width: calc(100% + ${Vars.gap} * 2);
-    height: ${Vars.gap};
+    width: calc(100% + ${Vars.frame} * 2);
+    height: ${Vars.frame};
     top: 0;
-    left: -${Vars.gap};
+    left: -${Vars.frame};
     transform: translate(0, -100%);
-    background: ${Vars.color.background}
+    background: ${Vars.color.white}
   }
   .line--bottom:before {
     top: auto;
@@ -56,19 +34,18 @@ const FrameStyle = styled.div`
 `
 const HeaderStyle = styled.div`
   position: fixed;
-  top: ${Vars.gap};
-  left: ${Vars.gap};
-  right: ${Vars.gap};
+  top: ${Vars.frame};
+  left: ${Vars.frame};
+  right: ${Vars.frame};
   bottom: auto;
   height: 104px;
-  background: ${Vars.test};
 `
 
-const LayoutStyle = styled.div`
-  padding-top: calc(${Vars.gap} + 104px);
-  padding-right: ${Vars.gap};
-  padding-left: ${Vars.gap};
-  padding-bottom: ${Vars.gap};
+const LayoutStyle = styled.main`
+  padding-top: calc(${Vars.frame} + 104px);
+  padding-right: ${Vars.frame};
+  padding-left: ${Vars.frame};
+  padding-bottom: ${Vars.frame};
 `
 
 const Layout = ({ children }) => {
@@ -82,9 +59,11 @@ const Layout = ({ children }) => {
           <span className='line line--left'></span>
         </div>
       </FrameStyle>
-      <HeaderStyle></HeaderStyle>
+      <HeaderStyle>
+        <span className='line line--bottom'></span>
+      </HeaderStyle>
       <LayoutStyle>
-        <main>{children}</main>
+        {children}
       </LayoutStyle>
     </>
   )
