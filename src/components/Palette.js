@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react';
 import styled from  'styled-components';
 import Vars from "~/styles/Variables";
-import { useState, useEffect } from 'react';
 
 const PaletteStyle = styled.div`
   position: fixed;
@@ -23,8 +23,7 @@ const ColorStyle = styled.button`
   }
 `
 
-const Palette = ({ children }) => {
-  const [themeColor, setThemeColor] = useState(saved ? saved : 6);
+const Palette = ({ themeColor, setThemeColor }) => {
 
   useEffect(() => {
     document.body.dataset.themeColor = Object.keys(Vars.color).filter(el => el !== 'white')[themeColor];

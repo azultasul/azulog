@@ -1,12 +1,15 @@
+import { useState, useEffect } from 'react';
 import Head from 'next/head'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
 import Layout from '~/components/layout/Layout';
-import { useState, useEffect } from 'react';
 import Palette from '~/components/Palette'
 
-export default function App({ Component, pageProps }) {
+import '~/styles/fonts.css';
 
+export default function App({ Component, pageProps }) {
+  const [themeColor, setThemeColor] = useState(6);
+  
   return (
     <>
       <Head>
@@ -20,7 +23,7 @@ export default function App({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-      <Palette></Palette>
+      <Palette themeColor={themeColor} setThemeColor={setThemeColor}></Palette>
     </>
   )
 }

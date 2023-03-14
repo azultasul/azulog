@@ -51,7 +51,7 @@ const LayoutStyle = styled.main`
 const Layout = ({ children }) => {
   return (
     <>
-      <FrameStyle>
+      {/* <FrameStyle>
         <div>
           <span className='line line--top'></span>
           <span className='line line--right'></span>
@@ -61,7 +61,7 @@ const Layout = ({ children }) => {
       </FrameStyle>
       <HeaderStyle>
         <span className='line line--bottom'></span>
-      </HeaderStyle>
+      </HeaderStyle> */}
       <LayoutStyle>
         {children}
       </LayoutStyle>

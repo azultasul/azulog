@@ -12,7 +12,7 @@ const Work = () => {
   return (
     <Test>
       <div className='grid-container'>
-          <GridRow grid={4} className='dhdhdh'>
+          <GridRow grid={4}>
             <div>안녕안녕</div>
             <div>하이하이</div>
             <div>바아이</div>

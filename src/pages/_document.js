@@ -34,16 +34,16 @@ export default class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="/fonts/ProximaNova-Bold.woff"
+            href="/fonts/Cafe24Ohsquareair.woff2"
             as="font"
-            type="font/woff"
+            type="font/woff2"
             crossOrigin=""
           />
           <link
             rel="preload"
-            href="/fonts/ProximaNova-Regular.woff"
+            href="/fonts/Cafe24Ohsquare.woff2"
             as="font"
-            type="font/woff"
+            type="font/woff2"
             crossOrigin=""
           />
         </Head>
@@ -52,6 +52,6 @@ export default class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
