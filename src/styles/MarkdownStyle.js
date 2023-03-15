@@ -2,7 +2,7 @@ import styled from  'styled-components';
 import Vars from "~/styles/Variables"
 
 const MarkdownStyle = styled.section`
-  // font-size: 16px;
+  font-size: 16px;
   max-width: 800px;
   margin: 0 auto;
   h1 {

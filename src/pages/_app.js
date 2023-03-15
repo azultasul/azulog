@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import Head from 'next/head'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'

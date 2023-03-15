@@ -16,7 +16,7 @@ const FrameStyle = styled.div`
     height: 100%;
   }
 
-  .line--top:before, .line--bottom:before {
+  .c-line--top:before, .c-line--bottom:before {
     content: '';
     position: absolute;
     width: calc(100% + ${Vars.frame} * 2);
@@ -26,7 +26,7 @@ const FrameStyle = styled.div`
     transform: translate(0, -100%);
     background: ${Vars.color.white}
   }
-  .line--bottom:before {
+  .c-line--bottom:before {
     top: auto;
     bottom: 0;
     transform: translate(0, 100%);
@@ -53,14 +53,14 @@ const Layout = ({ children }) => {
     <>
       {/* <FrameStyle>
         <div>
-          <span className='line line--top'></span>
-          <span className='line line--right'></span>
-          <span className='line line--bottom'></span>
-          <span className='line line--left'></span>
+          <span className='c-line c-line--top'></span>
+          <span className='c-line c-line--right'></span>
+          <span className='c-line c-line--bottom'></span>
+          <span className='c-line c-line--left'></span>
         </div>
       </FrameStyle>
       <HeaderStyle>
-        <span className='line line--bottom'></span>
+        <span className='c-line c-line--bottom'></span>
       </HeaderStyle> */}
       <LayoutStyle>
         {children}

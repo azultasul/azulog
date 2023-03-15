@@ -6,15 +6,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  // html {
-  //   font-size: 1px;
-  //   ${Vars.media.l`
-  //     font-size: ${100/Vars.sizes.l}vw;
-  //   `};
-  //   ${Vars.media.md`
-  //     font-size: ${100/Vars.sizes.md}vw;
-  //   `};
-  // }
+  html {
+    font-size: 1px;
+    ${Vars.media.l`
+      font-size: ${100/Vars.sizes.l}vw;
+    `};
+    ${Vars.media.md`
+      font-size: ${100/Vars.sizes.md}vw;
+    `};
+  }
   body {
     font-family: 'cafe';
     line-height: 1.5;
@@ -35,8 +35,12 @@ const GlobalStyle = createGlobalStyle`
     Object.keys(Vars.color).filter(el => el !== 'white').map(el => `
       body[data-theme-color=${el}] {
         color: ${Vars.color[el]};
-        .line {
+        .c-line {
           background: ${Vars.color[el]};
+        }
+        .c-text-line {
+          color: transparent;
+          -webkit-text-stroke: 1.5px ${Vars.color[el]};
         }
       }
     `)
@@ -52,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
     // gap: ${Vars.gap};
   }
 
-  .line {
+  .c-line {
     position: absolute;
     top: 0;
     left: 0;
