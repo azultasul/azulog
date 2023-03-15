@@ -9,7 +9,7 @@ import '~/styles/fonts.css';
 
 export default function App({ Component, pageProps }) {
   const [themeColor, setThemeColor] = useState(6);
-  
+
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }) {
         <meta name="description" content="AzulTasul's blog" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <Reset />
+      {/* <Reset /> */}
       <GlobalStyle />
       <Layout>
         <Component {...pageProps} />

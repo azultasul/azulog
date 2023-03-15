@@ -1,11 +1,28 @@
 import Link from 'next/link';
 import styled from  'styled-components';
+import { getAllMetaData } from '~/lib/getPost';
 
-const BlogList = () => {
+export async function getStaticProps() {
+  const allPostsData = getAllMetaData('blog')
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
+
+const BlogList = ({ allPostsData }) => {
+  // console.log("allPostsData", allPostsData);
 
   return (
     <>
-      list
+      <ul>
+        {allPostsData.map(({ id, date, title }) => (
+          <li key={id}>
+            <Link href={`/blog/${id}`}>{title}</Link>
+          </li>
+        ))}
+      </ul>
     </>
   )
 }

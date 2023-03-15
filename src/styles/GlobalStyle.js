@@ -6,15 +6,15 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  html {
-    font-size: 1px;
-    ${Vars.media.l`
-      font-size: ${100/Vars.sizes.l}vw;
-    `};
-    ${Vars.media.md`
-      font-size: ${100/Vars.sizes.md}vw;
-    `};
-  }
+  // html {
+  //   font-size: 1px;
+  //   ${Vars.media.l`
+  //     font-size: ${100/Vars.sizes.l}vw;
+  //   `};
+  //   ${Vars.media.md`
+  //     font-size: ${100/Vars.sizes.md}vw;
+  //   `};
+  // }
   body {
     font-family: 'cafe';
     line-height: 1.5;

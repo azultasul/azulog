@@ -3,7 +3,7 @@ import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds('blog');
+  const paths = getAllPostIds('work');
 
   return {
     paths,
@@ -13,28 +13,28 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`}
 export async function getStaticProps({ params }) {
-  const blogData = await getPostData('blog', params.id);
+  const workData = await getPostData('work', params.id);
 
   return {
     props: {
-      blogData,
+      workData,
     },
   };
 }
 
-const BlogDetail = ({ blogData }) => {
-  // console.log("blogData",blogData);
+const WorkDetail = ({ workData }) => {
+  // console.log("workData",workData);
 
   return (
     <MarkdownStyle>
-      {/* {blogData.title}
+      {/* {workData.title}
       <br />
-      {blogData.id}
+      {workData.id}
       <br />
-      {blogData.date} */}
-      <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
+      {workData.date} */}
+      <div dangerouslySetInnerHTML={{ __html: workData.contentHtml }} />
     </MarkdownStyle>
   );
 }
 
-export default BlogDetail;
+export default WorkDetail;

@@ -1,28 +1,30 @@
+import Link from 'next/link';
 import styled from  'styled-components';
-import Vars from "~/styles/Variables"
-import GridRow from '~/components/layout/GridRow'
+import { getAllMetaData } from '~/lib/getPost';
 
-const Test = styled.div`
-  width: 100%;
-  font-size: 70rem;
-  font-weight: bold;
-`
+export async function getStaticProps() {
+  const allPostsData = getAllMetaData('work')
+  return {
+    props: {
+      allPostsData
+    }
+  }
+}
 
-const Work = () => {
+const WorkList = ({ allPostsData }) => {
+  // console.log("allPostsData", allPostsData);
+
   return (
-    <Test>
-      <div className='grid-container'>
-          <GridRow grid={4}>
-            <div>안녕안녕</div>
-            <div>하이하이</div>
-            <div>바아이</div>
-          </GridRow>
-          <GridRow grid={8}>
-            <div>영역2</div>
-          </GridRow>
-      </div>
-    </Test>
+    <>
+      <ul>
+        {allPostsData.map(({ id, date, title }) => (
+          <li key={id}>
+            <Link href={`/work/${id}`}>{title}</Link>
+          </li>
+        ))}
+      </ul>
+    </>
   )
 }
 
-export default Work;
+export default WorkList;

@@ -1,16 +1,15 @@
 ---
 title: 타이틀
-id: main
 date: date
 ---
 
 # npx create-next-app my
-
+---
 
 `npx create-next-app my-app`을 사용하면 기본으로 설정된 dependencies가 자동으로 설치된다. 하지만 타입스크립트, 절대경로 등 프로젝트 생성 후 설정을 추가하거나 파일을 지우고 생성하는 등 추가 과정이 필요하다. 나는 그 과정을 거치는 것 보다 처음부터 원하는 설정을 하는 것을 선호한다.
 
 # npx create-next-app@latest
-
+---
 
 `npx create-next-app@latest`로 프로젝트를 생성하면 순서대로 *project name, TypeScript, ESLint, ‘src/’ directory, experimental ‘app/’ directory, import alias*을 사용할 것인지 묻는다. 나는 아래처럼 설정했다. 
 

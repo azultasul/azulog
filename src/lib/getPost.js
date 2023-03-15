@@ -1,11 +1,35 @@
 import { remark } from 'remark';
 import html from 'remark-html';
+import remarkGfm from 'remark-gfm'
 import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
 
+function getmatterResult(type, id) {
+  // Use gray-matter to parse the post metadata section
+  const fullPath = path.join(type, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const matterResult = matter(fileContents);
+
+  return matterResult
+}
+
+export function getAllMetaData(type) {
+  const fileNames = fs.readdirSync(path.join(type));
+
+  const names = fileNames.map(fileName => {
+    const id = fileName.replace(/\.md$/, '')
+    const matterResult = getmatterResult(type, id)
+
+    return {
+      id,
+      ...matterResult.data
+    }
+  })
+  return names
+}
+
 export function getAllPostIds(type) {
-  // const fileNames = fs.readdirSync(path.join('blog'));
   const fileNames = fs.readdirSync(path.join(type));
 
   return fileNames.map((fileName) => {
@@ -18,16 +42,12 @@ export function getAllPostIds(type) {
 }
 
 export async function getPostData(type, id) {
-  // const fullPath = path.join('blog', `${id}.md`);
-  const fullPath = path.join(type, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
-
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+  const matterResult = getmatterResult(type, id)
   
   // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
+    .use(remarkGfm)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
