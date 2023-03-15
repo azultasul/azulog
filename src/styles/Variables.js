@@ -52,4 +52,6 @@ const media = {
   `, 
 }
 
-export default { frame, gap, color, test, sizes, media }
+const vars = { frame, gap, color, test, sizes, media }
+
+export default vars
