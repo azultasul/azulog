@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     width: 100vw;
     height: 100vh;
-    background: ${Vars.color.white};
+    background: ${Vars.backColor};
   }
   button {
     padding: 0;
@@ -32,15 +32,11 @@ const GlobalStyle = createGlobalStyle`
 
   /* color mode (palette) */
   ${
-    Object.keys(Vars.color).filter(el => el !== 'white').map(el => `
+    Object.keys(Vars.textColor).filter(el => el !== 'white').map(el => `
       body[data-theme-color=${el}] {
-        color: ${Vars.color[el]};
+        color: ${Vars.textColor[el]};
         .c-line {
-          background: ${Vars.color[el]};
-        }
-        .c-text-line {
-          color: transparent;
-          -webkit-text-stroke: 1.5px ${Vars.color[el]};
+          background: ${Vars.textColor[el]};
         }
       }
     `)

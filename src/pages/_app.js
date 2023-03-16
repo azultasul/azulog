@@ -3,12 +3,19 @@ import Head from 'next/head'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
 import Layout from '~/components/layout/Layout';
-import Palette from '~/components/Palette'
+import Navbar from '~/components/layout/Navbar';
+import Vars from "~/styles/Variables";
+import Variables from "~/store/ColorContext";
+
 
 import '~/styles/fonts.css';
 
 export default function App({ Component, pageProps }) {
-  const [themeColor, setThemeColor] = useState(6);
+  // const [themeColor, setThemeColor] = useState(6);
+  const [themeColor, setThemeColor] = useState({color: '#252525', index: 5});
+  useEffect(() => {
+
+  }, [])
 
   return (
     <>
@@ -18,12 +25,14 @@ export default function App({ Component, pageProps }) {
         <meta name="description" content="AzulTasul's blog" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      {/* <Reset /> */}
-      <GlobalStyle />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-      <Palette themeColor={themeColor} setThemeColor={setThemeColor}></Palette>
+      <Variables.Provider value={{currColor: themeColor}}>
+        {/* <Reset /> */}
+        <GlobalStyle />
+        <Navbar themeColor={themeColor} setThemeColor={setThemeColor}></Navbar>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Variables.Provider>
     </>
   )
 }

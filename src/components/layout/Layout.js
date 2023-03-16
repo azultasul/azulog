@@ -24,7 +24,7 @@ const FrameStyle = styled.div`
     top: 0;
     left: -${Vars.frame};
     transform: translate(0, -100%);
-    background: ${Vars.color.white}
+    background: ${Vars.backColor}
   }
   .c-line--bottom:before {
     top: auto;
@@ -34,7 +34,7 @@ const FrameStyle = styled.div`
 `
 const HeaderStyle = styled.div`
   position: fixed;
-  top: ${Vars.frame};
+  top: ${Vars.frameTop};
   left: ${Vars.frame};
   right: ${Vars.frame};
   bottom: auto;
@@ -42,7 +42,7 @@ const HeaderStyle = styled.div`
 `
 
 const LayoutStyle = styled.main`
-  padding-top: calc(${Vars.frame} + 104px);
+  padding-top: ${Vars.frameTop};
   padding-right: ${Vars.frame};
   padding-left: ${Vars.frame};
   padding-bottom: ${Vars.frame};
@@ -51,17 +51,6 @@ const LayoutStyle = styled.main`
 const Layout = ({ children }) => {
   return (
     <>
-      {/* <FrameStyle>
-        <div>
-          <span className='c-line c-line--top'></span>
-          <span className='c-line c-line--right'></span>
-          <span className='c-line c-line--bottom'></span>
-          <span className='c-line c-line--left'></span>
-        </div>
-      </FrameStyle>
-      <HeaderStyle>
-        <span className='c-line c-line--bottom'></span>
-      </HeaderStyle> */}
       <LayoutStyle>
         {children}
       </LayoutStyle>

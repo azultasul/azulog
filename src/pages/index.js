@@ -6,8 +6,8 @@ import styled from  'styled-components';
 export default function Home() {
   return (
     <>
-      <FilledTitle title='Azulog' />
-      {/* <Falling></Falling> */}
+      {/* <FilledTitle title='AZULOG' top='100px' left='50%' fontSize='250rem' position='absolute'/> */}
+      <Falling></Falling>
     </>
   )
 }

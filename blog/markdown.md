@@ -1,5 +1,5 @@
 ---
-title: 마크다운
+title: Next.js에 styled-components 적용하기 (feat. SWC)
 date: date
 ---
 # 마크다운 예제

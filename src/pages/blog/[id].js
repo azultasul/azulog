@@ -1,6 +1,13 @@
 // import Layout from '../../components/layout';
 import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
+import FilledTitle from '~/components/FilledTitle'
+import styled from  'styled-components';
+
+const TitleStyle = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+`
 
 export async function getStaticPaths() {
   const paths = getAllPostIds('blog');
@@ -26,14 +33,19 @@ const BlogDetail = ({ blogData }) => {
   // console.log("blogData",blogData);
 
   return (
-    <MarkdownStyle>
-      {/* {blogData.title}
-      <br />
-      {blogData.id}
-      <br />
-      {blogData.date} */}
-      <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
-    </MarkdownStyle>
+    <>
+      <TitleStyle>
+        <FilledTitle title={blogData.title} fontSize='80px' topGap='20px'/>
+      </TitleStyle>
+      <MarkdownStyle>
+        {/* {blogData.title}
+        <br />
+        {blogData.id}
+        <br />
+        {blogData.date} */}
+        <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
+      </MarkdownStyle>
+    </>
   );
 }
 

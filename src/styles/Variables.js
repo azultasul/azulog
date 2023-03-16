@@ -1,20 +1,19 @@
 import { css } from 'styled-components'
 
 const frame = '24px';
+const frameTop = '50px';
 const gap = '16px';
 
-const color = {
-  white: '#f5f5f5',
+const backColor = '#f5f5f5';
+const textColor = {
   wine: '#720e01',
-  peach: '#f59477',
+  // peach: '#f59477',
   yellow: '#d49a51',
   skyblue: '#7ab7d4',
   blue: '#4e639e',
   purple: '#504ca8',
   black: '#252525',
 }
-
-const test = color.purple;
 
 const sizes = {
   l: 1400,
@@ -25,6 +24,11 @@ const sizes = {
 }
 
 const media = {
+  xl: (...styles) => css`
+    @media (max-width: ${sizes.maxL}px) {
+      ${css(...styles)};
+    }
+  `,
   l: (...styles) => css`
     @media (max-width: ${sizes.l}px) {
       ${css(...styles)};
@@ -52,6 +56,6 @@ const media = {
   `, 
 }
 
-const vars = { frame, gap, color, test, sizes, media }
+const vars = { frame, frameTop, gap, backColor, textColor, sizes, media }
 
 export default vars
