@@ -11,48 +11,44 @@ const TableOfContentsStyle = styled.div`
   .inner {
     position: relative;
   }
-  .button, .contents {
+  .button {
+    position: absolute;
+    left: -7px;
+    bottom: -10px;
+  }
+  .contents {
     position: absolute;
     left: 0px;
     bottom: 0px;
   }
   .button {
-    // width: 50px;
-    // height: 50px;
-    // border-radius: 50%;
-    // border: 1px solid black;
-    // overflow: hidden;
-    // &-inner {
-    //   position: relative;
-    //   width: 100%;
-    //   height: 100%;
-    // }
-    button {
-      // position: absolute;
-      // left: 50%;
-      // top: 50%;
-      // transform: translate(-50%, -50%);
-      font-family: 'cafe';
-      font-size: 24px;
-      font-weight: bold;
-      line-height: 1;
-      word-break: keep-all;
-    }
+    font-family: 'cafe';
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+    color: ${props => props.color};
+    word-break: keep-all;
     z-index: 999;
   }
   .contents {
     width: ${props => props.isOpen ? '250px' : '0px'};
-    height: ${props => props.isOpen ? 'auto' : '0px'};
+    height: ${props => props.isOpen ? '45vh' : '0px'};
     font-size: 18px;
     font-weight: 400;
     border: ${props => `1px solid ${props.color}`};
     border-radius: 18px 18px 18px 2px;
     background: ${Vars.backColor};
     overflow: hidden;
+    overflow-y: scroll;
     z-index: 998;
+    transition-property: width, height;
+    transition-duration: 0.3s;
     &-inner {
-      padding: 24px;
-      padding-bottom: 32px;
+      margin: 24px;
+      margin-bottom: 32px;
+    }
+    &-h2-wrap {
+      padding-left: 16px;
     }
     a {
       display: block;
@@ -68,20 +64,16 @@ const TableOfContents = ({ toc }) => {
       {color => (
         <TableOfContentsStyle isOpen={isOpen} color={color.currColor.color}>
           <div className='inner'>
-            <div className='button'>
-              <div className='button-inner'>
-                <button onClick={() => setIsOpen(!isOpen)}>{isOpen ? '닫기' : '목차'}</button>
-              </div>
-            </div>
+            <button className='button' onClick={() => setIsOpen(!isOpen)}>{isOpen ? 'x' : '목차'}</button>
             <div className='contents' onClick={() => setIsOpen(false)}>
               <div className='contents-inner'>
                 {Object.keys(toc).map((el, idx) => <div key={idx}>
-                  <Link href={`#user-content-${idx}`}>{toc[el].title}</Link>
-                  <div>
+                  <Link href={`#user-content-${idx}`}>{idx + 1}. {toc[el].title}</Link>
+                  {toc[el].item && <div className='contents-h2-wrap'>
                     {toc[el].item.map((li,_idx) => <Link href={`#user-content-${idx}-${_idx}`} key={`${idx}-${_idx}`}>
                       {li}
                     </Link>)}
-                  </div>
+                  </div>}
                 </div>)}
               </div>
             </div>

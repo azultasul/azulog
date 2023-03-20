@@ -6,11 +6,13 @@ const gap = '16px';
 
 const backColor = '#f5f5f5';
 const textColor = {
-  wine: '#720e01',
+  red: '#720e01',
   // peach: '#f59477',
-  yellow: '#d49a51',
-  skyblue: '#7ab7d4',
-  blue: '#4e639e',
+  yellow: '#c6880f',
+  // skyblue: '#7ab7d4',
+  green: '#025b4b',
+  blue: '#2d4a9e',
+  // blue: '#4e639e',
   purple: '#504ca8',
   black: '#252525',
 }
