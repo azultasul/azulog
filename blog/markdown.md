@@ -1,5 +1,5 @@
 ---
-title: Next.js에 styled-components 적용하기 (feat. SWC)
+title: markdown
 date: date
 ---
 # 마크다운 예제
@@ -10,7 +10,6 @@ date: date
 여기서는 marked.js를 기준으로 설명합니다.
 :::  
 ## 제목(Heading)
-> **출력**  
 > # h1 Heading
 > ## h2 Heading
 > ### h3 Heading
@@ -18,23 +17,19 @@ date: date
 > ##### h5 Heading
 > ###### h6 Heading  
 ## 구문 장식
-> **출력**  
 > **강조** __강조__  
 > *이택릭* _이탤릭_  
 > ~~취소선~~  
 > 인라인 `코드`  
 ## 링크(Link)
-> **출력**  
 > 1. [내부 링크](/guide/)
 > 2. [내부 링크](/guide/footer/index.html)
 > 3. [외부 링크](https://www.google.com)  
 ## 이미지(Image)
-> **출력**  
 > ![대체 텍스트](https://media.giphy.com/media/pO4UHglOY2vII/giphy.gif)  
 > ![대체 텍스트](https://media.giphy.com/media/2RF2GfrnbPdXa/giphy.gif "타이틀")  
 > <img src="https://media.giphy.com/media/AMqCTHuCMFpM4/giphy.gif" alt="대체 텍스트" width="400px" />  
 ## 가로 구분선(Horizontal Rule)
-> **출력**  
 > 텍스트
 > 
 > ---
@@ -50,21 +45,18 @@ date: date
 
 ## 그룹핑  
 ### 코드 블럭(Code Blocks)
-> **출력**  
 > ```
 > markdown: {
 >   lineNumbers: true
 > }
 > ```  
 ### 문법 강조(Syntax Highlighting)
-> **출력**  
 > ```js
 > let foo = 'bar'
 > console.log(foo)
 > // bar
 > ```  
 ### 경고(Alert)
-> **출력**  
 > ::: info
 > 알아두면 유용합니다.  
 > 수고하세요.
@@ -90,7 +82,6 @@ date: date
 > 이 메시지는 영국에서 최초로 시작되어 일년에 한바퀴를 돌면서...
 > :::  
 ### 불릿(Bullet)
-> **출력**  
 > - 첫번째
 >   - 두번째
 >     - 세번째
@@ -99,7 +90,6 @@ date: date
 >   + 두번째
 >     - 세번째  
 ### 목록(Lists)
-> **출력**  
 > 1. 첫번째
 >    1. 일번
 >    2. 이번
@@ -110,11 +100,9 @@ date: date
 :::
   
 ### 작업 목록(Task List)
-> **출력**  
 > - [ ] 간지나게 자기
 > - [x] 작살나게 밥먹기  
 ### 인용(Blockquotes)
-> **출력**  
 >> 인용<br>
 >> 인용
 >>> 인용 내의 인용
@@ -142,17 +130,14 @@ date: date
 > | 1      | Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod |
 > | 2      | tempor incididunt ut labore et dolore magna aliqua Ut enim ad minim veniam |
 > | 3      | quis nostrud exercitation ullamco |  
-### 줄 바꿈(Line Breaks)
-> **출력**  <br>
+### 줄 바꿈(Line Breaks)<br>
 > 줄 바꿈이
 > 적용되지 않습니다.  
 > 줄 바꿈이 필요한 라인의 뒤에 공백 2칸을 추가해주세요.    
 > 이렇게.  
 ### 인라인 HTML(Inline HTML)
-> **출력**  
 > 맥의 잠금 화면 단축키는 <kbd>⌃</kbd> + <kbd>⌘</kbd> + <kbd>Q</kbd>입니다.  
 ### 주석(Comments)
-> **출력**  
 > 이 것은 주석이 아닙니다.
 > 
 > [//]: # "주석입니다."

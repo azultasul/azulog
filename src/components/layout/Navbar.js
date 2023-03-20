@@ -20,8 +20,8 @@ const NavStyle = styled.main`
 
 const PaletteStyle = styled.div`
   position: absolute;
-  left: 0;
-  top: calc(${Vars.frameTop} + 5.25px);
+  left: 12px;
+  top: calc(${Vars.frameTop} + 4.25px);
   transform: translateY(-100%);
   display: flex;
   flex-direction: row;
@@ -30,37 +30,34 @@ const PaletteStyle = styled.div`
 
 const ColorStyle = styled.button`
   display: block;
-  margin-right: 3px;
-  font-size: 35px;
+  margin-right: 2px;
+  font-size: 28px;
   font-weight: bold;
   line-height: 1;
   color: ${props => props.color};
   background: transparent;
   &:nth-of-type(${props => props.idx + 1}) {
-    font-size: 38px;
+    font-size: 30px;
   }
 `
 
 const LinkStyle = styled.ul`
   display: flex;
   position: absolute;
-  right: 0;
-  top: calc(${Vars.frameTop} + 5px);
+  right: 12px;
+  top: calc(${Vars.frameTop} + 2.8px);
   transform: translateY(-100%);
   margin: 0;
   padding: 0;
   border: 0 none;
   list-style: none;
   li {
-    margin-left: 10px;
-  }
-  a {
     font-family: 'cafe';
     color: ${props => props.color};
-    font-size: 25px;
+    font-size: 19px;
     font-weight: bold;
     line-height: 1;
-    text-decoration: none; 
+    margin-left: 10px;
   }
 `
 
@@ -70,6 +67,7 @@ const Navbar = ({ themeColor, setThemeColor }) => {
   useEffect(() => {
     document.body.dataset.themeColor = Object.keys(Vars.textColor)[themeColor.index];
   }, [themeColor])
+
   return (
     <NavStyle color={themeColor.color}>
       <div className='nav-inner'>

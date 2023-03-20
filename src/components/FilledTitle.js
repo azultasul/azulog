@@ -11,6 +11,7 @@ const TitleStyle = styled.div`
   left: ${props => props.left || '50%'};
   top: ${props => props.top || '50%'};
   transform: ${props => props.position === 'absolute' ? 'translate(-50%, 0%)' : ' translate(0%, 0%)'};
+  font-family: 'cafe';
   .title {
     padding: 0 35px;
     z-index: 100;
@@ -18,15 +19,15 @@ const TitleStyle = styled.div`
     text-align: center;
     font-size: ${props => props.fontSize};
     font-weight: bold;
-    line-height: 1.4;
+    line-height: 1.7;
     width: 100%;
     word-break: keep-all;
     &-wrap {
       position: relative;
-    }
-    &--lined {
       border-top: ${props => `1px solid ${props.color}`};
       border-bottom: ${props => `1px solid ${props.color}`};
+    }
+    &--lined {
       color: transparent;
       -webkit-text-stroke: ${props => `1px ${props.color}`};
     }

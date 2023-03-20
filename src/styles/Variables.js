@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 
 const frame = '24px';
-const frameTop = '50px';
+const frameTop = '40px';
 const gap = '16px';
 
 const backColor = '#f5f5f5';

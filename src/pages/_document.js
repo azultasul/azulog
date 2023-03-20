@@ -32,20 +32,6 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link
-            rel="preload"
-            href="/fonts/Cafe24Ohsquareair.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin=""
-          />
-          <link
-            rel="preload"
-            href="/fonts/Cafe24Ohsquare.woff2"
-            as="font"
-            type="font/woff2"
-            crossOrigin=""
-          />
         </Head>
         <body>
           <Main />

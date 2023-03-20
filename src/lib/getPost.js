@@ -1,6 +1,7 @@
 import { remark } from 'remark';
 import html from 'remark-html';
-import remarkGfm from 'remark-gfm'
+import remarkGfm from 'remark-gfm';
+import remarkHeadingId from 'remark-heading-id';
 import matter from 'gray-matter';
 import fs from 'fs';
 import path from 'path';
@@ -48,6 +49,7 @@ export async function getPostData(type, id) {
   const processedContent = await remark()
     .use(html)
     .use(remarkGfm)
+    .use(remarkHeadingId)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 

@@ -5,7 +5,7 @@ import { Reset } from 'styled-reset'
 import Layout from '~/components/layout/Layout';
 import Navbar from '~/components/layout/Navbar';
 import Vars from "~/styles/Variables";
-import Variables from "~/store/ColorContext";
+import ColorContext from "~/store/ColorContext";
 
 
 import '~/styles/fonts.css';
@@ -25,14 +25,14 @@ export default function App({ Component, pageProps }) {
         <meta name="description" content="AzulTasul's blog" />
         {/* <link rel="icon" href="/favicon.ico" /> */}
       </Head>
-      <Variables.Provider value={{currColor: themeColor}}>
+      <ColorContext.Provider value={{currColor: themeColor}}>
         {/* <Reset /> */}
         <GlobalStyle />
         <Navbar themeColor={themeColor} setThemeColor={setThemeColor}></Navbar>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </Variables.Provider>
+      </ColorContext.Provider>
     </>
   )
 }
