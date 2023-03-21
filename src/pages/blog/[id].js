@@ -2,10 +2,11 @@ import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
+import Vars from "~/styles/Variables"
 import styled from  'styled-components';
 
 const TitleStyle = styled.div`
-  max-width: 1400px;
+  max-width: ${Vars.sizes.l}px;
   margin: 0 auto;
 `
 

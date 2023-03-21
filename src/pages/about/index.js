@@ -4,6 +4,7 @@ const About = () => {
 
   return (
     <>
+      About
     </>
   );
 }

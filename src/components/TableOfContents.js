@@ -27,12 +27,13 @@ const TableOfContentsStyle = styled.div`
     font-weight: bold;
     line-height: 1;
     color: ${props => props.color};
+    background: ${Vars.backColor};
     word-break: keep-all;
     z-index: 999;
   }
   .contents {
     width: ${props => props.isOpen ? '250px' : '0px'};
-    height: ${props => props.isOpen ? '45vh' : '0px'};
+    height: ${props => props.isOpen ? '30vh' : '0px'};
     font-size: 18px;
     font-weight: 400;
     border: ${props => `1px solid ${props.color}`};
@@ -44,8 +45,12 @@ const TableOfContentsStyle = styled.div`
     transition-property: width, height;
     transition-duration: 0.3s;
     &-inner {
-      margin: 24px;
-      margin-bottom: 32px;
+      margin-top: 24px;
+
+      padding: 0px 24px 32px;
+      width: 100%;
+      height: calc(100% - 24px);
+      overflow: scroll;
     }
     &-h2-wrap {
       padding-left: 16px;
@@ -57,7 +62,7 @@ const TableOfContentsStyle = styled.div`
 `
 
 const TableOfContents = ({ toc }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <ColorContext.Consumer>

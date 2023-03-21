@@ -10,16 +10,18 @@ const TitleStyle = styled.div`
   position: ${props => props.position || 'static'};
   left: ${props => props.left || '50%'};
   top: ${props => props.top || '50%'};
-  transform: ${props => props.position === 'absolute' ? 'translate(-50%, 0%)' : ' translate(0%, 0%)'};
+  transform: ${props => (props.position === 'absolute' || props.position === 'fixed') ? 'translate(-50%, 0%)' : ' translate(0%, 0%)'};
   font-family: 'cafe';
+  font-size: ${props => props.fontSize};
+  font-weight: bold;
+  line-height: ${props => props.lineHeight || 1.7};
+  width: ${props => props.position === 'fixed' ? `${Vars.sizes.l}px` : 'auto'};
+  max-width: ${props => props.position === 'fixed' ? `calc(100vw - 2 * ${Vars.frame})` : 'auto'};
   .title {
     padding: 0 35px;
     z-index: 100;
     overflow: hidden;
     text-align: center;
-    font-size: ${props => props.fontSize};
-    font-weight: bold;
-    line-height: 1.7;
     width: 100%;
     word-break: keep-all;
     &-wrap {
@@ -32,10 +34,10 @@ const TitleStyle = styled.div`
       -webkit-text-stroke: ${props => `1px ${props.color}`};
     }
     &--filled {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      position: ${props => props.type === 'lined' ? 'absolute' : 'static'};
+      left: ${props => props.type === 'lined' ? '50%' : 'auto'};
+      top: ${props => props.type === 'lined' ? '50%' : 'auto'};
+      transform: ${props => props.type === 'lined' ? 'translate(-50%, -50%)' : 'translate(0%, 0%)'};
 
     }
     > div {
@@ -44,16 +46,16 @@ const TitleStyle = styled.div`
   }
 `;
 
-export const FilledTitle = ({ title, top, left, fontSize, position, topGap }) => {
+export const FilledTitle = ({ type = 'normal', title, top, left, fontSize, position, topGap, lineHeight }) => {
 
   return (
     <ColorContext.Consumer>
       {color => (
-        <TitleStyle top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} color={color.currColor.color}>
+        <TitleStyle type={type} top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} lineHeight={lineHeight} color={color.currColor.color}>
           <div className='title-wrap'>
-            <div className='title title--lined'>
+            {type === 'lined' && <div className='title title--lined'>
               <div>{title}</div>
-            </div>
+            </div>}
             <div className='title title--filled'>
               <div>{title}</div>
             </div>

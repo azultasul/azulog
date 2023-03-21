@@ -1,6 +1,6 @@
 ---
 title: markdown
-date: date
+date: '2023-03-08'
 ---
 # 마크다운 예제
 

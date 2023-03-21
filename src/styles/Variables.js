@@ -19,7 +19,7 @@ const textColor = {
 
 const sizes = {
   l: 1400,
-  md: 768,
+  md: 1024,
   sm: 380,
   minL: 320,
   maxL: 1920

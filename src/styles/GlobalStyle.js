@@ -29,9 +29,14 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     border: 0;
+    background: transparent;
+    cursor: pointer;
   }
   a {
     text-decoration: none;
+  }
+  img {
+    width: 100%;
   }
 
   /* color mode (palette) */
@@ -49,6 +54,7 @@ const GlobalStyle = createGlobalStyle`
       }
     `)
   }
+
 
   /* layout */
   .container {

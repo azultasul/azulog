@@ -27,6 +27,9 @@ const MarkdownStyle = styled.section`
   a {
     text-decoration: underline;
   }
+  img {
+    margin-top: 12px;
+  }
   blockquote {
     margin: 12px 0 12px;
     padding-left: 20px;

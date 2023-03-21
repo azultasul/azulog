@@ -12,7 +12,7 @@ const NavStyle = styled.main`
   z-index: 999;
   .nav-inner {
     position: relative;
-    max-width: 1400px;
+    max-width: ${Vars.sizes.l}px;
     height: 100%;
     margin: 0 auto;
   }
@@ -39,6 +39,11 @@ const ColorStyle = styled.button`
   &:nth-of-type(${props => props.idx + 1}) {
     font-size: 30px;
   }
+  &:hover {
+    color: transparent;
+    -webkit-text-stroke: ${props => `1px ${props.color}`};
+    transition: 0.2s;
+  }
 `
 
 const LinkStyle = styled.ul`
@@ -58,6 +63,11 @@ const LinkStyle = styled.ul`
     font-weight: bold;
     line-height: 1;
     margin-left: 10px;
+    &:hover a {
+      color: transparent;
+      -webkit-text-stroke: ${props => `1px ${props.color}`};
+      transition: 0.2s;
+    }
   }
 `
 
@@ -82,7 +92,7 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             ))
           }
         </PaletteStyle>
-        <LinkStyle>
+        <LinkStyle color={themeColor.color}>
           <li>
             <Link href="/">HOME</Link>
           </li>
