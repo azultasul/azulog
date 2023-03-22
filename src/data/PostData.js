@@ -1,8 +1,8 @@
 const techStack = {
-  0: 'javascript',
-  1: 'frontend',
-  2: 'css',
-  3: 'scss',
+  0: 'Javascript',
+  1: 'Frontend',
+  2: 'CSS',
+  3: 'SCSS',
   4: 'Github',
   5: 'React',
   6: 'Next.js',

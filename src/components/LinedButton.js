@@ -58,9 +58,15 @@ const LinedButton = ({ type, style = 'filled', title, onClick, href, children, c
       {color => (
         <LinedStyle color={color.currColor.color} className={`${style}`}>
           {type === 'button'
-            ? <button onClick={onClick} className={`lined-text lined-button ${className}`}>{title}</button>
+            ? <button onClick={onClick} className={`lined-text lined-button ${className}`}>
+                {title}
+                <>{children}</>
+              </button>
             : type === 'link'
-              ? <Link href={href} className={`lined-text lined-link ${className}`}>{title}</Link>
+              ? <Link href={href} className={`lined-text lined-link ${className}`}>
+                  {title}
+                  <>{children}</>
+                </Link>
               // : <div className={`lined-text ${className}`}>{title}</div>
               : <>{children}</>
           }

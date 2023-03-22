@@ -4,7 +4,6 @@ import FilledTitle from '~/components/FilledTitle';
 import PostList from '~/components/PostList';
 
 import Vars from "~/data/Variables"
-import PostData from '~/data/PostData'
 import styled from  'styled-components';
 import { getAllMetaData } from '~/lib/getPost';
 
@@ -36,7 +35,7 @@ const BlogList = ({ allPostsData }) => {
   return (
     <PageStyle titleTotalH={titleTotalH}>
       <FilledTitle ref={titleRef} type='lined' title='BLOG' position='fixed' top={`${Vars.frameTop}px`} left='50%' fontSize='170px' topGap='20px' lineHeight='1'/>
-      <PostList data={allPostsData} frameTotalH={frameTotalH} sortList={Object.values(PostData.techStack)}/>
+      <PostList data={allPostsData} frameTotalH={frameTotalH} />
     </PageStyle>
   )
 }
