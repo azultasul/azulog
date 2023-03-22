@@ -54,44 +54,54 @@ const SortStyle = styled.div`
 const BlogList = ({ data, frameTotalH }) => {
   const contentsRef = useRef(null);
   const [ contentsMargin, setContentsMargin ] = useState(0);
-  const [ sortByDate, setSortByDate ] = useState(0);
-  const [ sortByCategory, setSortByCategory ] = useState([]);
+  const [ sortNumByDate, setSortNumByDate ] = useState(0);
+  const [ sortNumByCategory, setSortNumByCategory ] = useState([]);
 
   // const [ sortedDataByDate, setSortedDataByDate ] = useState(sortedDataByCategory);
-  // const [ sortedDataByCategory, setSortedDataByCategory ] = useState(data);
+  const [ sortedDataByCategory, setSortedDataByCategory ] = useState(data);
   const categoryList = Object.values(PostData.techStack);
 
-  // sortByDate
-  const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date))
-  // const sortedData = data.sort((a, b) => new Date(a.date) - new Date(b.date))
 
-  const getSortByCategory = (el) => {
-    const hasCategoryNumber = sortByCategory.includes(el);
-    
-    // console.log("????", hasCategoryNumber && sortByCategory.filter(num => num !== el));
-    
+  // const getSortNumByDate = (num) => {
+  //   const sortedData = num === 0
+  //     ? data.sort((a, b) => new Date(a.date) - new Date(b.date))
+  //     : data.sort((a, b) => new Date(b.date) - new Date(a.date))
+  // }
 
-    hasCategoryNumber 
-    ? setSortByCategory(prev => [...prev.filter(num => num !== el)])
-    : setSortByCategory(prev => [...prev, el])
+  const getSortNumByCategory = (el) => {
+    const hasCategoryNumber = sortNumByCategory.includes(el);
+    setSortNumByCategory(prev => {
+      const data = hasCategoryNumber 
+        ? [...prev.filter(num => num !== el)]
+        : [...prev, el]
+
+      return data
+    })
   }
+
+
+  useEffect(() => {
+    console.log("??", sortNumByCategory);
+
+    setSortedDataByCategory(prev => {
+      const test = sortNumByCategory.length > 0
+        ? prev.filter(el => el.category.every(el2 => sortNumByCategory.includes(el2)))
+        // ? prev.filter(el =>  console.log("data", sortNumByCategory.every(el2 => el.category.includes(el2))))
+        : data
+
+      return test;
+    })
+
+  }, [sortNumByCategory]);
+
+  useEffect(() => {
+    // console.log(sortedDataByCategory);
+  }, [sortedDataByCategory])
+
   const resizeHandler = () => {
     const contentsW = contentsRef.current.clientWidth;
     setContentsMargin(contentsW > 1400 ? (contentsW - 1400)/2 : 0);
   };
-
-  // useEffect(() => {
-    
-
-  // }, [sortByDate]);
-
-  useEffect(() => {
-    console.log("??", sortByCategory);
-    // setSortedDataByCategory(prev => {
-    //   prev.map(el => el.category)
-    // })
-
-  }, [sortByCategory]);
 
   useEffect(() => {
     resizeHandler();
@@ -115,11 +125,11 @@ const BlogList = ({ data, frameTotalH }) => {
             </div>
           </div>
           <SortStyle color={color.currColor.color} contentsMargin={contentsMargin}>
-            <LinedButton type='button' style='lined' title='NEWEST' onClick={() => setSortByDate(0)} />
-            <LinedButton type='button' style='lined' title='OLDEST' onClick={() => setSortByDate(1)} />
+            <LinedButton type='button' style='lined' title='NEWEST' onClick={() => setSortNumByDate(0)} />
+            <LinedButton type='button' style='lined' title='OLDEST' onClick={() => setSortNumByDate(1)} />
             <br />
             {categoryList.map((el, idx) => (
-              <LinedButton key={idx} type='button' style='filled' title={el} onClick={() => getSortByCategory(idx)}>
+              <LinedButton key={idx} type='button' style='filled' title={el} onClick={() => getSortNumByCategory(idx)}>
                 <span className='button-num'>0</span>
               </LinedButton>
             ))}
