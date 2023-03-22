@@ -1,12 +1,12 @@
 import Link from 'next/link';
+import { useEffect, useRef, useState, useContext, createContext } from 'react';
 import FilledTitle from '~/components/FilledTitle';
-import LinedButton from '~/components/LinedButton';
-import PostCard from '~/components/PostCard';
+import PostList from '~/components/PostList';
 
-import Vars from "~/styles/Variables"
+import Vars from "~/data/Variables"
+import PostData from '~/data/PostData'
 import styled from  'styled-components';
 import { getAllMetaData } from '~/lib/getPost';
-import ColorContext from "~/store/ColorContext";
 
 export async function getStaticProps() {
   const allPostsData = getAllMetaData('blog')
@@ -17,65 +17,27 @@ export async function getStaticProps() {
   }
 }
 
-
 const PageStyle = styled.div`
-margin-top: 292px;
+  margin-top: ${props => `${props.titleTotalH}px`};
 `
-
-const ContentsStyle = styled.div`
-  display: flex;
-  // flex-wrap: wrap;
-  gap: ${Vars.gap};
-  max-width: ${Vars.sizes.l}px;
-  margin: 38px auto 0;
-  list-style: none;
-  padding: 0 32px;
-  .card-wrap {
-    max-width: 900px;
-  }
-`
-
-const SortStyle = styled.div`
-  flex: 1;
-  // border-top: ${props => `1px solid ${props.color}`};
-  margin: 0px;
-  // padding-top: 20px;
-  text-align: right;
-  .lined-button {
-    font-family: 'cafe';
-    font-size: 30px;
-    font-weight: bold;
-    margin: 0 20px;
-    line-height: 1.3;
-  }
-`
-
-const sortList = ['React', 'Next.js', 'Vue', 'Javascript', 'CSS', 'Frontend', 'Github']
 
 const BlogList = ({ allPostsData }) => {
-  // console.log("allPostsData", allPostsData);
+  const titleRef = useRef(null);
+  const [ titleTotalH, setTitleTotalH ] = useState(null);
+  const [ frameTotalH, setFrameTotalH ] = useState(null);
+
+  useEffect(() => {
+    const titleH = titleRef.current.offsetHeight;
+    const frameGap = Vars.frameTop + 38;
+    setTitleTotalH(titleH + 38);
+    setFrameTotalH(titleH + frameGap);
+  }, []);
 
   return (
-    <ColorContext.Consumer>
-      {color => (
-        <PageStyle>
-          <FilledTitle type='lined' title='BLOG' position='fixed' top={Vars.frameTop} left='50%' fontSize='230px' topGap='20px' lineHeight='1'/>
-          <ContentsStyle>
-            <div className='card-wrap'>
-              {allPostsData.map(({ id, date, title, thumb }) => (
-                <PostCard title={title} href={`/blog/${id}`} date={date} thumb={thumb} key={id}></PostCard>
-              ))}
-            </div>
-            <SortStyle color={color.currColor.color}>
-              <LinedButton type='button' style='lined' title='NEWEST' />
-              <LinedButton type='button' style='lined' title='OLDEST' />
-              <br />
-              {sortList.map((el, idx) => <LinedButton key={idx} type='button' style='filled' title={el} />)}
-            </SortStyle>
-          </ContentsStyle>
-        </PageStyle>
-      )}
-    </ColorContext.Consumer>
+    <PageStyle titleTotalH={titleTotalH}>
+      <FilledTitle ref={titleRef} type='lined' title='BLOG' position='fixed' top={`${Vars.frameTop}px`} left='50%' fontSize='170px' topGap='20px' lineHeight='1'/>
+      <PostList data={allPostsData} frameTotalH={frameTotalH} sortList={Object.values(PostData.techStack)}/>
+    </PageStyle>
   )
 }
 

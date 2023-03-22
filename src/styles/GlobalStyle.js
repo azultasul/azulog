@@ -1,5 +1,5 @@
 import { css, createGlobalStyle } from "styled-components";
-import Vars from "~/styles/Variables"
+import Vars from '../data/Variables';
 
 const GlobalStyle = createGlobalStyle`
   /* common */
@@ -58,12 +58,12 @@ const GlobalStyle = createGlobalStyle`
 
   /* layout */
   .container {
-    padding: ${Vars.frame};
+    padding: ${Vars.frame}px;
   }
   .grid-container {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    // gap: ${Vars.gap};
+    // gap: ${Vars.gap}px;
   }
 
 `;

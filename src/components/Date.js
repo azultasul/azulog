@@ -1,9 +1,11 @@
 import { parseISO, format } from 'date-fns';
 
-const Date = ({ dateString }) => {
+const Date = ({ dateString, className }) => {
   const date = parseISO(dateString);
   return (
-    <>{format(date, 'yyyy.MM.dd')}</>
+    <div className={className}>
+      {format(date, 'yyyy.MM.dd')}
+    </div>
   );
 }
 

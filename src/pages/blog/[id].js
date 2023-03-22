@@ -2,7 +2,7 @@ import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
-import Vars from "~/styles/Variables"
+import Vars from "~/data/Variables"
 import styled from  'styled-components';
 
 const TitleStyle = styled.div`

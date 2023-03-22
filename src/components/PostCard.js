@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image'
 import Date from '~/components/Date';
 import LinedButton from '~/components/LinedButton';
-import Vars from "~/styles/Variables"
+import Vars from "~/data/Variables"
 import styled from  'styled-components';
 import ColorContext from "~/store/ColorContext";
 
@@ -38,17 +38,6 @@ const CardStyle = styled.div`
     object-fit: cover;
     transition: 0.2s;
   }
-  .contents {
-    flex: 3;
-    padding: 18px;
-  }
-  .title {
-    font-family: 'cafe';
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 1.5;
-    // transition: 0.2s;
-  }
   &:hover {
     .thumb {
       transform: translate(-50%, -50%) scale(1.1);
@@ -59,8 +48,38 @@ const CardStyle = styled.div`
     }
   }
 `
+const ContentsStyle = styled.div`
+  flex: 3;
+  padding: 18px;
+  .title {
+    font-family: 'cafe';
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  .date {
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .category {
+    font-size: 15px;
+    font-weight: 400;
+    text-align: right;
+    line-height: 1;
+    span {
+      // background: gray;
+      // border-radius: 8px;
 
-const PostCard = ({ title, href, date, thumb, className }) => {
+      background: ${props => props.color};
+      border-radius: 16px;
+      padding: 4px 13px;
+      margin-left: 6px;
+      color: ${Vars.backColor};
+    }
+  }
+`
+
+const PostCard = ({ title, href, date, thumb, category, className }) => {
 
   return (
     <ColorContext.Consumer>
@@ -73,10 +92,11 @@ const PostCard = ({ title, href, date, thumb, className }) => {
                   <Image src={thumb} className='thumb' alt="alt" width='100' height='100' />
                 </div>
               }
-              <div className="contents">
+              <ContentsStyle color={color.currColor.color}>
                 <div className='title'>{title}</div>
-                <Date dateString={date} />
-              </div>
+                <Date className='date' dateString={date} />
+                <div className="category">{category.map((el, idx) => <span key={idx}>{el}</span>)}</div>
+              </ContentsStyle>
             </CardStyle>
           </Link>
         </CardWrapStyle>

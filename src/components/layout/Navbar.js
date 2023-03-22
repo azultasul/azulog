@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from  'styled-components';
-import Vars from "~/styles/Variables"
+import Vars from "~/data/Variables"
 
 const NavStyle = styled.main`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: ${Vars.frameTop};
+  height: ${Vars.frameTop}px;
   z-index: 999;
   .nav-inner {
     position: relative;
@@ -21,7 +22,7 @@ const NavStyle = styled.main`
 const PaletteStyle = styled.div`
   position: absolute;
   left: 12px;
-  top: calc(${Vars.frameTop} + 4.25px);
+  top: calc(${Vars.frameTop}px + 4.25px);
   transform: translateY(-100%);
   display: flex;
   flex-direction: row;
@@ -37,20 +38,23 @@ const ColorStyle = styled.button`
   color: ${props => props.color};
   background: transparent;
   &:nth-of-type(${props => props.idx + 1}) {
-    font-size: 30px;
+    transform: scale(1.17);
+    transform-origin: 50% 80%;
   }
   &:hover {
     color: transparent;
     -webkit-text-stroke: ${props => `1px ${props.color}`};
-    transition: 0.2s;
+    transition: color 0.2s;
   }
 `
 
 const LinkStyle = styled.ul`
   display: flex;
+  align-items: flex-end;
+  gap: 12px;
   position: absolute;
   right: 12px;
-  top: calc(${Vars.frameTop} + 2.8px);
+  top: calc(${Vars.frameTop}px + 2.8px);
   transform: translateY(-100%);
   margin: 0;
   padding: 0;
@@ -62,7 +66,11 @@ const LinkStyle = styled.ul`
     font-size: 19px;
     font-weight: bold;
     line-height: 1;
-    margin-left: 10px;
+    text-align: center;
+    &:nth-of-type(${props => props.routeIndex + 1}) {
+      transform: scale(1.17);
+      transform-origin: 50% 90%;
+    }
     &:hover a {
       color: transparent;
       -webkit-text-stroke: ${props => `1px ${props.color}`};
@@ -72,7 +80,26 @@ const LinkStyle = styled.ul`
 `
 
 const Navbar = ({ themeColor, setThemeColor }) => {
+  const router = useRouter();
+  const [ routeIndex, setRouteIndex ] = useState(0);
   const logo = 'AZULOG';
+
+  useEffect(() => {
+    const path = router.route.split('/')[1];
+    switch (path) {
+      case 'about':
+        setRouteIndex(1);
+        break;
+      case 'work':
+        setRouteIndex(2);
+        break;
+      case 'blog':
+        setRouteIndex(3);
+        break;
+      default:
+        setRouteIndex(0);
+    }
+  }, [router])
 
   useEffect(() => {
     document.body.dataset.themeColor = Object.keys(Vars.textColor)[themeColor.index];
@@ -81,7 +108,6 @@ const Navbar = ({ themeColor, setThemeColor }) => {
   return (
     <NavStyle color={themeColor.color}>
       <div className='nav-inner'>
-        {/* <Palette themeColor={color} setThemeColor={setThemeColor}></Palette> */}
         <PaletteStyle>
           {
             Object.keys(Vars.textColor)
@@ -92,7 +118,7 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             ))
           }
         </PaletteStyle>
-        <LinkStyle color={themeColor.color}>
+        <LinkStyle color={themeColor.color} routeIndex={routeIndex}>
           <li>
             <Link href="/">HOME</Link>
           </li>

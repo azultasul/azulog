@@ -1,11 +1,11 @@
 import styled from  'styled-components';
-import Vars from "~/styles/Variables"
+import Vars from "~/data/Variables"
 
 const LayoutStyle = styled.main`
-  padding-top: ${Vars.frameTop};
-  padding-right: ${Vars.frame};
-  padding-left: ${Vars.frame};
-  padding-bottom: ${Vars.frame};
+  padding-top: ${Vars.frameTop}px;
+  padding-right: ${Vars.frame}px;
+  padding-left: ${Vars.frame}px;
+  // padding-bottom: ${Vars.frame}px;
 `
 
 const Layout = ({ children }) => {

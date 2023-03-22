@@ -4,7 +4,7 @@ import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
 import Layout from '~/components/layout/Layout';
 import Navbar from '~/components/layout/Navbar';
-import Vars from "~/styles/Variables";
+import Vars from "~/data/Variables";
 import ColorContext from "~/store/ColorContext";
 
 

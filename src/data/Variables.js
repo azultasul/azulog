@@ -1,8 +1,8 @@
 import { css } from 'styled-components'
 
-const frame = '24px';
-const frameTop = '40px';
-const gap = '16px';
+const frame = 24;
+const frameTop = 40;
+const gap = 16;
 
 const backColor = '#f5f5f5';
 const textColor = {

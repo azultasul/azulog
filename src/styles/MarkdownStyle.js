@@ -1,5 +1,4 @@
 import styled from  'styled-components';
-import Vars from "~/styles/Variables"
 
 const MarkdownStyle = styled.section`
   font-size: 16px;

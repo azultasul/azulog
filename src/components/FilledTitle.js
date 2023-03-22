@@ -1,8 +1,5 @@
-import { useEffect, useRef, useState, useContext, createContext } from 'react';
-import Matter from 'matter-js';
-import Link from 'next/link'
-import Image from 'next/image'
-import Vars from "~/styles/Variables";
+import { forwardRef, useEffect, useRef, useState, useContext, createContext } from 'react';
+import Vars from "~/data/Variables";
 import styled from  'styled-components';
 import ColorContext from "~/store/ColorContext";
 
@@ -16,7 +13,7 @@ const TitleStyle = styled.div`
   font-weight: bold;
   line-height: ${props => props.lineHeight || 1.7};
   width: ${props => props.position === 'fixed' ? `${Vars.sizes.l}px` : 'auto'};
-  max-width: ${props => props.position === 'fixed' ? `calc(100vw - 2 * ${Vars.frame})` : 'auto'};
+  max-width: ${props => props.position === 'fixed' ? `calc(100vw - 2 * ${Vars.frame}px)` : 'auto'};
   .title {
     padding: 0 35px;
     z-index: 100;
@@ -41,17 +38,17 @@ const TitleStyle = styled.div`
 
     }
     > div {
-      margin-top: ${props => props.topGap || '30px'};
+      margin-top: ${props => `${props.topGap}` || '30px'};
     }
   }
 `;
 
-export const FilledTitle = ({ type = 'normal', title, top, left, fontSize, position, topGap, lineHeight }) => {
+export const FilledTitle = forwardRef(({ type = 'normal', title, top, left, fontSize, position, topGap, lineHeight }, ref) => {
 
   return (
     <ColorContext.Consumer>
       {color => (
-        <TitleStyle type={type} top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} lineHeight={lineHeight} color={color.currColor.color}>
+        <TitleStyle ref={ref} type={type} top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} lineHeight={lineHeight} color={color.currColor.color}>
           <div className='title-wrap'>
             {type === 'lined' && <div className='title title--lined'>
               <div>{title}</div>
@@ -64,6 +61,6 @@ export const FilledTitle = ({ type = 'normal', title, top, left, fontSize, posit
       )}
     </ColorContext.Consumer>
   )
-}
+});
 
 export default FilledTitle;
