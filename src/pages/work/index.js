@@ -34,7 +34,7 @@ const WorkList = ({ allPostsData }) => {
   return (
     <PageStyle titleTotalH={titleTotalH}>
       <FilledTitle ref={titleRef} type='lined' title='WORK' position='fixed' top={`${Vars.frameTop}px`} left='50%' fontSize='170px' topGap='20px' lineHeight='1'/>
-      <PostList data={allPostsData} frameTotalH={frameTotalH} dataCat='category' catName='techStack'/>
+      <PostList post='work' data={allPostsData} frameTotalH={frameTotalH} dataCat='category' catName='techStack'/>
     </PageStyle>
   )
 }

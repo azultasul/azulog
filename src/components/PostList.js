@@ -52,7 +52,7 @@ const SortStyle = styled.div`
   }
 `
 
-const PostList = ({ data, frameTotalH, dataCat, catName }) => {
+const PostList = ({ post, data, frameTotalH, dataCat, catName }) => {
   const contentsRef = useRef(null);
   const [ contentsMargin, setContentsMargin ] = useState(0);
 
@@ -98,7 +98,7 @@ const PostList = ({ data, frameTotalH, dataCat, catName }) => {
               {sortedData.map(({ id, date, title, thumb, category }) => {
                 const catName = category.map(el => Cat.techStack[el])
                 return (
-                  <PostCard title={title} href={`/blog/${id}`} date={date} thumb={thumb} category={catName} key={id}></PostCard>
+                  <PostCard title={title} href={`/${post}/${id}`} date={date} thumb={thumb} category={catName} key={id}></PostCard>
                 )
               })}
             </div>

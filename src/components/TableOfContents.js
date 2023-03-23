@@ -40,7 +40,6 @@ const TableOfContentsStyle = styled.div`
     border-radius: 18px 18px 18px 2px;
     background: ${Vars.backColor};
     overflow: hidden;
-    overflow-y: scroll;
     z-index: 998;
     transition-property: width, height;
     transition-duration: 0.4s;

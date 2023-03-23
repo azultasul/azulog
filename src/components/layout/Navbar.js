@@ -25,13 +25,13 @@ const PaletteStyle = styled.div`
   top: calc(${Vars.frameTop}px + 4.25px);
   transform: translateY(-100%);
   display: flex;
+  gap: 3px;
   flex-direction: row;
   align-items: flex-end;
 `
 
 const ColorStyle = styled.button`
   display: block;
-  margin-right: 2px;
   font-size: 28px;
   font-weight: bold;
   line-height: 1;
@@ -51,7 +51,7 @@ const ColorStyle = styled.button`
 const LinkStyle = styled.ul`
   display: flex;
   align-items: flex-end;
-  gap: 12px;
+  gap: 16px;
   position: absolute;
   right: 12px;
   top: calc(${Vars.frameTop}px + 2.8px);

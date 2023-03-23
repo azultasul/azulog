@@ -2,6 +2,7 @@ import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
+import Comments from '~/components/Comments'
 import Vars from "~/data/Variables"
 import styled from  'styled-components';
 
@@ -46,6 +47,7 @@ const BlogDetail = ({ blogData }) => {
         {blogData.date} */}
         <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
       </MarkdownStyle>
+      <Comments></Comments>
       <TableOfContents toc={blogData.toc} />
     </>
   );
