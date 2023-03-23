@@ -27,7 +27,7 @@ const LinedStyle = styled.div`
       color: ${props => props.color};
     }
   }
-  &:hover {
+  &:hover, &:has(.clicked) {
     .lined-text {
       transform: skew(-20deg);
       transition: 0.3s;

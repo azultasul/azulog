@@ -52,13 +52,13 @@ const SortStyle = styled.div`
   }
 `
 
-const PostList = ({ data, frameTotalH, dataCat, catName }) => {
+const PostList = ({ data, frameTotalH }) => {
   const contentsRef = useRef(null);
   const [ contentsMargin, setContentsMargin ] = useState(0);
 
   const [ sortNumByDate, setSortNumByDate ] = useState(0);
-  const [ sortedDataByCat, setSortedDataByCat ] = useState([]);
-  const [ sortedData, setSortedData ] = useState([]);
+  const [ sortedDataByCat, setSortedDataByCat ] = useState(data);
+  const [ sortedData, setSortedData ] = useState(data);
   
 
   const sortDataByDate = (array) => {
@@ -66,16 +66,24 @@ const PostList = ({ data, frameTotalH, dataCat, catName }) => {
       ? array.sort((a, b) => new Date(b.date) - new Date(a.date)) // 내림차순
       : array.sort((a, b) => new Date(a.date) - new Date(b.date)) // 오름차순
 
+      console.log("???", array, sortedDataByDate);
+
     return sortedDataByDate;
   }
+  // const [ sortedData, setSortedData ] = useState(sortDataByDate(data));
+
 
   useEffect(() => {
-    setSortedData([...sortDataByDate(sortedData)]);
-  }, [sortNumByDate])
+    console.log("data", sortedData);
+  }, [sortedData])
 
   useEffect(() => {
-    setSortedData([...sortDataByDate(sortedDataByCat)])
+    setSortedData(sortDataByDate(sortedDataByCat))
   }, [sortedDataByCat])
+
+  useEffect(() => {
+    setSortedData(prev => sortDataByDate(prev));
+  }, [sortNumByDate])
 
   const resizeHandler = () => {
     const contentsW = contentsRef.current.clientWidth;
@@ -107,7 +115,7 @@ const PostList = ({ data, frameTotalH, dataCat, catName }) => {
             <LinedButton type='button' style='lined' title='NEWEST' onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''}/>
             <LinedButton type='button' style='lined' title='OLDEST' onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''}/>
             <br />
-            <SortData data={data} dataCat={dataCat} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle='filled'></SortData>
+            <SortData data={data} dataCat='category' catName='techStack' setSortedDataByCat={setSortedDataByCat} buttonStyle='filled'></SortData>
           </SortStyle>
         </ContentsStyle>
       )}
