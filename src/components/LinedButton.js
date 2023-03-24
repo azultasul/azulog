@@ -6,6 +6,7 @@ const LinedStyle = styled.div`
   display: inline-block;
   position: relative;
   .lined-text {
+    display: inline-block;
     &:after {
       content: '';
       position: absolute;
@@ -63,7 +64,7 @@ const LinedButton = ({ type, style = 'filled', title, onClick, href, children, c
                 <>{children}</>
               </button>
             : type === 'link'
-              ? <Link href={href} className={`lined-text lined-link ${className}`}>
+              ? <Link href={href} onClick={onClick} className={`lined-text lined-link ${className}`}>
                   {title}
                   <>{children}</>
                 </Link>

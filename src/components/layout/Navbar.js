@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import styled from  'styled-components';
+import Image from 'next/image'
+import styled from 'styled-components';
 import Vars from "~/data/Variables"
+
+import github from '~/assets/github.svg';
 
 const NavStyle = styled.main`
   position: fixed;
@@ -77,6 +80,10 @@ const LinkStyle = styled.ul`
       transition: 0.2s;
     }
   }
+  img {
+    fill: ${props => props.color};
+    transform: translate(0px, 3px);
+  }
 `
 
 const Navbar = ({ themeColor, setThemeColor }) => {
@@ -130,6 +137,16 @@ const Navbar = ({ themeColor, setThemeColor }) => {
           </li>
           <li>
             <Link href="/blog">BLOG</Link>
+          </li>
+          <li>
+            <a href="https://github.com/azultasul" target='_blank'>
+              <Image
+                src={github}
+                alt="github"
+                width={20}
+                height={20}
+              />
+            </a>
           </li>
         </LinkStyle>
       </div>

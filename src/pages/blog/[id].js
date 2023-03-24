@@ -1,9 +1,15 @@
+import { useEffect, useRef, useState, useContext, createContext } from 'react';
+import { useRouter } from 'next/router'
+import Link from 'next/link';
+import LinedButton from '~/components/LinedButton';
+
 import { getAllPostIds, getPostData } from '~/lib/getPost';
 import MarkdownStyle from '~/styles/MarkdownStyle';
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
 import Comments from '~/components/Comments'
 import Vars from "~/data/Variables"
+import Cat from '~/data/Categories'
 import styled from  'styled-components';
 
 const TitleStyle = styled.div`
@@ -40,12 +46,12 @@ const BlogDetail = ({ blogData }) => {
         <FilledTitle title={blogData.title} fontSize='80px' topGap='20px'/>
       </TitleStyle>
       <MarkdownStyle>
-        {/* {blogData.title}
-        <br />
-        {blogData.id}
-        <br />
-        {blogData.date} */}
         <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
+      {blogData.category.map((cat, idx) => 
+        // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
+        <LinedButton key={idx} type='link' href={`/blog?tag=${cat}`} style='filled' title={Cat.techStack[cat]}>
+        </LinedButton>
+      )}
       </MarkdownStyle>
       <Comments></Comments>
       <TableOfContents toc={blogData.toc} />
