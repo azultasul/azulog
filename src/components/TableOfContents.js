@@ -34,7 +34,7 @@ const TableOfContentsStyle = styled.div`
   .contents {
     width: ${(props) => (props.isOpen ? '250px' : '0px')};
     height: ${(props) => (props.isOpen ? '30vh' : '0px')};
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     border: ${(props) => `1px solid ${props.color}`};
     border-radius: 18px 18px 18px 2px;
@@ -47,7 +47,7 @@ const TableOfContentsStyle = styled.div`
     &-inner {
       width: 100%;
       height: calc(100% - 24px);
-      padding: 10px 24px 32px;
+      padding: 15px 24px 32px;
       margin-top: 44px;
       overflow: scroll;
       opacity: ${(props) => (props.isOpen ? 1 : 0)};

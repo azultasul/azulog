@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useContext, createContext } from 'react'
 import FilledTitle from '~/components/FilledTitle'
 import PostList from '~/components/PostList'
 
@@ -33,7 +33,7 @@ const WorkList = ({ allPostsData }) => {
 
   return (
     <PageStyle titleTotalH={titleTotalH}>
-      <FilledTitle ref={titleRef} type="lined" title="WORK" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="170px" topGap="20px" lineHeight="1" />
+      <FilledTitle ref={titleRef} type="lined" title="WORK" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="150px" topGap="20px" lineHeight="1" />
       <PostList post="work" data={allPostsData} frameTotalH={frameTotalH} dataCat="category" catName="techStack" />
     </PageStyle>
   )

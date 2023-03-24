@@ -16,7 +16,7 @@ const CardWrapStyle = styled.div`
 const CardStyle = styled.div`
   display: flex;
   width: 100%;
-  min-height: 120px;
+  // min-height: 120px;
   border-radius: 18px;
   border: ${(props) => `1px solid ${props.color}`};
   overflow: hidden;
@@ -53,16 +53,16 @@ const ContentsStyle = styled.div`
   padding: 18px;
   .title {
     font-family: 'cafe';
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     line-height: 1.5;
   }
   .date {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
   }
   .category {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 400;
     text-align: right;
     line-height: 1;

@@ -15,7 +15,7 @@ const TitleStyle = styled.div`
   width: ${(props) => (props.position === 'fixed' ? `${Vars.sizes.l}px` : 'auto')};
   max-width: ${(props) => (props.position === 'fixed' ? `calc(100vw - 2 * ${Vars.frame}px)` : 'auto')};
   .title {
-    padding: 0 35px;
+    padding: 10px 35px;
     z-index: 100;
     overflow: hidden;
     text-align: center;
@@ -23,8 +23,8 @@ const TitleStyle = styled.div`
     word-break: keep-all;
     &-wrap {
       position: relative;
-      border-top: ${(props) => `1px solid ${props.color}`};
-      border-bottom: ${(props) => `1px solid ${props.color}`};
+      // border-top: ${(props) => `1px solid ${props.color}`};
+      // border-bottom: ${(props) => `1px solid ${props.color}`};
     }
     &--lined {
       color: transparent;

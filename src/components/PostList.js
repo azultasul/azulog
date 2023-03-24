@@ -37,7 +37,7 @@ const SortStyle = styled.div`
   .lined-text {
     position: relative;
     font-family: 'cafe';
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     // margin: 0 20px;
     margin: 6px 12px;
