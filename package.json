@@ -23,5 +23,10 @@
     "remark-html": "^15.0.2",
     "styled-components": "^5.3.8",
     "styled-reset": "^4.4.5"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.6"
   }
 }

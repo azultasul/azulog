@@ -1,5 +1,5 @@
-import { css, createGlobalStyle } from "styled-components";
-import Vars from '../data/Variables';
+import { css, createGlobalStyle } from 'styled-components'
+import Vars from '../data/Variables'
 
 const GlobalStyle = createGlobalStyle`
   /* common */
@@ -9,10 +9,10 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 1px;
     ${Vars.media.l`
-      font-size: ${100/Vars.sizes.l}vw;
+      font-size: ${100 / Vars.sizes.l}vw;
     `};
     ${Vars.media.md`
-      font-size: ${100/Vars.sizes.md}vw;
+      font-size: ${100 / Vars.sizes.md}vw;
     `};
   }
   body {
@@ -40,8 +40,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   /* color mode (palette) */
-  ${
-    Object.keys(Vars.textColor).map(el => `
+  ${Object.keys(Vars.textColor).map(
+    (el) => `
       body[data-theme-color=${el}] {
         color: ${Vars.textColor[el]};
         a {
@@ -52,8 +52,8 @@ const GlobalStyle = createGlobalStyle`
           border-top: 0.8px solid ${Vars.textColor[el]};
         }
       }
-    `)
-  }
+    `
+  )}
 
 
   /* layout */
@@ -66,6 +66,6 @@ const GlobalStyle = createGlobalStyle`
     // gap: ${Vars.gap}px;
   }
 
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

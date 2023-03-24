@@ -1,10 +1,15 @@
-import styled from  'styled-components';
+import styled from 'styled-components'
 
 const MarkdownStyle = styled.section`
   font-size: 16px;
   max-width: 800px;
   margin: 60px auto 0;
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'cafe';
   }
   h1 {
@@ -41,13 +46,13 @@ const MarkdownStyle = styled.section`
     color: rgb(255, 87, 87, 0.9);
   }
   pre {
-    background: rgb(37,37,37,0.03);
+    background: rgb(37, 37, 37, 0.03);
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 20px 30px;
     border-radius: 3.5px;
     code {
-      background: transparent;  
+      background: transparent;
       padding: 0;
       color: black;
     }
@@ -56,6 +61,6 @@ const MarkdownStyle = styled.section`
     margin-top: 0px;
     margin-bottom: 1em;
   }
-`;
+`
 
-export default MarkdownStyle;
+export default MarkdownStyle

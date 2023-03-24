@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Link from 'next/link'
 import Image from 'next/image'
-import Date from '~/components/Date';
-import LinedButton from '~/components/LinedButton';
-import Vars from "~/data/Variables"
-import styled from  'styled-components';
-import ColorContext from "~/store/ColorContext";
+import Date from '~/components/Date'
+import LinedButton from '~/components/LinedButton'
+import Vars from '~/data/Variables'
+import styled from 'styled-components'
+import ColorContext from '~/store/ColorContext'
 
 const CardWrapStyle = styled.div`
   // width: calc(50% - 8px);
@@ -18,14 +18,14 @@ const CardStyle = styled.div`
   width: 100%;
   min-height: 120px;
   border-radius: 18px;
-  border: ${props => `1px solid ${props.color}`};
+  border: ${(props) => `1px solid ${props.color}`};
   overflow: hidden;
   .image {
     position: relative;
     max-width: 200px;
     min-width: 110px;
     flex: 1;
-    border-right: ${props => `1px solid ${props.color}`};
+    border-right: ${(props) => `1px solid ${props.color}`};
     overflow: hidden;
   }
   .thumb {
@@ -44,7 +44,7 @@ const CardStyle = styled.div`
     }
     .title {
       color: transparent;
-      -webkit-text-stroke: ${props => `1px ${props.color}`};
+      -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     }
   }
 `
@@ -70,7 +70,7 @@ const ContentsStyle = styled.div`
       // background: gray;
       // border-radius: 8px;
 
-      background: ${props => props.color};
+      background: ${(props) => props.color};
       border-radius: 16px;
       padding: 4px 13px;
       margin-left: 6px;
@@ -80,22 +80,25 @@ const ContentsStyle = styled.div`
 `
 
 const PostCard = ({ title, href, date, thumb, category, className }) => {
-
   return (
     <ColorContext.Consumer>
-      {color => (
+      {(color) => (
         <CardWrapStyle>
           <Link href={href}>
             <CardStyle color={color.currColor.color}>
-              {thumb && 
+              {thumb && (
                 <div className="image">
-                  <Image src={thumb} className='thumb' alt="alt" width='100' height='100' />
+                  <Image src={thumb} className="thumb" alt="alt" width="100" height="100" />
                 </div>
-              }
+              )}
               <ContentsStyle color={color.currColor.color}>
-                <div className='title'>{title}</div>
-                <Date className='date' dateString={date} />
-                <div className="category">{category.map((el, idx) => <span key={idx}>{el}</span>)}</div>
+                <div className="title">{title}</div>
+                <Date className="date" dateString={date} />
+                <div className="category">
+                  {category.map((el, idx) => (
+                    <span key={idx}>{el}</span>
+                  ))}
+                </div>
               </ContentsStyle>
             </CardStyle>
           </Link>
@@ -105,4 +108,4 @@ const PostCard = ({ title, href, date, thumb, category, className }) => {
   )
 }
 
-export default PostCard;
+export default PostCard

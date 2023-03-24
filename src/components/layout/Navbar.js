@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
-import styled from 'styled-components';
-import Vars from "~/data/Variables"
+import styled from 'styled-components'
+import Vars from '~/data/Variables'
 
-import github from '~/assets/github.svg';
+import github from '~/assets/github.svg'
 
 const NavStyle = styled.main`
   position: fixed;
@@ -38,15 +38,15 @@ const ColorStyle = styled.button`
   font-size: 28px;
   font-weight: bold;
   line-height: 1;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   background: transparent;
-  &:nth-of-type(${props => props.idx + 1}) {
+  &:nth-of-type(${(props) => props.idx + 1}) {
     transform: scale(1.17);
     transform-origin: 50% 80%;
   }
   &:hover {
     color: transparent;
-    -webkit-text-stroke: ${props => `1px ${props.color}`};
+    -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     transition: color 0.2s;
   }
 `
@@ -65,65 +65,62 @@ const LinkStyle = styled.ul`
   list-style: none;
   li {
     font-family: 'cafe';
-    color: ${props => props.color};
+    color: ${(props) => props.color};
     font-size: 19px;
     font-weight: bold;
     line-height: 1;
     text-align: center;
-    &:nth-of-type(${props => props.routeIndex + 1}) {
+    &:nth-of-type(${(props) => props.routeIndex + 1}) {
       transform: scale(1.17);
       transform-origin: 50% 90%;
     }
     &:hover a {
       color: transparent;
-      -webkit-text-stroke: ${props => `1px ${props.color}`};
+      -webkit-text-stroke: ${(props) => `1px ${props.color}`};
       transition: 0.2s;
     }
   }
   img {
-    fill: ${props => props.color};
+    fill: ${(props) => props.color};
     transform: translate(0px, 3px);
   }
 `
 
 const Navbar = ({ themeColor, setThemeColor }) => {
-  const router = useRouter();
-  const [ routeIndex, setRouteIndex ] = useState(0);
-  const logo = 'AZULOG';
+  const router = useRouter()
+  const [routeIndex, setRouteIndex] = useState(0)
+  const logo = 'AZULOG'
 
   useEffect(() => {
-    const path = router.route.split('/')[1];
+    const path = router.route.split('/')[1]
     switch (path) {
       case 'about':
-        setRouteIndex(1);
-        break;
+        setRouteIndex(1)
+        break
       case 'work':
-        setRouteIndex(2);
-        break;
+        setRouteIndex(2)
+        break
       case 'blog':
-        setRouteIndex(3);
-        break;
+        setRouteIndex(3)
+        break
       default:
-        setRouteIndex(0);
+        setRouteIndex(0)
     }
   }, [router])
 
   useEffect(() => {
-    document.body.dataset.themeColor = Object.keys(Vars.textColor)[themeColor.index];
+    document.body.dataset.themeColor = Object.keys(Vars.textColor)[themeColor.index]
   }, [themeColor])
 
   return (
     <NavStyle color={themeColor.color}>
-      <div className='nav-inner'>
+      <div className="nav-inner">
         <PaletteStyle>
-          {
-            Object.keys(Vars.textColor)
-            .map((el, idx) => (
-            <ColorStyle color={Vars.textColor[el]} idx={themeColor.index} onClick={() => setThemeColor({color: Vars.textColor[el], index: idx})} key={idx}>
+          {Object.keys(Vars.textColor).map((el, idx) => (
+            <ColorStyle color={Vars.textColor[el]} idx={themeColor.index} onClick={() => setThemeColor({ color: Vars.textColor[el], index: idx })} key={idx}>
               {logo[idx]}
             </ColorStyle>
-            ))
-          }
+          ))}
         </PaletteStyle>
         <LinkStyle color={themeColor.color} routeIndex={routeIndex}>
           <li>
@@ -139,13 +136,8 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             <Link href="/blog">BLOG</Link>
           </li>
           <li>
-            <a href="https://github.com/azultasul" target='_blank'>
-              <Image
-                src={github}
-                alt="github"
-                width={20}
-                height={20}
-              />
+            <a href="https://github.com/azultasul" target="_blank">
+              <Image src={github} alt="github" width={20} height={20} />
             </a>
           </li>
         </LinkStyle>
@@ -154,4 +146,4 @@ const Navbar = ({ themeColor, setThemeColor }) => {
   )
 }
 
-export default Navbar;
+export default Navbar

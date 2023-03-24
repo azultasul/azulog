@@ -1,5 +1,5 @@
-import styled from  'styled-components';
-import Vars from "~/data/Variables"
+import styled from 'styled-components'
+import Vars from '~/data/Variables'
 
 const LayoutStyle = styled.main`
   padding-top: ${Vars.frameTop}px;
@@ -11,11 +11,9 @@ const LayoutStyle = styled.main`
 const Layout = ({ children }) => {
   return (
     <>
-      <LayoutStyle>
-        {children}
-      </LayoutStyle>
+      <LayoutStyle>{children}</LayoutStyle>
     </>
   )
 }
 
-export default Layout;
+export default Layout

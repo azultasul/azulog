@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import styled from  'styled-components';
-import ColorContext from "~/store/ColorContext";
+import Link from 'next/link'
+import styled from 'styled-components'
+import ColorContext from '~/store/ColorContext'
 
 const LinedStyle = styled.div`
   display: inline-block;
@@ -14,21 +14,22 @@ const LinedStyle = styled.div`
       bottom: 5px;
       width: 0%;
       height: 1px;
-      background: ${props => props.color};
+      background: ${(props) => props.color};
     }
   }
   &.lined {
     .lined-text {
       color: transparent;
-      -webkit-text-stroke: ${props => `1px ${props.color}`};
+      -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     }
   }
   &.filled {
     .lined-text {
-      color: ${props => props.color};
+      color: ${(props) => props.color};
     }
   }
-  &:hover, &:has(.clicked) {
+  &:hover,
+  &:has(.clicked) {
     .lined-text {
       transform: skew(-20deg);
       transition: 0.3s;
@@ -39,13 +40,13 @@ const LinedStyle = styled.div`
     }
     &.lined {
       .lined-text {
-        color: ${props => props.color};
+        color: ${(props) => props.color};
       }
     }
     &.filled {
       .lined-text {
         color: transparent;
-        -webkit-text-stroke: ${props => `1px ${props.color}`};
+        -webkit-text-stroke: ${(props) => `1px ${props.color}`};
       }
     }
   }
@@ -56,25 +57,26 @@ const LinedButton = ({ type, style = 'filled', title, onClick, href, children, c
 
   return (
     <ColorContext.Consumer>
-      {color => (
+      {(color) => (
         <LinedStyle color={color.currColor.color} className={`${style}`}>
-          {type === 'button'
-            ? <button onClick={onClick} className={`lined-text lined-button ${className}`}>
-                {title}
-                <>{children}</>
-              </button>
-            : type === 'link'
-              ? <Link href={href} onClick={onClick} className={`lined-text lined-link ${className}`}>
-                  {title}
-                  <>{children}</>
-                </Link>
-              // : <div className={`lined-text ${className}`}>{title}</div>
-              : <>{children}</>
-          }
+          {type === 'button' ? (
+            <button onClick={onClick} className={`lined-text lined-button ${className}`}>
+              {title}
+              <>{children}</>
+            </button>
+          ) : type === 'link' ? (
+            <Link href={href} onClick={onClick} className={`lined-text lined-link ${className}`}>
+              {title}
+              <>{children}</>
+            </Link>
+          ) : (
+            // : <div className={`lined-text ${className}`}>{title}</div>
+            <>{children}</>
+          )}
         </LinedStyle>
       )}
     </ColorContext.Consumer>
   )
 }
 
-export default LinedButton;
+export default LinedButton

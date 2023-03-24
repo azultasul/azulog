@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState, useContext, createContext } from 'react';
+import { useEffect, useRef, useState, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
-import Link from 'next/link';
-import LinedButton from '~/components/LinedButton';
+import Link from 'next/link'
+import LinedButton from '~/components/LinedButton'
 
-import { getAllPostIds, getPostData } from '~/lib/getPost';
-import MarkdownStyle from '~/styles/MarkdownStyle';
+import { getAllPostIds, getPostData } from '~/lib/getPost'
+import MarkdownStyle from '~/styles/MarkdownStyle'
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
 import Comments from '~/components/Comments'
-import Vars from "~/data/Variables"
+import Vars from '~/data/Variables'
 import Cat from '~/data/Categories'
-import styled from  'styled-components';
+import styled from 'styled-components'
 
 const TitleStyle = styled.div`
   max-width: ${Vars.sizes.l}px;
@@ -18,7 +18,7 @@ const TitleStyle = styled.div`
 `
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds('blog');
+  const paths = getAllPostIds('blog')
 
   return {
     paths,
@@ -28,13 +28,13 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`}
 export async function getStaticProps({ params }) {
-  const blogData = await getPostData('blog', params.id);
+  const blogData = await getPostData('blog', params.id)
 
   return {
     props: {
       blogData,
     },
-  };
+  }
 }
 
 const BlogDetail = ({ blogData }) => {
@@ -43,20 +43,19 @@ const BlogDetail = ({ blogData }) => {
   return (
     <>
       <TitleStyle>
-        <FilledTitle title={blogData.title} fontSize='80px' topGap='20px'/>
+        <FilledTitle title={blogData.title} fontSize="80px" topGap="20px" />
       </TitleStyle>
       <MarkdownStyle>
         <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
-      {blogData.category.map((cat, idx) => 
-        // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
-        <LinedButton key={idx} type='link' href={`/blog?tag=${cat}`} style='filled' title={Cat.techStack[cat]}>
-        </LinedButton>
-      )}
+        {blogData.category.map((cat, idx) => (
+          // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
+          <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={Cat.techStack[cat]}></LinedButton>
+        ))}
       </MarkdownStyle>
       <Comments></Comments>
       <TableOfContents toc={blogData.toc} />
     </>
-  );
+  )
 }
 
-export default BlogDetail;
+export default BlogDetail
