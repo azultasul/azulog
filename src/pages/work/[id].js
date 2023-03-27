@@ -4,25 +4,15 @@ import Link from 'next/link'
 import LinedButton from '~/components/LinedButton'
 import ColorContext from '~/store/ColorContext'
 
-import { getAllPostIds, getPostData } from '~/lib/getPost'
+// import { getAllPostIds, getPostData } from '~/lib/getPost'
 import MarkdownStyle from '~/styles/MarkdownStyle'
 import FilledTitle from '~/components/FilledTitle'
-import TableOfContents from '~/components/TableOfContents'
-import Comments from '~/components/Comments'
+
 import Vars from '~/data/Variables'
+import Works from '~/data/Works'
 import Cat from '~/data/Categories'
 import styled from 'styled-components'
 
-const TitleStyle = styled.div`
-  max-width: ${Vars.sizes.l}px;
-  margin: 0 auto;
-  .title {
-    padding: 110px 160px 45px;
-    &-wrap {
-      border-bottom: ${(props) => `1px solid ${props.color}`};
-    }
-  }
-`
 const InfoStyle = styled.div`
   max-width: 800px;
   margin: 44px auto 0;
@@ -39,48 +29,51 @@ const InfoStyle = styled.div`
   }
 `
 
-export async function getStaticPaths() {
-  const paths = getAllPostIds('work')
+// export async function getStaticPaths() {
+//   const paths = getAllPostIds('work')
 
-  return {
-    paths,
-    fallback: false,
-  }
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   }
+// }
 
-// `getStaticPaths` requires using `getStaticProps`}
-export async function getStaticProps({ params }) {
-  const workData = await getPostData('work', params.id)
+// // `getStaticPaths` requires using `getStaticProps`}
+// export async function getStaticProps({ params }) {
+//   const Works = await getPostData('work', params.id)
 
-  return {
-    props: {
-      workData,
-    },
-  }
-}
+//   return {
+//     props: {
+//       Works,
+//     },
+//   }
+// }
 
-const WorkDetail = ({ workData }) => {
-  // console.log("workData",workData);
+const WorkDetail = () => {
+  // console.log("Works",Works);
+  const router = useRouter()
+  const [currData, setCurrData] = useState({})
+  console.log('router', router.query.id)
+
+  useEffect(() => {
+    setCurrData(Works.filter((data) => data.id === router.query.id)[0])
+  }, [router.query.id])
+  useEffect(() => {
+    console.log('currData', currData)
+  }, [currData])
 
   return (
     <ColorContext.Consumer>
       {(color) => (
         <>
-          <TitleStyle color={color.currColor.color}>
-            <FilledTitle title={workData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
-          </TitleStyle>
+          <FilledTitle title={currData?.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
           <InfoStyle>
-            <div className="date">{workData.date}</div>
-            {workData.category.map((cat, idx) => (
+            <div className="date">{currData?.date}</div>
+            {currData?.category?.map((cat, idx) => (
               // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
               <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.techStack[cat]}`}></LinedButton>
             ))}
           </InfoStyle>
-          <MarkdownStyle>
-            <div dangerouslySetInnerHTML={{ __html: workData.contentHtml }} />
-          </MarkdownStyle>
-          <Comments></Comments>
-          <TableOfContents toc={workData.toc} />
         </>
       )}
     </ColorContext.Consumer>
