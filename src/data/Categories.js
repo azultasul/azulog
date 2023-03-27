@@ -1,15 +1,26 @@
 const techStack = {
-  0: 'Javascript',
-  1: 'Frontend',
-  2: 'CSS',
-  3: 'SCSS',
-  4: 'Github',
-  5: 'React',
-  6: 'Next.js',
-  7: 'Vue',
-  8: 'Interaction',
+  0: 'javascript',
+  1: 'frontend',
+  2: 'html',
+  3: 'css',
+  4: 'scss',
+  5: 'github',
+  6: 'react',
+  7: 'next.js',
+  8: 'vue',
+  9: 'interaction',
 }
 
-const postData = { techStack }
+const type = {
+  0: 'toy',
+  1: 'dfy',
+}
+
+const series = {
+  0: 'yes-wedding',
+  1: 'azulog',
+}
+
+const postData = { techStack, series }
 
 export default postData

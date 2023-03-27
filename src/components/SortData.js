@@ -3,8 +3,13 @@ import { useRouter } from 'next/router'
 import LinedButton from '~/components/LinedButton'
 
 import Cat from '~/data/Categories'
+import styled from 'styled-components'
 
-const PostList = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyle }) => {
+const SortStyle = styled.div`
+  text-transform: uppercase;
+`
+
+const SortData = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyle }) => {
   const [sortNum, setSortNum] = useState([])
   const router = useRouter()
 
@@ -37,7 +42,7 @@ const PostList = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyl
   }, [sortNum])
 
   return (
-    <>
+    <SortStyle>
       <LinedButton type="link" href={`/${post}`} style={buttonStyle} title="ALL" className={sortNum.length === 0 ? 'clicked' : ''}>
         <span className="button-num">{data.length}</span>
       </LinedButton>
@@ -47,8 +52,8 @@ const PostList = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyl
           <span className="button-num">{eachCatLength[idx]}</span>
         </LinedButton>
       ))}
-    </>
+    </SortStyle>
   )
 }
 
-export default PostList
+export default SortData

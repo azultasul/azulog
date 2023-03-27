@@ -8,6 +8,7 @@ const CommentStyle = styled.div`
   padding-bottom: 100px;
   .utterances {
     max-width: 800px;
+    width: 100%;
   }
 `
 

@@ -26,6 +26,8 @@ const BlogList = ({ allPostsData }) => {
   const [frameTotalH, setFrameTotalH] = useState(null)
 
   useEffect(() => {
+    console.log('allPostsData', allPostsData)
+
     const titleH = titleRef.current.offsetHeight
     const frameGap = Vars.frameTop + 38
     setTitleTotalH(titleH + 38)

@@ -13,23 +13,18 @@ import Vars from '~/data/Variables'
 import Cat from '~/data/Categories'
 import styled from 'styled-components'
 
-const TitleStyle = styled.div`
-  max-width: ${Vars.sizes.l}px;
-  margin: 0 auto;
-  .title {
-    padding: 110px 160px 45px;
-    &-wrap {
-      border-bottom: ${(props) => `1px solid ${props.color}`};
-    }
-  }
-`
-const InfoStyle = styled.div`
+const BlogStyle = styled.div`
   max-width: 800px;
-  margin: 44px auto 0;
+  margin: 0 auto;
+  padding-top: 90px;
+`
 
+const InfoStyle = styled.div`
+  margin: 30px auto 0px;
   text-align: right;
   .date {
     font-size: 15px;
+    font-weight: 500;
   }
   .lined-text {
     font-size: 20px;
@@ -37,6 +32,13 @@ const InfoStyle = styled.div`
     margin-left: 12px;
     line-height: 1.3;
   }
+  // .divider {
+  //   width: 40px;
+  //   height: 3px;
+  //   margin: 20px auto 0px;
+  //   opacity: 0.9;
+  //   background: ${(props) => props.color};
+  // }
 `
 
 export async function getStaticPaths() {
@@ -65,11 +67,10 @@ const BlogDetail = ({ blogData }) => {
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <>
-          <TitleStyle color={color.currColor.color}>
-            <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
-          </TitleStyle>
-          <InfoStyle>
+        <BlogStyle>
+          <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
+          <InfoStyle color={color.currColor.color}>
+            {/* <div className="divider"></div> */}
             <div className="date">{blogData.date}</div>
             {blogData.category.map((cat, idx) => (
               // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
@@ -81,7 +82,7 @@ const BlogDetail = ({ blogData }) => {
           </MarkdownStyle>
           <Comments></Comments>
           <TableOfContents toc={blogData.toc} />
-        </>
+        </BlogStyle>
       )}
     </ColorContext.Consumer>
   )

@@ -1,0 +1,133 @@
+export default [
+  {
+    id: 'fqled',
+    title: 'Future of Display(FQLED)',
+    thumb: true,
+    date: '2020-08-24',
+    endDate: '2020-11-27',
+    category: [5, 7],
+    // javascript, html, css, scss, bem
+    client: '삼성전자',
+    url: 'https://www.samsung.com/uk/explore/brand/beyond-the-limits/',
+    desc: '삼성전자의 퀀텀티비를 소개하는 페이지로, 저의 첫 프로젝트였습니다. 버벅임 없이 자연스럽고 가벼운 인터랙션을 구현하는 것이 중요한 프로젝트였습니다.',
+    learn: [
+      '계속되는 스크롤에 의해 사용자가 지루함을 느끼지 않도록 섹션을 나누어 한번의 스크롤로 자동재생되도록 구성했습니다. 사용자의 입장에서 기능을 개발하는 것에 대해 고민할 수 있는 기회였습니다.',
+      '긴 플로우를 가진 원페이지라 파트를 나눠 작업한 후 코드를 합칠 때 충돌이 발생하는 경우가 많았습니다. github를 이용하여 코드를 관리하고 충돌을 해결하며 협업하는 방법을 배웠습니다.',
+      'gsap scrolltrigger, canvas api 등 인터랙션 트랜드를 익히고 사용해보는 기회였습니다.',
+    ],
+    work: [
+      {
+        image: '0.gif',
+        title: 'Canvas API',
+        desc: '캔버스를 사용하여 버벅임없는 인터랙션 구현',
+      },
+      {
+        image: '2.gif',
+        desc: '캔버스를 사용하여 버벅임없는 인터랙션 구현',
+      },
+      {
+        image: '1.gif',
+        desc: '@@@',
+      },
+      {
+        image: '3.gif',
+        desc: '@@@',
+      },
+    ],
+  },
+  {
+    id: 'dfy21',
+    title: 'DFY 2K21',
+    thumb: true,
+    date: '2021-01-11',
+    endDate: '2021-10-15',
+    category: [5, 7],
+    client: '내부 프로젝트',
+    url: 'https://www.dfy.co.kr/',
+    desc: '디파이 10주년에 맞춰 사이트 리뉴얼을 진행했습니다. 뷰',
+    learn: ['@@@', '@@@'],
+    work: [
+      {
+        image: '0.gif',
+        title: '@@@',
+        desc: '@@@',
+      },
+    ],
+  },
+  {
+    id: 'mpxgallery',
+    title: 'MPX Gallery',
+    thumb: true,
+    date: '2021-09-27',
+    endDate: '2022-03-31',
+    category: [5, 7],
+    client: '내부 프로젝트',
+    url: 'https://mpx.co.kr/',
+    desc: '회사 내부 사업',
+    learn: ['@@@'],
+    work: [
+      {
+        image: '0.gif',
+        title: '@@@',
+        desc: '@@@',
+      },
+    ],
+  },
+  {
+    id: 'reslower',
+    title: 'ReSlower',
+    thumb: true,
+    date: '2022-04-04',
+    endDate: '2022-05-13',
+    category: [5, 7],
+    client: '내부 프로젝트',
+    url: 'https://www.reslow.life/',
+    desc: '회사 내부 사업',
+    learn: ['@@@'],
+    work: [
+      {
+        image: '0.gif',
+        title: '@@@',
+        desc: '@@@',
+      },
+    ],
+  },
+  {
+    id: 'inara',
+    title: '아이들 나라',
+    thumb: true,
+    date: '2022-06-23',
+    endDate: '2022-08-31',
+    category: [5, 7],
+    client: 'LG U+',
+    url: 'https://www.i-nara.co.kr/',
+    desc: '@@@',
+    learn: ['@@@'],
+    work: [
+      {
+        image: '0.gif',
+        title: '@@@',
+        desc: '@@@',
+      },
+    ],
+  },
+  {
+    id: 'grape',
+    title: 'DFY 인트라넷(Grape)',
+    thumb: true,
+    date: '2022-09-26',
+    endDate: null,
+    category: [5, 7],
+    client: '내부 프로젝트',
+    url: '@@@',
+    desc: '@@@',
+    learn: ['@@@'],
+    work: [
+      {
+        image: '0.gif',
+        title: '@@@',
+        desc: '@@@',
+      },
+    ],
+  },
+]

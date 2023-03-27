@@ -2,8 +2,9 @@ import styled from 'styled-components'
 
 const MarkdownStyle = styled.section`
   font-size: 16px;
-  max-width: 800px;
-  margin: 60px auto 0;
+  // max-width: 800px;
+  // margin: 60px auto 0;
+  margin-top: 60px;
   h1,
   h2,
   h3,

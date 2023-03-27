@@ -1,7 +1,7 @@
 ---
 title: '[Next.js] 프로젝트 생성'
 date: '2023-03-07'
-thumb: '/images/tech/이야.png'
+thumb: '/images/work/fqled/thumb.jpeg'
 category: [5, 7]
 toc: { 0: { title: 'npx create-next-app my-app' }, 1: { title: 'npx create-next-app@latest', item: ['🔎 ESLint', '🔎 ‘src/’ directory', '🔎 experimental ‘app/’ directory', '🔎 import alias'] } }
 ---

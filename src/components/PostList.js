@@ -95,9 +95,9 @@ const PostList = ({ post, data, frameTotalH, dataCat, catName }) => {
         <ContentsStyle ref={contentsRef} frameTotalH={frameTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
             <div className="card-inner">
-              {sortedData.map(({ id, date, title, thumb, category }) => {
-                const catName = category.map((el) => Cat.techStack[el])
-                return <PostCard title={title} href={`/${post}/${id}`} date={date} thumb={thumb} category={catName} key={id}></PostCard>
+              {sortedData.map((data) => {
+                const catName = data.category.map((el) => Cat.techStack[el])
+                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} category={catName} key={data.id}></PostCard>
               })}
             </div>
           </div>

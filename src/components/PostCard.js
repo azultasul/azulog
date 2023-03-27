@@ -67,9 +67,6 @@ const ContentsStyle = styled.div`
     text-align: right;
     line-height: 1;
     span {
-      // background: gray;
-      // border-radius: 8px;
-
       background: ${(props) => props.color};
       border-radius: 16px;
       padding: 4px 13px;
@@ -79,21 +76,21 @@ const ContentsStyle = styled.div`
   }
 `
 
-const PostCard = ({ title, href, date, thumb, category, className }) => {
+const PostCard = ({ type, data, href, category, className }) => {
   return (
     <ColorContext.Consumer>
       {(color) => (
         <CardWrapStyle>
           <Link href={href}>
             <CardStyle color={color.currColor.color}>
-              {thumb && (
+              {data.thumb && (
                 <div className="image">
-                  <Image src={thumb} className="thumb" alt="alt" width="100" height="100" />
+                  <Image src={type === 'work' ? `/images/${type}/${data.id}/thumb.jpeg` : data.thumb} className="thumb" alt="alt" width="100" height="100" />
                 </div>
               )}
               <ContentsStyle color={color.currColor.color}>
-                <div className="title">{title}</div>
-                <Date className="date" dateString={date} />
+                <div className="title">{data.title}</div>
+                <Date className="date" dateString={data.date} />
                 <div className="category">
                   {category.map((el, idx) => (
                     <span key={idx}>{el}</span>

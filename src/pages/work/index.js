@@ -3,28 +3,21 @@ import FilledTitle from '~/components/FilledTitle'
 import PostList from '~/components/PostList'
 
 import Vars from '~/data/Variables'
+import Works from '~/data/Works'
 import styled from 'styled-components'
-import { getAllMetaData } from '~/lib/getPost'
-
-export async function getStaticProps() {
-  const allPostsData = getAllMetaData('work')
-  return {
-    props: {
-      allPostsData,
-    },
-  }
-}
 
 const PageStyle = styled.div`
   margin-top: ${(props) => `${props.titleTotalH}px`};
 `
 
-const WorkList = ({ allPostsData }) => {
+const WorkList = () => {
   const titleRef = useRef(null)
   const [titleTotalH, setTitleTotalH] = useState(null)
   const [frameTotalH, setFrameTotalH] = useState(null)
 
   useEffect(() => {
+    console.log('Works', Works)
+
     const titleH = titleRef.current.offsetHeight
     const frameGap = Vars.frameTop + 38
     setTitleTotalH(titleH + 38)
@@ -34,7 +27,7 @@ const WorkList = ({ allPostsData }) => {
   return (
     <PageStyle titleTotalH={titleTotalH}>
       <FilledTitle ref={titleRef} type="lined" title="WORK" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="150px" topGap="20px" lineHeight="1" />
-      <PostList post="work" data={allPostsData} frameTotalH={frameTotalH} dataCat="category" catName="techStack" />
+      <PostList post="work" data={Works} frameTotalH={frameTotalH} dataCat="category" catName="techStack" />
     </PageStyle>
   )
 }
