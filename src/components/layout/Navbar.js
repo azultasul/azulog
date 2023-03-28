@@ -28,7 +28,7 @@ const PaletteStyle = styled.div`
   top: calc(${Vars.frameTop}px + 4.25px);
   transform: translateY(-100%);
   display: flex;
-  gap: 3px;
+  // gap: 3px;
   flex-direction: row;
   align-items: flex-end;
 `
@@ -41,8 +41,10 @@ const ColorStyle = styled.button`
   color: ${(props) => props.color};
   background: transparent;
   &:nth-of-type(${(props) => props.idx + 1}) {
-    transform: scale(1.17);
-    transform-origin: 50% 80%;
+    // transform: scale(1.17);
+    // transform-origin: 50% 80%;
+    color: transparent;
+    -webkit-text-stroke: ${(props) => `1px ${props.color}`};
   }
   &:hover {
     color: transparent;
@@ -54,7 +56,7 @@ const ColorStyle = styled.button`
 const LinkStyle = styled.ul`
   display: flex;
   align-items: flex-end;
-  gap: 16px;
+  gap: 8px;
   position: absolute;
   right: 12px;
   top: calc(${Vars.frameTop}px + 2.8px);
@@ -70,9 +72,9 @@ const LinkStyle = styled.ul`
     font-weight: bold;
     line-height: 1;
     text-align: center;
-    &:nth-of-type(${(props) => props.routeIndex + 1}) {
-      transform: scale(1.17);
-      transform-origin: 50% 90%;
+    &:nth-of-type(${(props) => props.routeIndex + 1}) a {
+      color: transparent;
+      -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     }
     &:hover a {
       color: transparent;
@@ -80,9 +82,11 @@ const LinkStyle = styled.ul`
       transition: 0.2s;
     }
   }
-  img {
+  .github {
+    width: 20px;
+    height: 20px;
     fill: ${(props) => props.color};
-    transform: translate(0px, 3px);
+    transform: translate(0px, -3px);
   }
 `
 
@@ -135,11 +139,11 @@ const Navbar = ({ themeColor, setThemeColor }) => {
           <li>
             <Link href="/blog">BLOG</Link>
           </li>
-          <li>
-            <a href="https://github.com/azultasul" target="_blank">
-              <Image src={github} alt="github" width={20} height={20} />
-            </a>
-          </li>
+          <a href="https://github.com/azultasul" target="_blank" className="github">
+            <Image src={github} alt="github" width={20} height={20} />
+          </a>
+          {/* <li>
+          </li> */}
         </LinkStyle>
       </div>
     </NavStyle>

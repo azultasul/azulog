@@ -9,6 +9,7 @@ import MarkdownStyle from '~/styles/MarkdownStyle'
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
 import Comments from '~/components/Comments'
+import useDate from '~/utils/useDate'
 import Vars from '~/data/Variables'
 import Cat from '~/data/Categories'
 import styled from 'styled-components'
@@ -22,6 +23,9 @@ const BlogStyle = styled.div`
 const InfoStyle = styled.div`
   margin: 30px auto 0px;
   text-align: right;
+  width: 55%;
+  margin: 0 0 0 auto;
+
   .date {
     font-size: 15px;
     font-weight: 500;
@@ -62,7 +66,8 @@ export async function getStaticProps({ params }) {
 }
 
 const BlogDetail = ({ blogData }) => {
-  // console.log("blogData",blogData);
+  const [startDate] = useDate(blogData.date)
+  console.log('blogData', blogData.contentHtml)
 
   return (
     <ColorContext.Consumer>
@@ -71,7 +76,7 @@ const BlogDetail = ({ blogData }) => {
           <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
           <InfoStyle color={color.currColor.color}>
             {/* <div className="divider"></div> */}
-            <div className="date">{blogData.date}</div>
+            <div className="date">{startDate.ko}</div>
             {blogData.category.map((cat, idx) => (
               // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
               <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={`#${Cat.techStack[cat]}`}></LinedButton>

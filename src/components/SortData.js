@@ -46,12 +46,14 @@ const SortData = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyl
       <LinedButton type="link" href={`/${post}`} style={buttonStyle} title="ALL" className={sortNum.length === 0 ? 'clicked' : ''}>
         <span className="button-num">{data.length}</span>
       </LinedButton>
-      {categoryList.map((el, idx) => (
-        // eachCatLength[idx] > 0 &&
-        <LinedButton key={idx} type="link" href={`/${post}?tag=${getSortNum(sortNum, idx).join(',')}`} style={buttonStyle} title={el} className={sortNum.includes(`${idx}`) ? 'clicked' : ''}>
-          <span className="button-num">{eachCatLength[idx]}</span>
-        </LinedButton>
-      ))}
+      {categoryList.map(
+        (el, idx) =>
+          eachCatLength[idx] > 0 && (
+            <LinedButton key={idx} type="link" href={`/${post}?tag=${getSortNum(sortNum, idx).join(',')}`} style={buttonStyle} title={el} className={sortNum.includes(`${idx}`) ? 'clicked' : ''}>
+              <span className="button-num">{eachCatLength[idx]}</span>
+            </LinedButton>
+          )
+      )}
     </SortStyle>
   )
 }

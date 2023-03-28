@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Date from '~/components/Date'
 import LinedButton from '~/components/LinedButton'
+import useDate from '~/utils/useDate'
 import Vars from '~/data/Variables'
 import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
@@ -61,11 +62,17 @@ const ContentsStyle = styled.div`
     font-size: 14px;
     font-weight: 400;
   }
+  .desc {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+  }
   .category {
     font-size: 14px;
     font-weight: 400;
     text-align: right;
     line-height: 1;
+    margin-top: ${(props) => (props.type === 'work' ? '15px' : '5px')};
     span {
       background: ${(props) => props.color};
       border-radius: 16px;
@@ -77,6 +84,9 @@ const ContentsStyle = styled.div`
 `
 
 const PostCard = ({ type, data, href, category, className }) => {
+  const [startDate] = useDate(data.date)
+  const [endDate] = useDate(type === 'work' ? data.endDate : null)
+
   return (
     <ColorContext.Consumer>
       {(color) => (
@@ -88,9 +98,10 @@ const PostCard = ({ type, data, href, category, className }) => {
                   <Image src={type === 'work' ? `/images/${type}/${data.id}/thumb.jpeg` : data.thumb} className="thumb" alt="alt" width="100" height="100" />
                 </div>
               )}
-              <ContentsStyle color={color.currColor.color}>
+              <ContentsStyle color={color.currColor.color} type={type}>
                 <div className="title">{data.title}</div>
-                <Date className="date" dateString={data.date} />
+                {type === 'work' && <div className="desc">{data.desc}</div>}
+                <div className="date">{type === 'work' ? `${startDate.ko} ~ ${endDate ? endDate.ko : ''}` : `${startDate.ko}`}</div>
                 <div className="category">
                   {category.map((el, idx) => (
                     <span key={idx}>{el}</span>

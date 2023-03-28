@@ -7,8 +7,11 @@ const techStack = {
   5: 'github',
   6: 'react',
   7: 'next.js',
-  8: 'vue',
-  9: 'interaction',
+  8: 'remix.js',
+  9: 'vue',
+  10: 'vuex',
+  11: 'gsap',
+  12: 'template engine',
 }
 
 const type = {

@@ -16,8 +16,6 @@ const WorkList = () => {
   const [frameTotalH, setFrameTotalH] = useState(null)
 
   useEffect(() => {
-    console.log('Works', Works)
-
     const titleH = titleRef.current.offsetHeight
     const frameGap = Vars.frameTop + 38
     setTitleTotalH(titleH + 38)

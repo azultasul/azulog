@@ -17,6 +17,7 @@ const MarkdownStyle = styled.section`
     font-size: 2em;
     margin-top: 1.9em;
     margin-bottom: 0.5em;
+    line-height: 1.3;
   }
   h2 {
     margin-top: 1.2em;
