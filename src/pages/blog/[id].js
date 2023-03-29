@@ -4,7 +4,7 @@ import Link from 'next/link'
 import LinedButton from '~/components/LinedButton'
 import ColorContext from '~/store/ColorContext'
 
-import { getAllPostIds, getPostData } from '~/lib/getPost'
+import { getAllPostIds, getPostData, getAllMetaData } from '~/lib/getPost'
 import MarkdownStyle from '~/styles/MarkdownStyle'
 import FilledTitle from '~/components/FilledTitle'
 import TableOfContents from '~/components/TableOfContents'
@@ -36,13 +36,26 @@ const InfoStyle = styled.div`
     margin-left: 12px;
     line-height: 1.3;
   }
-  // .divider {
-  //   width: 40px;
-  //   height: 3px;
-  //   margin: 20px auto 0px;
-  //   opacity: 0.9;
-  //   background: ${(props) => props.color};
-  // }
+`
+
+const PostButtonStyle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 70px;
+  .lined-text {
+    font-family: 'cafe';
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.5;
+  }
+  .title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -3px;
+  }
+  .next {
+    text-align: right;
+  }
 `
 
 export async function getStaticPaths() {
@@ -57,17 +70,23 @@ export async function getStaticPaths() {
 // `getStaticPaths` requires using `getStaticProps`}
 export async function getStaticProps({ params }) {
   const blogData = await getPostData('blog', params.id)
+  const allPostsData = getAllMetaData('blog')
+  const currPostsIndex = allPostsData.findIndex((el) => el.id === params.id)
+  const allPostsIds = allPostsData.map((el) => el.id)
 
   return {
     props: {
       blogData,
+      allPostsIds,
+      allPostsData,
+      currPostsIndex,
     },
   }
 }
 
-const BlogDetail = ({ blogData }) => {
+const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => {
   const [startDate] = useDate(blogData.date)
-  console.log('blogData', blogData.contentHtml)
+  console.log('allPostsData', allPostsData)
 
   return (
     <ColorContext.Consumer>
@@ -75,16 +94,34 @@ const BlogDetail = ({ blogData }) => {
         <BlogStyle>
           <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
           <InfoStyle color={color.currColor.color}>
-            {/* <div className="divider"></div> */}
             <div className="date">{startDate.ko}</div>
             {blogData.category.map((cat, idx) => (
-              // <Link href={`/blog?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
               <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={`#${Cat.techStack[cat]}`}></LinedButton>
             ))}
           </InfoStyle>
           <MarkdownStyle>
             <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
           </MarkdownStyle>
+          <PostButtonStyle>
+            <div className="prev">
+              {currPostsIndex > 0 && (
+                <Link href={`/blog/${allPostsData[currPostsIndex - 1].id}`}>
+                  <LinedButton style="filled" title="이전 글" direction="left">
+                    <div className="title">{allPostsData[currPostsIndex - 1].title}</div>
+                  </LinedButton>
+                </Link>
+              )}
+            </div>
+            <div className="next">
+              {currPostsIndex < allPostsData.length - 1 && (
+                <Link href={`/blog/${allPostsData[currPostsIndex + 1].id}`}>
+                  <LinedButton style="filled" title="다음 글">
+                    <div className="title">{allPostsData[currPostsIndex + 1].title}</div>
+                  </LinedButton>
+                </Link>
+              )}
+            </div>
+          </PostButtonStyle>
           <Comments></Comments>
           <TableOfContents toc={blogData.toc} />
         </BlogStyle>

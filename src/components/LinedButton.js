@@ -31,7 +31,7 @@ const LinedStyle = styled.div`
   &:hover,
   &:has(.clicked) {
     .lined-text {
-      transform: skew(-20deg);
+      transform: ${(props) => (props.direction === 'left' ? 'skew(20deg)' : 'skew(-20deg)')};
       transition: 0.3s;
       &:after {
         width: 100%;
@@ -52,13 +52,13 @@ const LinedStyle = styled.div`
   }
 `
 
-const LinedButton = ({ type, style = 'filled', title, onClick, href, children, className }) => {
+const LinedButton = ({ type, style = 'filled', title, onClick, href, direction = 'right', children, className }) => {
   // style: filled / lined
 
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <LinedStyle color={color.currColor.color} className={`${style}`}>
+        <LinedStyle color={color.currColor.color} className={`${style}`} direction={direction}>
           {type === 'button' ? (
             <button onClick={onClick} className={`lined-text lined-button ${className}`}>
               {title}
@@ -70,8 +70,10 @@ const LinedButton = ({ type, style = 'filled', title, onClick, href, children, c
               <>{children}</>
             </Link>
           ) : (
-            // : <div className={`lined-text ${className}`}>{title}</div>
-            <>{children}</>
+            <>
+              <div className={`lined-text ${className}`}>{title}</div>
+              <>{children}</>
+            </>
           )}
         </LinedStyle>
       )}

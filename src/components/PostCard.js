@@ -99,9 +99,18 @@ const PostCard = ({ type, data, href, category, className }) => {
                 </div>
               )}
               <ContentsStyle color={color.currColor.color} type={type}>
-                <div className="title">{data.title}</div>
-                {type === 'work' && <div className="desc">{data.desc}</div>}
-                <div className="date">{type === 'work' ? `${startDate.ko} ~ ${endDate ? endDate.ko : ''}` : `${startDate.ko}`}</div>
+                <div className="title">
+                  {data.title}
+                  {data.star && <span> ★</span>}
+                </div>
+                {type === 'work' ? (
+                  <>
+                    <div className="desc">{data.desc}</div>
+                    <div className="date">{`${startDate.ko} ~ ${endDate ? endDate.ko : ''}`}</div>
+                  </>
+                ) : (
+                  <div className="date">{startDate.ko}</div>
+                )}
                 <div className="category">
                   {category.map((el, idx) => (
                     <span key={idx}>{el}</span>

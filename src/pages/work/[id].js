@@ -172,26 +172,31 @@ const WorkDetail = ({ work }) => {
               </div>
             </div>
 
-            <h1>작업 내용</h1>
-            <hr />
-            <div className="work-wrap">
-              {work.work.map((el, idx) => (
-                <div className="work" key={idx}>
-                  <div className="work__image">
-                    <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" width="100" height="100" />
-                  </div>
-                  <div className="work__desc-wrap">
-                    {el.title && (
-                      <h3 className="work__title">
-                        {el.number && <span className="work__number">{el.number}</span>}
-                        {el.title}
-                      </h3>
-                    )}
-                    {el.desc && <div className="work__desc">{el.desc}</div>}
-                  </div>
+            {work.work && (
+              <>
+                <h1>작업 내용</h1>
+                <hr />
+                <div className="work-wrap">
+                  {work.work.map((el, idx) => (
+                    <div className="work" key={idx}>
+                      <div className="work__image">
+                        {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
+                        {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" width="100" height="100" />}
+                      </div>
+                      <div className="work__desc-wrap">
+                        {el.title && (
+                          <h3 className="work__title">
+                            {el.number && <span className="work__number">{el.number}</span>}
+                            {el.title}
+                          </h3>
+                        )}
+                        {el.desc && <div className="work__desc">{el.desc}</div>}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </ContentsStyle>
         </WorkStyle>
       )}

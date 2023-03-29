@@ -12,9 +12,12 @@ const techStack = {
   10: 'vuex',
   11: 'gsap',
   12: 'template engine',
+  13: 'tailwind',
+  14: 'mantine',
+  15: 'styled-component',
 }
 
-const type = {
+const company = {
   0: 'toy',
   1: 'dfy',
 }
@@ -24,6 +27,6 @@ const series = {
   1: 'azulog',
 }
 
-const postData = { techStack, series }
+const postData = { techStack, company, series }
 
 export default postData

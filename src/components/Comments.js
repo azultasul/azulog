@@ -4,7 +4,7 @@ import Vars from '~/data/Variables'
 import styled from 'styled-components'
 
 const CommentStyle = styled.div`
-  margin-top: 120px;
+  margin-top: 50px;
   padding-bottom: 100px;
   .utterances {
     max-width: 800px;
