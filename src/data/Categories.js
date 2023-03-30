@@ -1,4 +1,4 @@
-const techStack = {
+const tech = {
   0: 'javascript',
   1: 'frontend',
   2: 'html',
@@ -17,7 +17,7 @@ const techStack = {
   15: 'styled-component',
 }
 
-const company = {
+const type = {
   0: 'toy',
   1: 'dfy',
 }
@@ -27,6 +27,6 @@ const series = {
   1: 'azulog',
 }
 
-const postData = { techStack, company, series }
+const postData = { tech, type, series }
 
 export default postData

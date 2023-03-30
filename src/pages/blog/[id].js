@@ -41,7 +41,7 @@ const InfoStyle = styled.div`
 const PostButtonStyle = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 70px;
+  margin-top: 80px;
   .lined-text {
     font-family: 'cafe';
     font-size: 22px;
@@ -86,7 +86,7 @@ export async function getStaticProps({ params }) {
 
 const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => {
   const [startDate] = useDate(blogData.date)
-  console.log('allPostsData', allPostsData)
+  // console.log('allPostsData', allPostsData)
 
   return (
     <ColorContext.Consumer>
@@ -95,8 +95,8 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
           <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
           <InfoStyle color={color.currColor.color}>
             <div className="date">{startDate.ko}</div>
-            {blogData.category.map((cat, idx) => (
-              <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={`#${Cat.techStack[cat]}`}></LinedButton>
+            {blogData.tech.map((cat, idx) => (
+              <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
             ))}
           </InfoStyle>
           <MarkdownStyle>

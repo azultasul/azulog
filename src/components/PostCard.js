@@ -63,11 +63,11 @@ const ContentsStyle = styled.div`
     font-weight: 400;
   }
   .desc {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.3;
   }
-  .category {
+  .tech {
     font-size: 14px;
     font-weight: 400;
     text-align: right;
@@ -83,7 +83,7 @@ const ContentsStyle = styled.div`
   }
 `
 
-const PostCard = ({ type, data, href, category, className }) => {
+const PostCard = ({ type, data, href, tech, className }) => {
   const [startDate] = useDate(data.date)
   const [endDate] = useDate(type === 'work' ? data.endDate : null)
 
@@ -95,7 +95,7 @@ const PostCard = ({ type, data, href, category, className }) => {
             <CardStyle color={color.currColor.color}>
               {data.thumb && (
                 <div className="image">
-                  <Image src={type === 'work' ? `/images/${type}/${data.id}/thumb.jpeg` : data.thumb} className="thumb" alt="alt" width="100" height="100" />
+                  <Image src={type === 'work' ? `/images/${type}/${data.id}/thumb.jpeg` : data.thumb} className="thumb" alt="alt" unoptimized width="100" height="100" />
                 </div>
               )}
               <ContentsStyle color={color.currColor.color} type={type}>
@@ -111,8 +111,8 @@ const PostCard = ({ type, data, href, category, className }) => {
                 ) : (
                   <div className="date">{startDate.ko}</div>
                 )}
-                <div className="category">
-                  {category.map((el, idx) => (
+                <div className="tech">
+                  {tech.map((el, idx) => (
                     <span key={idx}>{el}</span>
                   ))}
                 </div>

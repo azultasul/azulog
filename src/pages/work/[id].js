@@ -63,9 +63,11 @@ const ContentsStyle = styled(MarkdownStyle)`
     &-wrap {
     }
     &__image {
+      position: relative;
       flex: 1.8;
       img {
         margin-top: 0;
+        position: static;
       }
     }
     &__number {
@@ -142,9 +144,9 @@ const WorkDetail = ({ work }) => {
             <div className="lined-wrap">
               {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
               <br />
-              {work.category?.map((cat, idx) => (
-                // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.techStack[cat]}</Link>
-                <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.techStack[cat]}`}></LinedButton>
+              {work.tech?.map((cat, idx) => (
+                // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.tech[cat]}</Link>
+                <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
               ))}
             </div>
           </InfoStyle>
@@ -181,14 +183,14 @@ const WorkDetail = ({ work }) => {
                     <div className="work" key={idx}>
                       <div className="work__image">
                         {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
-                        {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" width="100" height="100" />}
+                        {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" unoptimized width="100" height="100" />}
                       </div>
                       <div className="work__desc-wrap">
                         {el.title && (
-                          <h3 className="work__title">
+                          <h2 className="work__title">
                             {el.number && <span className="work__number">{el.number}</span>}
                             {el.title}
-                          </h3>
+                          </h2>
                         )}
                         {el.desc && <div className="work__desc">{el.desc}</div>}
                       </div>

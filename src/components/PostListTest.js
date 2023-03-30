@@ -34,10 +34,10 @@ const SortStyle = styled.div`
   right: 0;
   text-align: right;
   padding-right: ${(props) => `${props.contentsMargin}px`};
-  .lined-button {
+  .lined-text {
     position: relative;
     font-family: 'cafe';
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     // margin: 0 20px;
     margin: 6px 12px;
@@ -52,13 +52,13 @@ const SortStyle = styled.div`
   }
 `
 
-const PostList = ({ data, frameTotalH }) => {
+const PostList = ({ post, data, frameTotalH, catName }) => {
   const contentsRef = useRef(null)
   const [contentsMargin, setContentsMargin] = useState(0)
 
   const [sortNumByDate, setSortNumByDate] = useState(0)
-  const [sortedDataByCat, setSortedDataByCat] = useState(data)
-  const [sortedData, setSortedData] = useState(data)
+  const [sortedDataByCat, setSortedDataByCat] = useState([])
+  const [sortedData, setSortedData] = useState([])
 
   const sortDataByDate = (array) => {
     const sortedDataByDate =
@@ -66,23 +66,16 @@ const PostList = ({ data, frameTotalH }) => {
         ? array.sort((a, b) => new Date(b.date) - new Date(a.date)) // 내림차순
         : array.sort((a, b) => new Date(a.date) - new Date(b.date)) // 오름차순
 
-    console.log('???', array, sortedDataByDate)
-
     return sortedDataByDate
   }
-  // const [ sortedData, setSortedData ] = useState(sortDataByDate(data));
 
   useEffect(() => {
-    console.log('data', sortedData)
-  }, [sortedData])
-
-  useEffect(() => {
-    setSortedData(sortDataByDate(sortedDataByCat))
-  }, [sortedDataByCat])
-
-  useEffect(() => {
-    setSortedData((prev) => sortDataByDate(prev))
+    setSortedData([...sortDataByDate(sortedData)])
   }, [sortNumByDate])
+
+  useEffect(() => {
+    setSortedData([...sortDataByDate(sortedDataByCat)])
+  }, [sortedDataByCat])
 
   const resizeHandler = () => {
     const contentsW = contentsRef.current.clientWidth
@@ -102,9 +95,9 @@ const PostList = ({ data, frameTotalH }) => {
         <ContentsStyle ref={contentsRef} frameTotalH={frameTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
             <div className="card-inner">
-              {sortedData.map(({ id, date, title, thumb, category }) => {
-                const catName = category.map((el) => Cat.techStack[el])
-                return <PostCard title={title} href={`/blog/${id}`} date={date} thumb={thumb} category={catName} key={id}></PostCard>
+              {sortedData.map((data) => {
+                const catName = data.tech.map((el) => Cat.tech[el])
+                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={catName} key={data.id}></PostCard>
               })}
             </div>
           </div>
@@ -112,7 +105,7 @@ const PostList = ({ data, frameTotalH }) => {
             <LinedButton type="button" style="lined" title="NEWEST" onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''} />
             <LinedButton type="button" style="lined" title="OLDEST" onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''} />
             <br />
-            <SortData data={data} dataCat="category" catName="techStack" setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
+            <SortData post={post} data={data} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
           </SortStyle>
         </ContentsStyle>
       )}

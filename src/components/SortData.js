@@ -9,12 +9,12 @@ const SortStyle = styled.div`
   text-transform: uppercase;
 `
 
-const SortData = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyle }) => {
+const SortData = ({ post, data, catName, setSortedDataByCat, buttonStyle }) => {
   const [sortNum, setSortNum] = useState([])
   const router = useRouter()
 
   const categoryList = Object.values(Cat[catName])
-  const eachCatLength = Object.keys(Cat[catName]).map((key) => data.map((el) => el[dataCat].includes(parseInt(key))).filter((el) => el === true).length)
+  const eachCatLength = Object.keys(Cat[catName]).map((key) => data.map((el) => el[catName].includes(parseInt(key))).filter((el) => el === true).length)
 
   const getSortNum = (prev, num) => {
     const hasCategoryNumber = sortNum.includes(`${num}`)
@@ -33,8 +33,8 @@ const SortData = ({ post, data, dataCat, catName, setSortedDataByCat, buttonStyl
       const dataArray =
         sortNum.length > 0
           ? prev > 0
-            ? prev.filter((el) => sortNum.every((num) => el[dataCat].includes(parseInt(num))))
-            : data.filter((el) => sortNum.every((num) => el[dataCat].includes(parseInt(num))))
+            ? prev.filter((el) => sortNum.every((num) => el[catName].includes(parseInt(num))))
+            : data.filter((el) => sortNum.every((num) => el[catName].includes(parseInt(num))))
           : data
 
       return dataArray

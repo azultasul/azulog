@@ -52,7 +52,7 @@ const SortStyle = styled.div`
   }
 `
 
-const PostList = ({ post, data, frameTotalH, dataCat, catName }) => {
+const PostList = ({ post, data, frameTotalH, catName }) => {
   const contentsRef = useRef(null)
   const [contentsMargin, setContentsMargin] = useState(0)
 
@@ -96,8 +96,8 @@ const PostList = ({ post, data, frameTotalH, dataCat, catName }) => {
           <div className="card-wrap">
             <div className="card-inner">
               {sortedData.map((data) => {
-                const catName = data.category.map((el) => Cat.techStack[el])
-                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} category={catName} key={data.id}></PostCard>
+                const catName = data.tech.map((el) => Cat.tech[el])
+                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={catName} key={data.id}></PostCard>
               })}
             </div>
           </div>
@@ -105,7 +105,7 @@ const PostList = ({ post, data, frameTotalH, dataCat, catName }) => {
             <LinedButton type="button" style="lined" title="NEWEST" onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''} />
             <LinedButton type="button" style="lined" title="OLDEST" onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''} />
             <br />
-            <SortData post={post} data={data} dataCat={dataCat} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
+            <SortData post={post} data={data} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
           </SortStyle>
         </ContentsStyle>
       )}
