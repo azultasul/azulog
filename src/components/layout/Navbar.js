@@ -5,7 +5,9 @@ import Image from 'next/image'
 import styled from 'styled-components'
 import Vars from '~/data/Variables'
 
-import github from '~/assets/github.svg'
+import Github from '~/assets/github.svg'
+import Home from '~/assets/home.svg'
+import HomeFilled from '~/assets/home-filled.svg'
 
 const NavStyle = styled.main`
   position: fixed;
@@ -82,11 +84,16 @@ const LinkStyle = styled.ul`
       transition: 0.2s;
     }
   }
+  .home {
+    position: absolute;
+  }
   .github {
     width: 20px;
     height: 20px;
-    fill: ${(props) => props.color};
-    transform: translate(0px, -3px);
+    transform: translate(0px, -2px);
+    path {
+      fill: ${(props) => props.color};
+    }
   }
 `
 
@@ -98,14 +105,11 @@ const Navbar = ({ themeColor, setThemeColor }) => {
   useEffect(() => {
     const path = router.route.split('/')[1]
     switch (path) {
-      case 'about':
+      case 'work':
         setRouteIndex(1)
         break
-      case 'work':
-        setRouteIndex(2)
-        break
       case 'blog':
-        setRouteIndex(3)
+        setRouteIndex(2)
         break
       default:
         setRouteIndex(0)
@@ -131,19 +135,14 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             <Link href="/">HOME</Link>
           </li>
           <li>
-            <Link href="/about">ABOUT</Link>
-          </li>
-          <li>
             <Link href="/work">WORK</Link>
           </li>
           <li>
             <Link href="/blog">BLOG</Link>
           </li>
           <a href="https://github.com/azultasul" target="_blank" className="github">
-            <Image src={github} alt="github" width={20} height={20} />
+            <Github width={20} height={20} viewBox="0 0 100 100"></Github>
           </a>
-          {/* <li>
-          </li> */}
         </LinkStyle>
       </div>
     </NavStyle>

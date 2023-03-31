@@ -62,6 +62,11 @@ const ContentsStyle = styled(MarkdownStyle)`
     margin-top: 50px;
     &-wrap {
     }
+    &__text {
+      width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
     &__image {
       position: relative;
       flex: 1.8;
@@ -90,7 +95,7 @@ const ContentsStyle = styled(MarkdownStyle)`
     &:first-child {
       margin-top: 0px;
     }
-    &:nth-child(2n) {
+    &:nth-child(2n + 1) {
       flex-direction: row-reverse;
       .work {
         &__desc {
@@ -181,19 +186,25 @@ const WorkDetail = ({ work }) => {
                 <div className="work-wrap">
                   {work.work.map((el, idx) => (
                     <div className="work" key={idx}>
-                      <div className="work__image">
-                        {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
-                        {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" unoptimized width="100" height="100" />}
-                      </div>
-                      <div className="work__desc-wrap">
-                        {el.title && (
-                          <h2 className="work__title">
-                            {el.number && <span className="work__number">{el.number}</span>}
-                            {el.title}
-                          </h2>
-                        )}
-                        {el.desc && <div className="work__desc">{el.desc}</div>}
-                      </div>
+                      {el.text ? (
+                        <div className="work__text">{el.text}</div>
+                      ) : (
+                        <>
+                          <div className="work__image">
+                            {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
+                            {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" unoptimized width="100" height="100" />}
+                          </div>
+                          <div className="work__desc-wrap">
+                            {el.title && (
+                              <h2 className="work__title">
+                                {el.number && <span className="work__number">{el.number}</span>}
+                                {el.title}
+                              </h2>
+                            )}
+                            {el.desc && <div className="work__desc">{el.desc}</div>}
+                          </div>
+                        </>
+                      )}
                     </div>
                   ))}
                 </div>
