@@ -8,6 +8,7 @@ const TableOfContentsStyle = styled.div`
   position: fixed;
   left: ${Vars.frame}px;
   bottom: ${Vars.frame}px;
+  z-index: 100;
   .inner {
     position: relative;
   }
@@ -38,12 +39,12 @@ const TableOfContentsStyle = styled.div`
     font-weight: 400;
     border: ${(props) => `1px solid ${props.color}`};
     border-radius: 18px 18px 18px 2px;
-    background: ${Vars.backColor};
     overflow: hidden;
     z-index: 998;
     transition-property: width, height;
     transition-duration: 0.4s;
     transition-delay: ${(props) => (props.isOpen ? '0s' : '0.2s')};
+    background: ${Vars.backColor};
     &-inner {
       width: 100%;
       height: calc(100% - 24px);

@@ -17,6 +17,10 @@ const WorkList = ({ allPostsData }) => {
     setTitleTotalH(titleH + 38)
   }, [])
 
+  useEffect(() => {
+    document.body.dataset.pageName = 'about'
+  }, [])
+
   return (
     <PageStyle titleTotalH={titleTotalH}>
       <FilledTitle ref={titleRef} type="lined" title="ABOUT" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="170px" topGap="20px" lineHeight="1" />

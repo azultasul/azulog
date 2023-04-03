@@ -140,6 +140,10 @@ const WorkDetail = ({ work }) => {
   const [endDate] = useDate(work.endDate)
   const [term] = useDate(work.date, work.endDate)
 
+  useEffect(() => {
+    document.body.dataset.pageName = 'detail'
+  }, [])
+
   return (
     <ColorContext.Consumer>
       {(color) => (

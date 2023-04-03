@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 const CommentStyle = styled.div`
   margin-top: 70px;
-  padding-bottom: 100px;
   .utterances {
     max-width: 800px;
     width: 100%;

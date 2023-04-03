@@ -67,6 +67,11 @@ const GlobalStyle = createGlobalStyle`
     grid-template-columns: repeat(12, 1fr);
     // gap: ${Vars.gap}px;
   }
+  body[data-page-name='list'] {
+    .footer {
+      display: none;
+    }
+  }
 
 `
 

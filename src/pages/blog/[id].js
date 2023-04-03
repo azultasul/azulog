@@ -88,6 +88,10 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
   const [startDate] = useDate(blogData.date)
   // console.log('allPostsData', allPostsData)
 
+  useEffect(() => {
+    document.body.dataset.pageName = 'detail'
+  }, [])
+
   return (
     <ColorContext.Consumer>
       {(color) => (
