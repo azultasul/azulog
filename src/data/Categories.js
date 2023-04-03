@@ -24,7 +24,8 @@ const type = {
 
 const series = {
   0: 'yes-wedding',
-  1: 'azulog',
+  1: 'npm',
+  2: 'azulog',
 }
 
 const postData = { tech, type, series }

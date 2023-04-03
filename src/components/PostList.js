@@ -60,6 +60,15 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
   const [sortedDataByCat, setSortedDataByCat] = useState([])
   const [sortedData, setSortedData] = useState([])
 
+  const sortNumOfEachData = data.map((el) => {
+    const obj = {}
+    catName.forEach((cat) => (obj[cat] = el[cat]))
+    return {
+      id: el.id,
+      ...obj,
+    }
+  })
+
   const sortDataByDate = (array) => {
     const sortedDataByDate =
       sortNumByDate === 0
@@ -74,7 +83,9 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
   }, [sortNumByDate])
 
   useEffect(() => {
-    setSortedData([...sortDataByDate(sortedDataByCat)])
+    const filteredData = data.filter((el) => sortedDataByCat.includes(el.id))
+    console.log('filteredData', sortedDataByCat)
+    setSortedData([...sortDataByDate(filteredData)])
   }, [sortedDataByCat])
 
   const resizeHandler = () => {
@@ -96,8 +107,8 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
           <div className="card-wrap">
             <div className="card-inner">
               {sortedData.map((data) => {
-                const catName = data.tech.map((el) => Cat.tech[el])
-                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={catName} key={data.id}></PostCard>
+                const techList = data.tech.map((el) => Cat.tech[el])
+                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
               })}
             </div>
           </div>
@@ -105,7 +116,7 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
             <LinedButton type="button" style="lined" title="NEWEST" onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''} />
             <LinedButton type="button" style="lined" title="OLDEST" onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''} />
             <br />
-            <SortData post={post} data={data} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
+            <SortData post={post} data={sortNumOfEachData} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
           </SortStyle>
         </ContentsStyle>
       )}

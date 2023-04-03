@@ -39,7 +39,7 @@ const BlogList = ({ allPostsData }) => {
   return (
     <PageStyle titleTotalH={titleTotalH}>
       <FilledTitle ref={titleRef} type="lined" title="BLOG" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="150px" topGap="20px" lineHeight="1" />
-      <PostList post="blog" data={allPostsData} frameTotalH={frameTotalH} catName="tech" />
+      <PostList post="blog" data={allPostsData} frameTotalH={frameTotalH} catName={['tech', 'series']} />
     </PageStyle>
   )
 }

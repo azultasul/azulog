@@ -9,51 +9,111 @@ const SortStyle = styled.div`
   text-transform: uppercase;
 `
 
-const SortData = ({ post, data, catName, setSortedDataByCat, buttonStyle }) => {
-  const [sortNum, setSortNum] = useState([])
+const SortData = ({ post, data, catName, setSortedDataByCat }) => {
+  const [sortNum, setSortNum] = useState({})
   const router = useRouter()
 
-  const categoryList = Object.values(Cat[catName])
-  const eachCatLength = Object.keys(Cat[catName]).map((key) => data.map((el) => el[catName].includes(parseInt(key))).filter((el) => el === true).length)
+  const [categoryList, setCategoryList] = useState({})
+  const [eachCatLength, setEachCatLength] = useState({})
 
-  const getSortNum = (prev, num) => {
-    const hasCategoryNumber = sortNum.includes(`${num}`)
+  const getSortNum = (prev, name, num) => {
+    if (num < 0) {
+      return []
+    } else {
+      const hasCategoryNumber = sortNum[name].includes(`${num}`)
 
-    const numArray = hasCategoryNumber ? [...prev.filter((el) => el !== `${num}`)] : [...prev, `${num}`]
+      const numArray = hasCategoryNumber ? [...prev[name].filter((el) => el !== `${num}`)] : [...prev[name], `${num}`]
 
-    return numArray
+      return numArray.join(',')
+    }
+  }
+
+  const getHref = (prev, name, num) => {
+    let href = `/${post}?`
+    catName.forEach((cname, idx) => {
+      href = href + `${cname}=${cname === name ? getSortNum(prev, name, num) : prev[cname]}${idx < catName.length - 1 ? '&' : ''}`
+    })
+    return href
   }
 
   useEffect(() => {
-    setSortNum(router.query.tag?.length > 0 ? [...router.query.tag.split(',')] : [])
-  }, [router.query.tag])
+    // init category list, length
+    setCategoryList((prev) => {
+      const obj = catName.forEach((name) => {
+        categoryList[name] = Object.values(Cat[name])
+      })
+
+      return { ...prev, ...obj }
+    })
+    setEachCatLength((prev) => {
+      const obj = catName.forEach((name) => {
+        eachCatLength[name] = Object.keys(Cat[name]).map((key) => data.map((el) => el[name].includes(parseInt(key))).filter((el) => el === true).length)
+      })
+
+      return { ...prev, ...obj }
+    })
+  }, [])
+
+  useEffect(() => {
+    setSortNum((prev) => {
+      const obj = {}
+      catName.forEach((name) => {
+        obj[name] = router.query[name]?.length > 0 ? [...router.query[name].split(',')] : []
+      })
+
+      return { ...prev, ...obj }
+    })
+  }, [router.query])
 
   useEffect(() => {
     setSortedDataByCat((prev) => {
-      const dataArray =
-        sortNum.length > 0
-          ? prev > 0
-            ? prev.filter((el) => sortNum.every((num) => el[catName].includes(parseInt(num))))
-            : data.filter((el) => sortNum.every((num) => el[catName].includes(parseInt(num))))
-          : data
+      let sortedId = {}
+      catName.forEach((name, idx) => {
+        const dataArray =
+          sortNum[name]?.length > 0
+            ? prev > 0
+              ? prev.filter((el) => sortNum[name].every((num) => el[name]?.includes(parseInt(num))))
+              : data.filter((el) => sortNum[name].every((num) => el[name]?.includes(parseInt(num))))
+            : data
 
-      return dataArray
+        sortedId[name] = dataArray.map((el) => el.id)
+      })
+
+      let ids
+      catName.forEach((name, idx) => {
+        if (idx < catName.length - 1) {
+          ids = sortedId[name].filter((el) => sortedId[catName[idx + 1]].includes(el)) // returns [1, 2]
+        }
+      })
+      console.log('ids', ids)
+      return ids
     })
   }, [sortNum])
 
   return (
     <SortStyle>
-      <LinedButton type="link" href={`/${post}`} style={buttonStyle} title="ALL" className={sortNum.length === 0 ? 'clicked' : ''}>
-        <span className="button-num">{data.length}</span>
-      </LinedButton>
-      {categoryList.map(
-        (el, idx) =>
-          eachCatLength[idx] > 0 && (
-            <LinedButton key={idx} type="link" href={`/${post}?tag=${getSortNum(sortNum, idx).join(',')}`} style={buttonStyle} title={el} className={sortNum.includes(`${idx}`) ? 'clicked' : ''}>
-              <span className="button-num">{eachCatLength[idx]}</span>
-            </LinedButton>
-          )
-      )}
+      {catName.map((name, idx) => (
+        <div key={idx}>
+          <LinedButton type="link" href={getHref(sortNum, name, -1)} style={idx % 2 === 0 ? 'filled' : 'lined'} title="ALL" className={sortNum[name]?.length === 0 ? 'clicked' : ''}>
+            <span className="button-num">{data.length}</span>
+          </LinedButton>
+          {categoryList[name]?.map(
+            (el, _idx) =>
+              eachCatLength[name][_idx] > 0 && (
+                <LinedButton
+                  key={_idx}
+                  type="link"
+                  href={getHref(sortNum, name, _idx)}
+                  style={idx % 2 === 0 ? 'filled' : 'lined'}
+                  title={el}
+                  className={sortNum[name].includes(`${_idx}`) ? 'clicked' : ''}
+                >
+                  <span className="button-num">{eachCatLength[name][_idx]}</span>
+                </LinedButton>
+              )
+          )}
+        </div>
+      ))}
     </SortStyle>
   )
 }
