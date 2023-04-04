@@ -37,18 +37,11 @@ const SortStyle = styled.div`
   .lined-text {
     position: relative;
     font-family: 'cafe';
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
     // margin: 0 20px;
     margin: 6px 12px;
-    line-height: 1.3;
-  }
-  .button-num {
-    position: absolute;
-    right: -2px;
-    bottom: 5.8px;
-    transform: translate(100%, 0px);
-    font-size: 8px;
+    line-height: 1.4;
   }
 `
 
@@ -59,15 +52,6 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
   const [sortNumByDate, setSortNumByDate] = useState(0)
   const [sortedDataByCat, setSortedDataByCat] = useState([])
   const [sortedData, setSortedData] = useState([])
-
-  const sortNumOfEachData = data.map((el) => {
-    const obj = {}
-    catName.forEach((cat) => (obj[cat] = el[cat]))
-    return {
-      id: el.id,
-      ...obj,
-    }
-  })
 
   const sortDataByDate = (array) => {
     const sortedDataByDate =
@@ -83,9 +67,7 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
   }, [sortNumByDate])
 
   useEffect(() => {
-    const filteredData = data.filter((el) => sortedDataByCat.includes(el.id))
-    console.log('filteredData', sortedDataByCat)
-    setSortedData([...sortDataByDate(filteredData)])
+    setSortedData([...sortDataByDate(sortedDataByCat)])
   }, [sortedDataByCat])
 
   const resizeHandler = () => {
@@ -116,7 +98,7 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
             <LinedButton type="button" style="lined" title="NEWEST" onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''} />
             <LinedButton type="button" style="lined" title="OLDEST" onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''} />
             <br />
-            <SortData post={post} data={sortNumOfEachData} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
+            <SortData post={post} data={data} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
           </SortStyle>
         </ContentsStyle>
       )}

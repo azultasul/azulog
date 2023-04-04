@@ -1,3 +1,9 @@
+const krName = {
+  tech: '기술 스택',
+  type: '프로젝트 타입',
+  series: '시리즈',
+}
+
 const tech = {
   0: 'javascript',
   1: 'frontend',
@@ -28,6 +34,6 @@ const series = {
   2: 'azulog',
 }
 
-const postData = { tech, type, series }
+const catData = { krName, tech, type, series }
 
-export default postData
+export default catData

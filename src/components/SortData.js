@@ -7,6 +7,35 @@ import styled from 'styled-components'
 
 const SortStyle = styled.div`
   text-transform: uppercase;
+  .category {
+    display: inline-block;
+    position: relative;
+    margin-top: 18px;
+    margin-right: 5px;
+    padding: 0px 2px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 6px;
+      bottom: 0;
+      right: 0;
+      transform: skew(-15deg);
+      background: #3d88ed;
+      opacity: 0.5;
+      z-index: -1;
+    }
+  }
+  .button-num {
+    position: absolute;
+    right: -2px;
+    bottom: 5.8px;
+    transform: translate(100%, 0px);
+    font-size: 8px;
+  }
 `
 
 const SortData = ({ post, data, catName, setSortedDataByCat }) => {
@@ -67,33 +96,30 @@ const SortData = ({ post, data, catName, setSortedDataByCat }) => {
 
   useEffect(() => {
     setSortedDataByCat((prev) => {
-      let sortedId = {}
-      catName.forEach((name, idx) => {
-        const dataArray =
-          sortNum[name]?.length > 0
-            ? prev > 0
-              ? prev.filter((el) => sortNum[name].every((num) => el[name]?.includes(parseInt(num))))
-              : data.filter((el) => sortNum[name].every((num) => el[name]?.includes(parseInt(num))))
-            : data
+      const isAll = !catName.some((name) => sortNum[name]?.length > 0)
+      let dataArray
 
-        sortedId[name] = dataArray.map((el) => el.id)
-      })
+      isAll // catName sortNum배열 길이가 모두 0
+        ? (dataArray = data) // data 전체 return
+        : catName.forEach((name, idx) => {
+            if (idx === 0) {
+              dataArray =
+                prev > 0 ? prev.filter((el) => sortNum[name].every((num) => el[name].includes(parseInt(num)))) : data.filter((el) => sortNum[name].every((num) => el[name]?.includes(parseInt(num))))
+            } else {
+              dataArray = dataArray.length > 0 ? dataArray.filter((el) => sortNum[name].every((num) => el[name].includes(parseInt(num)))) : []
+            }
+          })
 
-      let ids
-      catName.forEach((name, idx) => {
-        if (idx < catName.length - 1) {
-          ids = sortedId[name].filter((el) => sortedId[catName[idx + 1]].includes(el)) // returns [1, 2]
-        }
-      })
-      console.log('ids', ids)
-      return ids
+      return dataArray
     })
   }, [sortNum])
 
   return (
-    <SortStyle>
+    <>
       {catName.map((name, idx) => (
-        <div key={idx}>
+        <SortStyle key={idx}>
+          <span className="category">{Cat.krName[name]}</span>
+          <br />
           <LinedButton type="link" href={getHref(sortNum, name, -1)} style={idx % 2 === 0 ? 'filled' : 'lined'} title="ALL" className={sortNum[name]?.length === 0 ? 'clicked' : ''}>
             <span className="button-num">{data.length}</span>
           </LinedButton>
@@ -112,9 +138,9 @@ const SortData = ({ post, data, catName, setSortedDataByCat }) => {
                 </LinedButton>
               )
           )}
-        </div>
+        </SortStyle>
       ))}
-    </SortStyle>
+    </>
   )
 }
 
