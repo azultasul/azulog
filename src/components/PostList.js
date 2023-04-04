@@ -32,15 +32,17 @@ const SortStyle = styled.div`
   position: sticky;
   top: 0;
   right: 0;
+  height: ${(props) => `calc(100vh - ${props.frameTotalH}px)`};
+  overflow-y: scroll;
   text-align: right;
   padding-right: ${(props) => `${props.contentsMargin}px`};
+  padding-bottom: 20px;
   .lined-text {
     position: relative;
     font-family: 'cafe';
     font-size: 22px;
     font-weight: bold;
-    // margin: 0 20px;
-    margin: 6px 12px;
+    margin: 4px 10px;
     line-height: 1.4;
   }
 `
@@ -71,7 +73,7 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
   }, [sortedDataByCat])
 
   const resizeHandler = () => {
-    const contentsW = contentsRef.current.clientWidth
+    const contentsW = contentsRef.current?.clientWidth
     setContentsMargin(contentsW > 1400 ? (contentsW - 1400) / 2 : 0)
   }
 
