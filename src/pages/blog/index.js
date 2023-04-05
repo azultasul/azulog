@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { getAllMetaData } from '~/lib/getPost'
 
 export async function getStaticProps() {
-  const allPostsData = getAllMetaData('blog')
+  const allPostsData = getAllMetaData()
   return {
     props: {
       allPostsData,

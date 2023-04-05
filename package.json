@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && index:blog",
+    "index:blog": "node index-blog.mjs",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "algoliasearch": "^4.17.0",
     "date-fns": "^2.29.3",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
@@ -17,6 +19,7 @@
     "next": "^13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-instantsearch-hooks-web": "^6.42.1",
     "remark": "^14.0.2",
     "remark-gfm": "^3.0.1",
     "remark-heading-id": "^1.0.0",

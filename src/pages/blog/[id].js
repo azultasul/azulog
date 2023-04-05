@@ -59,7 +59,7 @@ const PostButtonStyle = styled.div`
 `
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds('blog')
+  const paths = getAllPostIds()
 
   return {
     paths,
@@ -69,8 +69,8 @@ export async function getStaticPaths() {
 
 // `getStaticPaths` requires using `getStaticProps`}
 export async function getStaticProps({ params }) {
-  const blogData = await getPostData('blog', params.id)
-  const allPostsData = getAllMetaData('blog')
+  const blogData = await getPostData(params.id)
+  const allPostsData = getAllMetaData()
   const currPostsIndex = allPostsData.findIndex((el) => el.id === params.id)
   const allPostsIds = allPostsData.map((el) => el.id)
 

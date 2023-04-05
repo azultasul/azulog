@@ -140,6 +140,9 @@ const Navbar = ({ themeColor, setThemeColor }) => {
           <li>
             <Link href="/blog">BLOG</Link>
           </li>
+          <li>
+            <Link href="/test">test</Link>
+          </li>
           <a href="https://github.com/azultasul" target="_blank" className="github">
             <Github width={20} height={20} viewBox="0 0 100 100"></Github>
           </a>
