@@ -2,14 +2,17 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
+import Search from '~/components/search/Search'
 import styled from 'styled-components'
 import Vars from '~/data/Variables'
+import SearchIcon from '~/assets/search.svg'
+import LinedButton from '~/components/LinedButton'
 
 import Github from '~/assets/github.svg'
 import Home from '~/assets/home.svg'
 import HomeFilled from '~/assets/home-filled.svg'
 
-const NavStyle = styled.main`
+const NavStyle = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -57,7 +60,8 @@ const ColorStyle = styled.button`
 
 const LinkStyle = styled.ul`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  // align-items: flex-end;
   gap: 8px;
   position: absolute;
   right: 12px;
@@ -67,6 +71,10 @@ const LinkStyle = styled.ul`
   padding: 0;
   border: 0 none;
   list-style: none;
+  a,
+  svg {
+    display: block;
+  }
   li {
     font-family: 'cafe';
     color: ${(props) => props.color};
@@ -90,16 +98,44 @@ const LinkStyle = styled.ul`
   .github {
     width: 20px;
     height: 20px;
-    transform: translate(0px, -2px);
-    path {
-      fill: ${(props) => props.color};
+    transform: translate(0px, -1px);
+  }
+  .search {
+    display: flex;
+    &__button {
+      display: flex;
+      align-items: center;
+      transform: translate(0px, -1px);
     }
+    &__text {
+      font-size: 14px;
+      font-weight: 600;
+
+      color: ${(props) => props.color};
+      background: transparent;
+      margin-right: 2px;
+      &:hover {
+        color: transparent;
+        -webkit-text-stroke: ${(props) => `1px ${props.color}`};
+        transition: color 0.15s;
+      }
+    }
+    svg {
+      transform: ${(props) => (props.isSearchOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+      transition-property: transform;
+      transition-duration: 0.3s;
+    }
+  }
+  svg,
+  path {
+    fill: ${(props) => props.color};
   }
 `
 
 const Navbar = ({ themeColor, setThemeColor }) => {
   const router = useRouter()
   const [routeIndex, setRouteIndex] = useState(0)
+  const [isSearchOpened, setIsSearchOpened] = useState(false)
   const logo = 'AZULOG'
 
   useEffect(() => {
@@ -130,7 +166,17 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             </ColorStyle>
           ))}
         </PaletteStyle>
-        <LinkStyle color={themeColor.color} routeIndex={routeIndex}>
+        <LinkStyle color={themeColor.color} routeIndex={routeIndex} isSearchOpened={isSearchOpened}>
+          <div className="search">
+            <button className="search__button" onClick={() => setIsSearchOpened((prev) => !prev)}>
+              <span className="search__text">{isSearchOpened ? 'Close' : ''}</span>
+              <SearchIcon width={20} height={20} viewBox="0 0 24 24" />
+            </button>
+            <Search isSearchOpened={isSearchOpened} color={themeColor.color} />
+          </div>
+          <a href="https://github.com/azultasul" target="_blank" className="github">
+            <Github width={20} height={20} viewBox="0 0 100 100"></Github>
+          </a>
           <li>
             <Link href="/">HOME</Link>
           </li>
@@ -140,12 +186,6 @@ const Navbar = ({ themeColor, setThemeColor }) => {
           <li>
             <Link href="/blog">BLOG</Link>
           </li>
-          <li>
-            <Link href="/test">test</Link>
-          </li>
-          <a href="https://github.com/azultasul" target="_blank" className="github">
-            <Github width={20} height={20} viewBox="0 0 100 100"></Github>
-          </a>
         </LinkStyle>
       </div>
     </NavStyle>
