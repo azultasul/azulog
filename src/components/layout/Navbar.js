@@ -82,7 +82,7 @@ const LinkStyle = styled.ul`
     font-weight: bold;
     line-height: 1;
     text-align: center;
-    &:nth-of-type(${(props) => props.routeIndex + 1}) a {
+    &.link:nth-of-type(${(props) => props.routeIndex + 1}) a {
       color: transparent;
       -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     }
@@ -90,6 +90,11 @@ const LinkStyle = styled.ul`
       color: transparent;
       -webkit-text-stroke: ${(props) => `1px ${props.color}`};
       transition: 0.2s;
+
+      .hit__tech {
+        color: ${Vars.backColor};
+        -webkit-text-stroke: 0px;
+      }
     }
   }
   .home {
@@ -108,8 +113,11 @@ const LinkStyle = styled.ul`
       transform: translate(0px, -1px);
     }
     &__text {
+      opacity: ${(props) => (props.isSearchOpen ? 1 : 0)};
       font-size: 14px;
       font-weight: 600;
+      transition-delay: ${(props) => (props.isSearchOpen ? '0.6s' : '0.3s')};
+      transition-duration: 0.3s;
 
       color: ${(props) => props.color};
       background: transparent;
@@ -121,7 +129,7 @@ const LinkStyle = styled.ul`
       }
     }
     svg {
-      transform: ${(props) => (props.isSearchOpened ? 'rotate(90deg)' : 'rotate(0deg)')};
+      transform: ${(props) => (props.isSearchOpen ? 'rotate(90deg)' : 'rotate(0deg)')};
       transition-property: transform;
       transition-duration: 0.3s;
     }
@@ -135,7 +143,7 @@ const LinkStyle = styled.ul`
 const Navbar = ({ themeColor, setThemeColor }) => {
   const router = useRouter()
   const [routeIndex, setRouteIndex] = useState(0)
-  const [isSearchOpened, setIsSearchOpened] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const logo = 'AZULOG'
 
   useEffect(() => {
@@ -166,24 +174,24 @@ const Navbar = ({ themeColor, setThemeColor }) => {
             </ColorStyle>
           ))}
         </PaletteStyle>
-        <LinkStyle color={themeColor.color} routeIndex={routeIndex} isSearchOpened={isSearchOpened}>
+        <LinkStyle color={themeColor.color} routeIndex={routeIndex} isSearchOpen={isSearchOpen}>
           <div className="search">
-            <button className="search__button" onClick={() => setIsSearchOpened((prev) => !prev)}>
-              <span className="search__text">{isSearchOpened ? 'Close' : ''}</span>
+            <button className="search__button" onClick={() => setIsSearchOpen((prev) => !prev)}>
+              <span className="search__text">{isSearchOpen ? 'Close' : ''}</span>
               <SearchIcon width={20} height={20} viewBox="0 0 24 24" />
             </button>
-            <Search isSearchOpened={isSearchOpened} color={themeColor.color} />
+            <Search isSearchOpen={isSearchOpen} setIsSearchOpen={setIsSearchOpen} color={themeColor.color} />
           </div>
           <a href="https://github.com/azultasul" target="_blank" className="github">
             <Github width={20} height={20} viewBox="0 0 100 100"></Github>
           </a>
-          <li>
+          <li className="link">
             <Link href="/">HOME</Link>
           </li>
-          <li>
+          <li className="link">
             <Link href="/work">WORK</Link>
           </li>
-          <li>
+          <li className="link">
             <Link href="/blog">BLOG</Link>
           </li>
         </LinkStyle>

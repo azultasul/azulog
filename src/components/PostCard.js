@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Date from '~/components/Date'
 import LinedButton from '~/components/LinedButton'
+import Tag from '~/components/Tag'
 import useDate from '~/utils/useDate'
 import Vars from '~/data/Variables'
 import styled from 'styled-components'
@@ -67,20 +68,6 @@ const ContentsStyle = styled.div`
     font-weight: 400;
     line-height: 1.3;
   }
-  .tech {
-    font-size: 14px;
-    font-weight: 400;
-    text-align: right;
-    line-height: 1;
-    margin-top: ${(props) => (props.type === 'work' ? '15px' : '5px')};
-    span {
-      background: ${(props) => props.color};
-      border-radius: 16px;
-      padding: 4px 13px;
-      margin-left: 6px;
-      color: ${Vars.backColor};
-    }
-  }
 `
 
 const PostCard = ({ type, data, href, tech, className }) => {
@@ -111,11 +98,7 @@ const PostCard = ({ type, data, href, tech, className }) => {
                 ) : (
                   <div className="date">{startDate.ko}</div>
                 )}
-                <div className="tech">
-                  {tech.map((el, idx) => (
-                    <span key={idx}>{el}</span>
-                  ))}
-                </div>
+                <Tag tagList={tech} />
               </ContentsStyle>
             </CardStyle>
           </Link>
