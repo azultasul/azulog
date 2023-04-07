@@ -116,6 +116,7 @@ const LinkStyle = styled.ul`
       opacity: ${(props) => (props.isSearchOpen ? 1 : 0)};
       font-size: 14px;
       font-weight: 600;
+      transition-property: opacity;
       transition-delay: ${(props) => (props.isSearchOpen ? '0.6s' : '0.3s')};
       transition-duration: 0.3s;
 

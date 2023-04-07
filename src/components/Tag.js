@@ -12,12 +12,13 @@ const TagStyle = styled.div`
   font-weight: 400;
   text-align: right;
   line-height: 1;
-  margin-top: ${(props) => (props.type === 'work' ? '15px' : '5px')};
   span {
+    display: inline-block;
     background: ${(props) => props.color};
     border-radius: 16px;
     padding: 4px 13px;
     margin-left: 6px;
+    margin-top: ${(props) => (props.type === 'work' ? '15px' : '5px')};
     color: ${Vars.backColor};
   }
 `

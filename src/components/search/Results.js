@@ -31,9 +31,10 @@ const ResultsStyle = styled.div`
     }
     &__empty {
       padding-bottom: 20px;
+      font-family: 'cafe';
       font-size: 16px;
       font-weight: 700;
-      font-family: 'cafe';
+      font-style: italic;
       text-align: center;
     }
   }
@@ -43,18 +44,26 @@ const ResultsStyle = styled.div`
       padding: 0;
     }
     &__item {
+      position: relative;
       text-align: left;
       font-size: 20px;
       padding: 12px 0px;
       border-top: ${(props) => `0.8px solid ${props.color}`};
       &:nth-of-type(1) {
-        border-top: none;
-        padding-top: 6px;
+        margin-top: 6px;
       }
     }
   }
   .hit {
     display: flex;
+    &__type {
+      position: absolute;
+      top: -6.5px;
+      left: 0;
+      padding: 0px 8px 0px 2px;
+      font-size: 12px;
+      background: ${Vars.backColor};
+    }
     &__image {
       display: inline-block;
       width: 50px;
@@ -78,7 +87,6 @@ const ResultsStyle = styled.div`
     }
     &__tech {
       font-size: 12px;
-      margin-top: 8px;
       span {
         padding: 3px 8px;
       }
@@ -109,18 +117,22 @@ const ResultsStyle = styled.div`
 `
 const Hit = ({ hit }) => {
   return (
-    <Link href={`/blog/${hit.id}`} className="hit">
-      {hit?.thumb && (
-        <div className="hit__image">
-          <Image src={hit?.thumb} className="hit__thumb" alt="alt" unoptimized width="100" height="100" />
+    <>
+      {hit?.type && <div className="hit__type">{hit.type}</div>}
+      <Link href={`/${hit?.type}/${hit.id}`} className="hit">
+        {hit?.thumb && (
+          <div className="hit__image">
+            {/* <Image src={hit.thumb} className="hit__thumb" alt="alt" unoptimized width="100" height="100" /> */}
+            <Image src={hit.type === 'work' ? `/images/work/${hit.id}/thumb.jpeg` : hit.thumb} className="hit__thumb" alt="alt" unoptimized width="100" height="100" />
+          </div>
+        )}
+        <div className="hit__text">
+          {hit?.title ? <Highlight attribute="title" hit={hit} classNames={{ root: 'highligt__root--title', highlighted: 'highligt__highlighted' }} /> : '제목 없음'}
+          <div className="hit__date">{hit.date}</div>
+          <Tag tagList={hit.tech} className="hit__tech" />
         </div>
-      )}
-      <div className="hit__text">
-        {hit?.title ? <Highlight attribute="title" hit={hit} classNames={{ root: 'highligt__root--title', highlighted: 'highligt__highlighted' }} /> : '제목 없음'}
-        <div className="hit__date">{hit?.date}</div>
-        <Tag tagList={hit?.tech} className="hit__tech" />
-      </div>
-    </Link>
+      </Link>
+    </>
   )
 }
 
@@ -136,7 +148,8 @@ const Results = ({ color, isSearchOpen, setIsSearchOpen, className }) => {
         <div className="result">
           <div className="result__inner">
             {hasResults && <Hits hitComponent={Hit} onClick={() => setIsSearchOpen(false)} classNames={{ list: 'hits__list', item: 'hits__item' }} />}
-            {!hasResults && <div className="result__empty">검색 결과 없음 😢</div>}
+            {/* {!hasResults && <div className="result__empty">검색 결과 없음 😢</div>} */}
+            {!hasResults && <div className="result__empty">EMPTY 😢</div>}
           </div>
         </div>
       )}

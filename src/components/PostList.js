@@ -25,6 +25,14 @@ const ContentsStyle = styled.div`
       padding-bottom: ${Vars.frame}px;
     }
   }
+  .empty {
+    padding-top: 100px;
+    font-family: 'cafe';
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+  }
 `
 
 const SortStyle = styled.div`
@@ -90,10 +98,14 @@ const PostList = ({ post, data, frameTotalH, catName }) => {
         <ContentsStyle ref={contentsRef} frameTotalH={frameTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
             <div className="card-inner">
-              {sortedData.map((data) => {
-                const techList = data.tech.map((el) => Cat.tech[el])
-                return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
-              })}
+              {sortedData.length > 0 ? (
+                sortedData.map((data) => {
+                  const techList = data.tech.map((el) => Cat.tech[el])
+                  return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
+                })
+              ) : (
+                <div className="empty">NOTHING~ 👀</div>
+              )}
             </div>
           </div>
           <SortStyle color={color.currColor.color} contentsMargin={contentsMargin}>
