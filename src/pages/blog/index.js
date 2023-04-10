@@ -21,16 +21,7 @@ const PageStyle = styled.div`
 `
 
 const BlogList = ({ allPostsData }) => {
-  const titleRef = useRef(null)
   const [titleTotalH, setTitleTotalH] = useState(null)
-  const [frameTotalH, setFrameTotalH] = useState(null)
-
-  useEffect(() => {
-    const titleH = titleRef.current.offsetHeight
-    const frameGap = Vars.frameTop + 40
-    setTitleTotalH(titleH + 40)
-    setFrameTotalH(titleH + frameGap)
-  }, [])
 
   useEffect(() => {
     document.body.dataset.pageName = 'list'
@@ -38,8 +29,19 @@ const BlogList = ({ allPostsData }) => {
 
   return (
     <PageStyle titleTotalH={titleTotalH}>
-      <FilledTitle ref={titleRef} type="lined" title="BLOG" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="150px" topGap="20px" lineHeight="1" />
-      <PostList post="blog" data={allPostsData} frameTotalH={frameTotalH} catName={['tech', 'series']} />
+      <FilledTitle
+        type="lined"
+        title="BLOG"
+        position="fixed"
+        top={`${Vars.frameTop}px`}
+        left="50%"
+        fontSize={['150px', '70px']}
+        topGap="20px"
+        lineHeight="1"
+        setTitleTotalH={(el) => setTitleTotalH(el)}
+        page="list"
+      />
+      <PostList post="blog" data={allPostsData} titleTotalH={titleTotalH} catName={['tech', 'series']} />
     </PageStyle>
   )
 }

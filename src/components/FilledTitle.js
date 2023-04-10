@@ -3,13 +3,18 @@ import Vars from '~/data/Variables'
 import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
 
+import useWindow from '~/utils/useWindow'
+
 const TitleStyle = styled.div`
   position: ${(props) => props.position || 'static'};
   left: ${(props) => props.left || '50%'};
   top: ${(props) => props.top || '50%'};
   transform: ${(props) => (props.position === 'absolute' || props.position === 'fixed' ? 'translate(-50%, 0%)' : ' translate(0%, 0%)')};
   font-family: 'cafe';
-  font-size: ${(props) => props.fontSize};
+  font-size: ${(props) => props.fontSize[0]};
+  ${Vars.media.md`
+    font-size: ${(props) => props.fontSize[1]};
+  `};
   font-weight: bold;
   line-height: ${(props) => props.lineHeight || 1.7};
   width: ${(props) => (props.position === 'fixed' ? `${Vars.sizes.l}px` : 'auto')};
@@ -42,11 +47,29 @@ const TitleStyle = styled.div`
   }
 `
 
-export const FilledTitle = forwardRef(({ type = 'normal', title, top, left, fontSize, position, topGap, lineHeight }, ref) => {
+export const FilledTitle = ({ type = 'normal', title, top, left, fontSize, position, topGap, lineHeight, setTitleTotalH, page = 'normal' }) => {
+  const titleRef = useRef(null)
+  const [windowSize] = useWindow()
+
+  useEffect(() => {
+    if (page !== 'list') return
+
+    const resizeHandler = () => {
+      setTitleTotalH(windowSize.w > Vars.sizes.md ? titleRef?.current.offsetHeight + 30 : titleRef?.current.offsetHeight + 20)
+    }
+
+    resizeHandler()
+    window.addEventListener('resize', resizeHandler)
+
+    return () => {
+      window.removeEventListener('resize', resizeHandler)
+    }
+  }, [])
+
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <TitleStyle ref={ref} type={type} top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} lineHeight={lineHeight} color={color.currColor.color}>
+        <TitleStyle ref={titleRef} type={type} top={top} left={left} fontSize={fontSize} position={position} topGap={topGap} lineHeight={lineHeight} color={color.currColor.color}>
           <div className="title-wrap">
             {type === 'lined' && (
               <div className="title title--lined">
@@ -61,7 +84,6 @@ export const FilledTitle = forwardRef(({ type = 'normal', title, top, left, font
       )}
     </ColorContext.Consumer>
   )
-})
-FilledTitle.displayName = 'FilledTitle'
+}
 
 export default FilledTitle

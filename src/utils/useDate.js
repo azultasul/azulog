@@ -1,9 +1,9 @@
-const useDate = (dateTye, dateTyeSec) => {
-  if (dateTye === null) {
+const useDate = (dateType, dateTypeSec) => {
+  if (dateType === null) {
     return [null]
   } else {
-    const date = dateTye ? new Date(dateTye) : new Date()
-    const dateSec = dateTyeSec ? new Date(dateTyeSec) : new Date()
+    const date = dateType ? new Date(dateType) : new Date()
+    const dateSec = dateTypeSec ? new Date(dateTypeSec) : new Date()
 
     const dateInfo = {
       ko: new Intl.DateTimeFormat('ko-KR').format(date),

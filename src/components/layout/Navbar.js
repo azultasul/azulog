@@ -5,12 +5,12 @@ import Image from 'next/image'
 import Search from '~/components/search/Search'
 import styled from 'styled-components'
 import Vars from '~/data/Variables'
-import SearchIcon from '~/assets/search.svg'
+import SearchIcon from '~/assets/icons/search.svg'
 import LinedButton from '~/components/LinedButton'
 
-import Github from '~/assets/github.svg'
-import Home from '~/assets/home.svg'
-import HomeFilled from '~/assets/home-filled.svg'
+import Github from '~/assets/icons/github.svg'
+import Home from '~/assets/icons/home.svg'
+import HomeFilled from '~/assets/icons/home-filled.svg'
 
 const NavStyle = styled.div`
   position: fixed;

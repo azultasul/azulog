@@ -7,7 +7,6 @@ const LayoutStyle = styled.main`
   padding-top: ${Vars.frameTop}px;
   padding-right: ${Vars.frame}px;
   padding-left: ${Vars.frame}px;
-  // padding-bottom: ${Vars.frame}px;
 `
 
 const Layout = ({ themeColor, setThemeColor, children }) => {

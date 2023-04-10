@@ -96,7 +96,7 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
     <ColorContext.Consumer>
       {(color) => (
         <BlogStyle>
-          <FilledTitle title={blogData.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
+          <FilledTitle title={blogData.title} fontSize={['50px', '50px']} topGap="0px" lineHeight="1.5" />
           <InfoStyle color={color.currColor.color}>
             <div className="date">{startDate.ko}</div>
             {blogData.tech.map((cat, idx) => (

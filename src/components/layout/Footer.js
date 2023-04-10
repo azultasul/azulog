@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import Github from '~/assets/github.svg'
-import Mail from '~/assets/mail.svg'
-import Vercel from '~/assets/vercel.svg'
+import Github from '~/assets/icons/github.svg'
+import Mail from '~/assets/icons/mail.svg'
+import Vercel from '~/assets/icons/vercel.svg'
 
 import Vars from '~/data/Variables'
 import styled from 'styled-components'

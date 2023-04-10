@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-const frame = 24
+const frame = 18
 const frameTop = 40
 const gap = 16
 
@@ -19,7 +19,8 @@ const textColor = {
 
 const sizes = {
   l: 1400,
-  md: 1024,
+  // md: 1024,
+  md: 870,
   sm: 380,
   minL: 320,
   maxL: 1920,

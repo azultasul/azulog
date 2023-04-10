@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import Matter from 'matter-js'
 import Link from 'next/link'
 import Image from 'next/image'
-// import githubImage from '~/assets/images/hotline.png';
 import styled from 'styled-components'
 
 const WordStyle = styled.div`
@@ -237,7 +236,6 @@ export const Falling = () => {
     render.mouse = mouse
     Runner.run(engine)
     Render.run(render)
-
     ;(function rerender() {
       about.forEach((element) => {
         element.render()

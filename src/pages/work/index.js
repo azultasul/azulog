@@ -11,16 +11,7 @@ const PageStyle = styled.div`
 `
 
 const WorkList = () => {
-  const titleRef = useRef(null)
   const [titleTotalH, setTitleTotalH] = useState(null)
-  const [frameTotalH, setFrameTotalH] = useState(null)
-
-  useEffect(() => {
-    const titleH = titleRef.current.offsetHeight
-    const frameGap = Vars.frameTop + 38
-    setTitleTotalH(titleH + 38)
-    setFrameTotalH(titleH + frameGap)
-  }, [])
 
   useEffect(() => {
     document.body.dataset.pageName = 'list'
@@ -28,9 +19,19 @@ const WorkList = () => {
 
   return (
     <PageStyle titleTotalH={titleTotalH}>
-      <FilledTitle ref={titleRef} type="lined" title="WORK" position="fixed" top={`${Vars.frameTop}px`} left="50%" fontSize="150px" topGap="20px" lineHeight="1" />
-      {/* <PostList post="work" data={Works} frameTotalH={frameTotalH} catName="tech" /> */}
-      <PostList post="work" data={Works} frameTotalH={frameTotalH} catName={['tech', 'type']} />
+      <FilledTitle
+        type="lined"
+        title="WORK"
+        position="fixed"
+        top={`${Vars.frameTop}px`}
+        left="50%"
+        fontSize={['150px', '70px']}
+        topGap="20px"
+        lineHeight="1"
+        setTitleTotalH={(el) => setTitleTotalH(el)}
+        page="list"
+      />
+      <PostList post="work" data={Works} titleTotalH={titleTotalH} catName={['tech', 'type']} />
     </PageStyle>
   )
 }

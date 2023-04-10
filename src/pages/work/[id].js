@@ -148,7 +148,7 @@ const WorkDetail = ({ work }) => {
     <ColorContext.Consumer>
       {(color) => (
         <WorkStyle>
-          <FilledTitle title={work.title} fontSize="50px" topGap="0px" lineHeight="1.5" />
+          <FilledTitle title={work.title} fontSize={['50px', '50px']} topGap="0px" lineHeight="1.5" />
           <InfoStyle>
             <div className="lined-wrap">
               {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
