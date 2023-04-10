@@ -35,8 +35,5 @@ yarn-error.log*
 # vscode 설정
 .vscode
 
-# 테스트 파일
-test
-
 # algolia index
 index-*.mjs

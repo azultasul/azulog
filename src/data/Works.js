@@ -1,4 +1,4 @@
-export default [
+const works = [
   {
     id: 'fqled',
     star: false,
@@ -233,3 +233,5 @@ export default [
     ],
   },
 ]
+
+export default works

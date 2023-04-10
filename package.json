@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && index:blog",
+    "build": "next build",
     "index:blog": "node index-blog.mjs",
     "start": "next start",
     "lint": "next lint"

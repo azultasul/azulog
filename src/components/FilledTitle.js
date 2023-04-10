@@ -62,5 +62,6 @@ export const FilledTitle = forwardRef(({ type = 'normal', title, top, left, font
     </ColorContext.Consumer>
   )
 })
+FilledTitle.displayName = 'FilledTitle'
 
 export default FilledTitle
