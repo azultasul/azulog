@@ -8,14 +8,18 @@ import useWindow from '~/utils/useWindow'
 
 import Vars from '~/data/Variables'
 import Cat from '~/data/Categories'
+import FilterIcon from '~/assets/icons/filter.svg'
 import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
 
 const ContentsStyle = styled.div`
   display: flex;
   // gap: ${Vars.gap}px;
-  gap: 44px;
+  gap: 30px;
+  // gap: 44px;
   height: ${(props) => `calc(100vh - ${props.titleTotalH + 40}px)`};
+  padding-right: ${Vars.frame}px;
+  padding-left: ${Vars.frame}px;
   overflow: scroll;
   list-style: none;
   &::-webkit-scrollbar {
@@ -30,7 +34,12 @@ const ContentsStyle = styled.div`
       padding-left: ${(props) => `${props.contentsMargin}px`};
     }
     &-inner {
-      padding-bottom: ${Vars.frame}px;
+      padding-bottom: 30px;
+      ${Vars.media.md`
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      `};
     }
   }
   .empty {
@@ -57,7 +66,8 @@ const SortStyle = styled.div`
     text-align: left;
   `}
   &.contents-inner {
-    padding: 18px 14px 14px;
+    padding: 0px 14px 32px 14px;
+    margin-top: 20px;
   }
   .lined-text {
     position: relative;
@@ -66,6 +76,10 @@ const SortStyle = styled.div`
     font-weight: bold;
     margin: 4px 10px;
     line-height: 1.4;
+    ${Vars.media.md`
+      font-size: 18px;
+      margin: 2px 8px;
+    `}
   }
 `
 
@@ -134,7 +148,7 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
               <SortData post={post} data={data} catName={catName} setSortedDataByCat={setSortedDataByCat} buttonStyle="filled"></SortData>
             </SortStyle>
           ) : (
-            <OpenContents button={['필터', '닫기']} contSize={{ width: '40vw', height: '60vh' }}>
+            <OpenContents button={<FilterIcon width={18} height={18} viewBox="0 0 24 24" />}>
               <SortStyle color={color.currColor.color} contentsMargin={contentsMargin} className="contents-inner">
                 <LinedButton type="button" style="lined" title="NEWEST" onClick={() => setSortNumByDate(0)} className={sortNumByDate === 0 ? 'clicked' : ''} />
                 <LinedButton type="button" style="lined" title="OLDEST" onClick={() => setSortNumByDate(1)} className={sortNumByDate === 1 ? 'clicked' : ''} />

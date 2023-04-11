@@ -20,15 +20,17 @@ const textColor = {
 const sizes = {
   l: 1400,
   // md: 1024,
-  md: 870,
-  sm: 380,
+  // md: 870,
+  md: 850,
+  // sm: 380,
+  sm: 580,
   minL: 320,
   maxL: 1920,
 }
 
 const media = {
   xl: (...styles) => css`
-    @media (max-width: ${sizes.maxL}px) {
+    @media (min-width: ${sizes.l + 1}px) {
       ${css(...styles)};
     }
   `,

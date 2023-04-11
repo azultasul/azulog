@@ -18,18 +18,21 @@ const WorkStyle = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding-top: 90px;
+  padding-right: ${Vars.frame}px;
+  padding-left: ${Vars.frame}px;
   font-size: 16px;
+  ${Vars.media.md`
+    padding-top: 50px;
+  `};
 `
 
 const InfoStyle = styled.div`
-  max-width: 800px;
-  margin: 44px auto 0;
-
-  .lined-wrap {
-    text-align: right;
-    width: 55%;
-    margin: 0 0 0 auto;
-  }
+  text-align: right;
+  width: 55%;
+  margin: 44px 0 0 auto;
+  ${Vars.media.md`
+    width: 85%;
+  `};
   .lined-text {
     font-size: 20px;
     font-weight: 700;
@@ -37,17 +40,16 @@ const InfoStyle = styled.div`
     line-height: 1.3;
   }
   .site {
-    font-size: 23px;
+    font-size: 24px;
+    ${Vars.media.md`
+      font-size: 22px;
+    `};
   }
 `
 
 const ContentsStyle = styled(MarkdownStyle)`
   .info {
     margin-top: 4px;
-    &-wrap {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
     &__title {
       font-weight: bold;
     }
@@ -60,16 +62,21 @@ const ContentsStyle = styled(MarkdownStyle)`
     display: flex;
     align-items: center;
     margin-top: 50px;
-    &-wrap {
-    }
+    ${Vars.media.md`
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      margin-top: 20px;
+    `};
     &__text {
       width: 100%;
-      padding-left: 10px;
-      padding-right: 10px;
     }
     &__image {
       position: relative;
       flex: 1.8;
+      ${Vars.media.md`
+        padding-left: 8px;
+        padding-right: 8px;
+      `};
       img {
         margin-top: 0;
         position: static;
@@ -81,14 +88,28 @@ const ContentsStyle = styled(MarkdownStyle)`
       padding-right: 5px;
       opacity: 0.7;
       vertical-align: top;
+      ${Vars.media.md`
+        font-size: 0.8em;
+      `};
     }
     &__title {
       margin: 0;
+      ${Vars.media.md`
+        margin-top: 40px;
+      `};
     }
     &__desc {
+      ${Vars.media.md`
+        margin-bottom: 20px;
+        padding-left: 8px;
+        padding-right: 8px;
+      `};
       &-wrap {
         flex: 1;
         padding-left: 24px;
+        ${Vars.media.md`
+          padding-left: 0px;
+        `};
       }
     }
 
@@ -97,11 +118,17 @@ const ContentsStyle = styled(MarkdownStyle)`
     }
     &:nth-child(2n + 1) {
       flex-direction: row-reverse;
+      ${Vars.media.md`
+        flex-direction: column-reverse;
+      `};
       .work {
         &__desc {
           &-wrap {
             padding-left: 0px;
             padding-right: 24px;
+            ${Vars.media.md`
+              padding-right: 0px;
+            `};
           }
         }
       }
@@ -148,16 +175,14 @@ const WorkDetail = ({ work }) => {
     <ColorContext.Consumer>
       {(color) => (
         <WorkStyle>
-          <FilledTitle title={work.title} fontSize={['50px', '50px']} topGap="0px" lineHeight="1.5" />
+          <FilledTitle title={work.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
           <InfoStyle>
-            <div className="lined-wrap">
-              {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
-              <br />
-              {work.tech?.map((cat, idx) => (
-                // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.tech[cat]}</Link>
-                <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
-              ))}
-            </div>
+            {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
+            <br />
+            {work.tech?.map((cat, idx) => (
+              // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.tech[cat]}</Link>
+              <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
+            ))}
           </InfoStyle>
           <ContentsStyle>
             <h1>설명</h1>

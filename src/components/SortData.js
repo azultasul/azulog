@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import LinedButton from '~/components/LinedButton'
 
+import Vars from '~/data/Variables'
 import Cat from '~/data/Categories'
 import styled from 'styled-components'
 
@@ -35,6 +36,10 @@ const SortStyle = styled.div`
     bottom: 5.8px;
     transform: translate(100%, 0px);
     font-size: 8px;
+    ${Vars.media.md`
+      right: -1px;
+      bottom: 2.5px;
+    `}
   }
 `
 

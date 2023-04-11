@@ -24,6 +24,9 @@ const GlobalStyle = createGlobalStyle`
     width: 100vw;
     height: 100vh;
     background: ${Vars.backColor};
+    // ${Vars.media.xl`
+    //   background: #4a5f1161;
+    // `};
     // ${Vars.media.l`
     //   background: #ff000066;
     // `};

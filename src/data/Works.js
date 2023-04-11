@@ -83,7 +83,7 @@ const works = [
       {
         image: '3.jpeg',
         number: '03',
-        title: 'Detail',
+        title: 'Details',
         desc: 'marquee, shuffle text 등 사이트 전반에 사용되는 디테일 요소들을 작업했습니다.',
       },
       {

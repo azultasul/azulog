@@ -9,8 +9,14 @@ import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
 
 const CardWrapStyle = styled.div`
-  // width: calc(50% - 8px);
   margin-top: 18px;
+  ${Vars.media.md`
+    width: calc(50% - 8px);
+    margin-top: 0px;
+  `};
+  ${Vars.media.sm`
+    width: 100%;
+  `};
   &:first-child {
     margin-top: 0px;
   }
@@ -22,6 +28,9 @@ const CardStyle = styled.div`
   border-radius: 18px;
   border: ${(props) => `1px solid ${props.color}`};
   overflow: hidden;
+  ${Vars.media.md`
+    display: block;
+  `};
   .image {
     position: relative;
     max-width: 200px;
@@ -29,6 +38,12 @@ const CardStyle = styled.div`
     flex: 1;
     border-right: ${(props) => `1px solid ${props.color}`};
     overflow: hidden;
+    ${Vars.media.md`
+      max-width: 100%;
+      height: 170px;
+      border-right: none;
+      border-bottom: ${(props) => `1px solid ${props.color}`};
+    `};
   }
   .thumb {
     position: absolute;
@@ -53,20 +68,33 @@ const CardStyle = styled.div`
 const ContentsStyle = styled.div`
   flex: 3;
   padding: 18px;
+  ${Vars.media.md`
+    padding: 14px;
+  `};
   .title {
     font-family: 'cafe';
     font-size: 22px;
     font-weight: bold;
     line-height: 1.5;
-  }
-  .date {
-    font-size: 14px;
-    font-weight: 400;
+    ${Vars.media.md`
+      font-size: 21px;
+    `};
   }
   .desc {
     font-size: 15px;
     font-weight: 400;
     line-height: 1.3;
+    ${Vars.media.md`
+      font-size: 14px;
+    `};
+  }
+  .date {
+    font-size: 14px;
+    font-weight: 400;
+    ${Vars.media.md`
+      font-size: 13px;
+      margin-bottom: 28px;
+    `};
   }
 `
 

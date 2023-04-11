@@ -1,10 +1,15 @@
+import Vars from '~/data/Variables'
 import styled from 'styled-components'
 
 const MarkdownStyle = styled.section`
-  font-size: 16px;
+  font-size: 18px;
+  line-height: 1.5;
   // max-width: 800px;
   // margin: 60px auto 0;
   margin-top: 60px;
+  ${Vars.media.md`
+    font-size: 16px;
+  `};
   h1,
   h2,
   h3,
@@ -18,6 +23,9 @@ const MarkdownStyle = styled.section`
     margin-top: 1.9em;
     margin-bottom: 0.5em;
     line-height: 1.3;
+    ${Vars.media.md`
+      font-size: 1.8em;
+    `};
   }
   h2 {
     margin-top: 1.2em;
@@ -53,6 +61,10 @@ const MarkdownStyle = styled.section`
     margin-bottom: 5px;
     padding: 20px 30px;
     border-radius: 3.5px;
+    overflow: scroll;
+    ${Vars.media.md`
+      padding: 15px 23px;
+    `};
     code {
       background: transparent;
       padding: 0;
@@ -62,6 +74,12 @@ const MarkdownStyle = styled.section`
   hr {
     margin-top: 0px;
     margin-bottom: 1em;
+  }
+  ul,
+  ol {
+    ${Vars.media.md`
+      padding-inline-start: 30px;
+    `};
   }
 `
 

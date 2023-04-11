@@ -10,7 +10,7 @@ import { useInstantSearch, Hits, InfiniteHits, Highlight } from 'react-instantse
 
 const ResultsStyle = styled.div`
   position: absolute;
-  width: ${(props) => (props.isSearchOpen ? '413.5px' : '0px')};
+  width: ${(props) => (props.isSearchOpen ? '402px' : '0px')};
   height: auto;
   top: -3px;
   left: 2.5px;
@@ -20,7 +20,8 @@ const ResultsStyle = styled.div`
 
   opacity: ${(props) => (props.isSearchOpen ? 1 : 0)};
   transition: opacity 0.3s ${(props) => (props.isSearchOpen ? '0.6s' : '0s')}, width 0s ${(props) => (props.isSearchOpen ? '0s' : '0.9s')};
-  background: ${Vars.backColor};
+  // background: ${Vars.backColor};
+  background: #f8f8ff;
   .result {
     padding-top: 20px;
     &__inner {

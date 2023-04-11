@@ -21,19 +21,19 @@ const NavStyle = styled.div`
   z-index: 999;
   .nav-inner {
     position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
     max-width: ${Vars.sizes.l}px;
     height: 100%;
     margin: 0 auto;
+    padding-left: ${Vars.frame}px;
+    padding-right: ${Vars.frame}px;
   }
 `
 
 const PaletteStyle = styled.div`
-  position: absolute;
-  left: 12px;
-  top: calc(${Vars.frameTop}px + 4.25px);
-  transform: translateY(-100%);
   display: flex;
-  // gap: 3px;
   flex-direction: row;
   align-items: flex-end;
 `
@@ -46,8 +46,6 @@ const ColorStyle = styled.button`
   color: ${(props) => props.color};
   background: transparent;
   &:nth-of-type(${(props) => props.idx + 1}) {
-    // transform: scale(1.17);
-    // transform-origin: 50% 80%;
     color: transparent;
     -webkit-text-stroke: ${(props) => `1px ${props.color}`};
   }
@@ -61,12 +59,7 @@ const ColorStyle = styled.button`
 const LinkStyle = styled.ul`
   display: flex;
   align-items: center;
-  // align-items: flex-end;
   gap: 8px;
-  position: absolute;
-  right: 12px;
-  top: calc(${Vars.frameTop}px + 2.8px);
-  transform: translateY(-100%);
   margin: 0;
   padding: 0;
   border: 0 none;

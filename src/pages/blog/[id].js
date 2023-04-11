@@ -18,6 +18,11 @@ const BlogStyle = styled.div`
   max-width: 800px;
   margin: 0 auto;
   padding-top: 90px;
+  padding-right: ${Vars.frame}px;
+  padding-left: ${Vars.frame}px;
+  ${Vars.media.md`
+    padding-top: 50px;
+  `};
 `
 
 const InfoStyle = styled.div`
@@ -29,6 +34,10 @@ const InfoStyle = styled.div`
   .date {
     font-size: 15px;
     font-weight: 500;
+    ${Vars.media.md`
+      font-size: 14px;
+      margin-top: 16px;
+    `};
   }
   .lined-text {
     font-size: 20px;
@@ -42,12 +51,19 @@ const PostButtonStyle = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
+  gap: 20px;
+  ${Vars.media.md`
+    margin-top: 60px;
+  `};
   .lined-text {
     font-family: 'cafe';
     font-size: 22px;
     font-weight: bold;
     line-height: 1.5;
   }
+  ${Vars.media.md`
+    font-size: 20px;
+  `};
   .title {
     font-size: 12px;
     font-weight: bold;
@@ -96,7 +112,7 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
     <ColorContext.Consumer>
       {(color) => (
         <BlogStyle>
-          <FilledTitle title={blogData.title} fontSize={['50px', '50px']} topGap="0px" lineHeight="1.5" />
+          <FilledTitle title={blogData.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
           <InfoStyle color={color.currColor.color}>
             <div className="date">{startDate.ko}</div>
             {blogData.tech.map((cat, idx) => (

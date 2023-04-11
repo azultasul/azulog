@@ -5,8 +5,8 @@ import Footer from '~/components/layout/Footer'
 
 const LayoutStyle = styled.main`
   padding-top: ${Vars.frameTop}px;
-  padding-right: ${Vars.frame}px;
-  padding-left: ${Vars.frame}px;
+  // padding-right: ${Vars.frame}px;
+  // padding-left: ${Vars.frame}px;
 `
 
 const Layout = ({ themeColor, setThemeColor, children }) => {
