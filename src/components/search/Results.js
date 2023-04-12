@@ -150,7 +150,7 @@ const Results = ({ color, isSearchOpen, setIsSearchOpen, className }) => {
           <div className="result__inner">
             {hasResults && <Hits hitComponent={Hit} onClick={() => setIsSearchOpen(false)} classNames={{ list: 'hits__list', item: 'hits__item' }} />}
             {/* {!hasResults && <div className="result__empty">검색 결과 없음 😢</div>} */}
-            {!hasResults && <div className="result__empty">EMPTY 😢</div>}
+            {!hasResults && <div className="result__empty">EMPTY 🥲</div>}
           </div>
         </div>
       )}

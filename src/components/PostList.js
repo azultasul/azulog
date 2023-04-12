@@ -1,9 +1,11 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState, useContext, createContext } from 'react'
+import { useRouter } from 'next/router'
 import LinedButton from '~/components/LinedButton'
 import PostCard from '~/components/PostCard'
 import SortData from '~/components/SortData'
 import OpenContents from '~/components/OpenContents'
+import PageTrans from '~/components/transition/PageTrans'
 import useWindow from '~/utils/useWindow'
 
 import Vars from '~/data/Variables'
@@ -43,11 +45,15 @@ const ContentsStyle = styled.div`
     }
   }
   .empty {
-    padding-top: 100px;
+    width: 100%;
+    height: 100px;
+    margin-top: 50px;
+    overflow: hidden;
     font-family: 'cafe';
     font-size: 30px;
     font-weight: 700;
     font-style: italic;
+    line-height: 100px;
     text-align: center;
   }
 `
@@ -84,6 +90,7 @@ const SortStyle = styled.div`
 `
 
 const PostList = ({ post, data, titleTotalH, catName }) => {
+  const router = useRouter()
   const contentsRef = useRef(null)
   const [contentsMargin, setContentsMargin] = useState(0)
 
@@ -129,16 +136,20 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
       {(color) => (
         <ContentsStyle ref={contentsRef} titleTotalH={titleTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
-            <div className="card-inner">
-              {sortedData.length > 0 ? (
-                sortedData.map((data) => {
-                  const techList = data.tech.map((el) => Cat.tech[el])
-                  return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
-                })
-              ) : (
-                <div className="empty">NOTHING~ 👀</div>
-              )}
-            </div>
+            <PageTrans transKey={router.asPath}>
+              <div className="card-inner">
+                {sortedData.length > 0 ? (
+                  sortedData.map((data) => {
+                    const techList = data.tech.map((el) => Cat.tech[el])
+                    return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
+                  })
+                ) : (
+                  <div className="empty">
+                    <div className="card">NOTHING~ 👀</div>
+                  </div>
+                )}
+              </div>
+            </PageTrans>
           </div>
           {windowSize.w > Vars.sizes.md ? (
             <SortStyle color={color.currColor.color} contentsMargin={contentsMargin}>

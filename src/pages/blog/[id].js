@@ -106,6 +106,10 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
 
   useEffect(() => {
     document.body.dataset.pageName = 'detail'
+    // window.scrollTo(0, 0)
+    // // return () => {
+    // //   window.scrollTo(0, 0)
+    // // }
   }, [])
 
   return (
@@ -125,7 +129,7 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
           <PostButtonStyle>
             <div className="prev">
               {currPostsIndex > 0 && (
-                <Link href={`/blog/${allPostsData[currPostsIndex - 1].id}`}>
+                <Link href={`/blog/${allPostsData[currPostsIndex - 1].id}`} scroll={false}>
                   <LinedButton style="filled" title="이전 글" direction="left">
                     <div className="title">{allPostsData[currPostsIndex - 1].title}</div>
                   </LinedButton>
@@ -134,7 +138,7 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
             </div>
             <div className="next">
               {currPostsIndex < allPostsData.length - 1 && (
-                <Link href={`/blog/${allPostsData[currPostsIndex + 1].id}`}>
+                <Link href={`/blog/${allPostsData[currPostsIndex + 1].id}`} scroll={false}>
                   <LinedButton style="filled" title="다음 글">
                     <div className="title">{allPostsData[currPostsIndex + 1].title}</div>
                   </LinedButton>
