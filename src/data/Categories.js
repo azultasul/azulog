@@ -21,6 +21,8 @@ const tech = {
   13: 'tailwind',
   14: 'mantine',
   15: 'styled-component',
+  16: 'npm',
+  17: 'vscode',
 }
 
 const type = {
@@ -30,8 +32,8 @@ const type = {
 
 const series = {
   0: 'yes-wedding',
-  1: 'npm',
-  2: 'azulog',
+  1: 'azulog',
+  2: 'test',
 }
 
 const catData = { krName, tech, type, series }

@@ -20,7 +20,7 @@ const Layout = ({ themeColor, setThemeColor, children }) => {
       <Navbar themeColor={themeColor} setThemeColor={setThemeColor}></Navbar>
       <PageTrans transKey={router.query.id || router.pathname} transTimeout={1200}>
         <div className="card-inner">
-          <LayoutStyle>{children}</LayoutStyle>
+          <LayoutStyle className="layout">{children}</LayoutStyle>
           <Footer></Footer>
         </div>
       </PageTrans>
