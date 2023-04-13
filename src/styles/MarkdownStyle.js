@@ -37,6 +37,7 @@ const MarkdownStyle = styled.section`
   }
   p {
     margin: 0px;
+    margin-top: 5px;
   }
   a {
     text-decoration: underline;
@@ -77,9 +78,7 @@ const MarkdownStyle = styled.section`
   }
   ul,
   ol {
-    ${Vars.media.md`
-      padding-inline-start: 30px;
-    `};
+    padding-inline-start: 30px;
   }
 `
 

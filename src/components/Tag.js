@@ -28,7 +28,7 @@ const Tag = ({ tagList, className }) => {
     <ColorContext.Consumer>
       {(color) => (
         <TagStyle color={color.currColor.color} className={className}>
-          {tagList.map((el, idx) => (
+          {tagList?.map((el, idx) => (
             <span key={idx}>{el}</span>
           ))}
         </TagStyle>

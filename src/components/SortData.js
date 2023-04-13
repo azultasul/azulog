@@ -81,7 +81,7 @@ const SortData = ({ post, data, catName, setSortedDataByCat }) => {
     })
     setEachCatLength((prev) => {
       const obj = catName.forEach((name) => {
-        eachCatLength[name] = Object.keys(Cat[name]).map((key) => data.map((el) => el[name].includes(parseInt(key))).filter((el) => el === true).length)
+        eachCatLength[name] = Object.keys(Cat[name]).map((key) => data.map((el) => el[name]?.includes(parseInt(key))).filter((el) => el === true).length)
       })
 
       return { ...prev, ...obj }

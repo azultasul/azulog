@@ -39,9 +39,13 @@ const TableOfContentsStyle = styled.div`
   }
   a {
     display: block;
+    font-weight: 700;
   }
   .sub-wrap {
     padding-left: 12px;
+    a {
+      font-weight: 400;
+    }
   }
 `
 

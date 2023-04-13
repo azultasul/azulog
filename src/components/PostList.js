@@ -140,7 +140,7 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
               <div className="card-inner">
                 {sortedData.length > 0 ? (
                   sortedData.map((data) => {
-                    const techList = data.tech.map((el) => Cat.tech[el])
+                    const techList = data.tech?.map((el) => Cat.tech[el])
                     return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
                   })
                 ) : (
