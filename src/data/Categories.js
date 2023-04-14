@@ -23,6 +23,9 @@ const tech = {
   15: 'styled-component',
   16: 'npm',
   17: 'vscode',
+  18: 'api',
+  19: 'firebase',
+  20: 'supabase',
 }
 
 const type = {

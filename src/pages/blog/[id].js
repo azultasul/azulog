@@ -3,6 +3,11 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import LinedButton from '~/components/LinedButton'
 import ColorContext from '~/store/ColorContext'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import remarkHeadingId from 'remark-heading-id'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 import { getAllPostIds, getPostData, getAllMetaData } from '~/lib/getPost'
 import MarkdownStyle from '~/styles/MarkdownStyle'
@@ -106,10 +111,6 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
 
   useEffect(() => {
     document.body.dataset.pageName = 'detail'
-    // window.scrollTo(0, 0)
-    // // return () => {
-    // //   window.scrollTo(0, 0)
-    // // }
   }, [])
 
   return (
@@ -124,7 +125,22 @@ const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => 
             ))}
           </InfoStyle>
           <MarkdownStyle>
-            <div dangerouslySetInnerHTML={{ __html: blogData.contentHtml }} />
+            <ReactMarkdown
+              children={blogData?.contentHtml}
+              remarkPlugins={[remarkGfm, remarkHeadingId]}
+              components={{
+                code({ node, inline, className, children, ...props }) {
+                  const match = /language-(\w+)/.exec(className || '')
+                  return !inline && match ? (
+                    <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={oneLight}>
+                      {String(children).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                  ) : (
+                    <code {...props}>{children}</code>
+                  )
+                },
+              }}
+            />
           </MarkdownStyle>
           <PostButtonStyle>
             <div className="prev">

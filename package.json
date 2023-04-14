@@ -22,11 +22,11 @@
     "react-dom": "18.2.0",
     "react-instantsearch-hooks-server": "^6.42.1",
     "react-instantsearch-hooks-web": "^6.42.1",
+    "react-markdown": "^8.0.7",
+    "react-syntax-highlighter": "^15.5.0",
     "react-transition-group": "^4.4.5",
-    "remark": "^14.0.2",
     "remark-gfm": "^3.0.1",
     "remark-heading-id": "^1.0.0",
-    "remark-html": "^15.0.2",
     "styled-components": "^5.3.8",
     "styled-reset": "^4.4.5"
   },

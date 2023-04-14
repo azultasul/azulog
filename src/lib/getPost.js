@@ -46,8 +46,9 @@ export async function getPostData(id) {
   const matterResult = getMatterResult(id)
 
   // Use remark to convert markdown into HTML string
-  const processedContent = await remark().use(html).use(remarkGfm).use(remarkHeadingId).process(matterResult.content)
-  const contentHtml = processedContent.toString()
+  // const processedContent = await remark().use(html).use(remarkGfm).use(remarkHeadingId).process(matterResult.content)
+  // const processedContent = matterResult.content
+  const contentHtml = matterResult.content
 
   // Combine the data with the id
   return {

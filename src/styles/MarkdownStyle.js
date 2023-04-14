@@ -51,26 +51,15 @@ const MarkdownStyle = styled.section`
     border-left: 3.5px solid rgb(37, 37, 37, 0.6);
   }
   code {
-    background: rgb(37, 37, 37, 0.07);
+    font-size: 16px;
+    background: rgb(250 250 250);
     padding: 1.5px 4px;
     border-radius: 3.5px;
     color: rgb(255, 87, 87, 0.9);
   }
-  pre {
-    background: rgb(37, 37, 37, 0.03);
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 20px 30px;
-    border-radius: 3.5px;
-    overflow: scroll;
-    ${Vars.media.md`
-      padding: 15px 23px;
-    `};
-    code {
-      background: transparent;
-      padding: 0;
-      color: black;
-    }
+  pre div code {
+    font-size: 16px;
+    line-height: 1.4;
   }
   hr {
     margin-top: 0px;

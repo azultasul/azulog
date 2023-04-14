@@ -56,13 +56,13 @@ const TableOfContents = ({ toc }) => {
         <div className="title">목차</div>
         {Object.keys(toc).map((el, idx) => (
           <div key={idx}>
-            <Link href={`#user-content-${idx}`}>
+            <Link href={`#${idx}`}>
               {idx + 1}. {toc[el].title}
             </Link>
             {toc[el].item && (
               <div className="sub-wrap">
                 {toc[el].item.map((li, _idx) => (
-                  <Link href={`#user-content-${idx}-${_idx}`} key={`${idx}-${_idx}`}>
+                  <Link href={`#${idx}-${_idx}`} key={`${idx}-${_idx}`}>
                     {li}
                   </Link>
                 ))}
