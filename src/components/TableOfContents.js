@@ -57,7 +57,11 @@ const TableOfContents = ({ toc }) => {
         {Object.keys(toc).map((el, idx) => (
           <div key={idx}>
             <Link href={`#${idx}`}>
-              {idx + 1}. {toc[el].title}
+              {toc[el].title && (
+                <>
+                  {idx + 1}. {toc[el].title}
+                </>
+              )}
             </Link>
             {toc[el].item && (
               <div className="sub-wrap">

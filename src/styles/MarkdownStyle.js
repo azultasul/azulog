@@ -55,7 +55,7 @@ const MarkdownStyle = styled.section`
     background: rgb(250 250 250);
     padding: 1.5px 4px;
     border-radius: 3.5px;
-    color: rgb(255, 87, 87, 0.9);
+    color: rgb(228, 86, 73);
   }
   pre div code {
     font-size: 16px;
