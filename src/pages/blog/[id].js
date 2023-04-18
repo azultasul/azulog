@@ -93,19 +93,17 @@ export async function getStaticProps({ params }) {
   const blogData = await getPostData(params.id)
   const allPostsData = getAllMetaData()
   const currPostsIndex = allPostsData.findIndex((el) => el.id === params.id)
-  const allPostsIds = allPostsData.map((el) => el.id)
 
   return {
     props: {
       blogData,
-      allPostsIds,
       allPostsData,
       currPostsIndex,
     },
   }
 }
 
-const BlogDetail = ({ blogData, allPostsIds, allPostsData, currPostsIndex }) => {
+const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
   const [startDate] = useDate(blogData.date)
   // console.log('allPostsData', allPostsData)
 

@@ -1,13 +1,8 @@
-import { remark } from 'remark'
-import html from 'remark-html'
-import remarkGfm from 'remark-gfm'
-import remarkHeadingId from 'remark-heading-id'
 import matter from 'gray-matter'
 import fs from 'fs'
 import path from 'path'
 
 function getMatterResult(id) {
-  // Use gray-matter to parse the post metadata section
   const fullPath = path.join('blog', `${id}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
@@ -44,13 +39,8 @@ export function getAllPostIds() {
 
 export async function getPostData(id) {
   const matterResult = getMatterResult(id)
-
-  // Use remark to convert markdown into HTML string
-  // const processedContent = await remark().use(html).use(remarkGfm).use(remarkHeadingId).process(matterResult.content)
-  // const processedContent = matterResult.content
   const contentHtml = matterResult.content
 
-  // Combine the data with the id
   return {
     id,
     contentHtml,
