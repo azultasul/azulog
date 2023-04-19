@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import Falling from '~/components/Falling'
 import FilledTitle from '~/components/FilledTitle'
+import Cursor from '~/components/Cursor'
 import styled from 'styled-components'
 
 import ColorContext from '~/store/ColorContext'
+import Works from '~/data/Works'
+import { getAllMetaData } from '~/lib/getPost'
 
 const IntroStyle = styled.section`
   width: 100%;
@@ -33,8 +37,21 @@ const IntroStyle = styled.section`
     }
   }
 `
+const AboutStyle = styled.section``
+const BlogStyle = styled.section``
+const WorkStyle = styled.section``
 
-export default function Home() {
+export async function getStaticProps() {
+  const latestBlogData = getAllMetaData()
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5)
+  return {
+    props: {
+      latestBlogData,
+    },
+  }
+}
+const Home = ({ latestBlogData }) => {
   useEffect(() => {
     document.body.dataset.pageName = 'home'
   }, [])
@@ -43,17 +60,37 @@ export default function Home() {
     <ColorContext.Consumer>
       {(color) => (
         <>
+          <Cursor></Cursor>
           <IntroStyle color={color.currColor.color}>
-            {/* <div className="back">2023</div> */}
-            {/* <div className="back back--chang">23</div> */}
-            <div className="text-wrap c-container">
+            <div className="text-wrap">
+              <div className="text">AZULOG</div>
+            </div>
+          </IntroStyle>
+          <AboutStyle className="c-container">
+            <div>
               <div>Frontend</div>
               <div>Developer</div>
               <div>DASOL's blog</div>
             </div>
-          </IntroStyle>
+          </AboutStyle>
+          <BlogStyle>
+            {latestBlogData.map((blog, index) => (
+              <Link href={`/blog/${blog.id}`} key={index} scroll={false}>
+                {blog.title}
+              </Link>
+            ))}
+          </BlogStyle>
+          <WorkStyle>
+            {Works.filter((el) => el.star).map((work, index) => (
+              <Link href={`/work/${work.id}`} key={index} scroll={false}>
+                {work.title}
+              </Link>
+            ))}
+          </WorkStyle>
         </>
       )}
     </ColorContext.Consumer>
   )
 }
+
+export default Home
