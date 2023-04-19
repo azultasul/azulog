@@ -3,8 +3,7 @@ import Head from 'next/head'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
 import Layout from '~/components/layout/Layout'
-import Navbar from '~/components/layout/Navbar'
-import Footer from '~/components/layout/Footer'
+import Cursor from '~/components/Cursor'
 import Vars from '~/data/Variables'
 import ColorContext from '~/store/ColorContext'
 
@@ -25,6 +24,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ColorContext.Provider value={{ currColor: themeColor }}>
         {/* <Reset /> */}
+        <Cursor></Cursor>
         <GlobalStyle />
         {/* <Navbar themeColor={themeColor} setThemeColor={setThemeColor}></Navbar> */}
         <Layout themeColor={themeColor} setThemeColor={setThemeColor}>

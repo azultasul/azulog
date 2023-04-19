@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Falling from '~/components/Falling'
 import FilledTitle from '~/components/FilledTitle'
-import Cursor from '~/components/Cursor'
 import styled from 'styled-components'
 
 import ColorContext from '~/store/ColorContext'
@@ -60,7 +59,6 @@ const Home = ({ latestBlogData }) => {
     <ColorContext.Consumer>
       {(color) => (
         <>
-          <Cursor></Cursor>
           <IntroStyle color={color.currColor.color}>
             <div className="text-wrap">
               <div className="text">AZULOG</div>

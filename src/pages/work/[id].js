@@ -180,8 +180,7 @@ const WorkDetail = ({ work }) => {
             {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
             <br />
             {work.tech?.map((cat, idx) => (
-              // <Link href={`/work?tag=${cat}`} key={idx}>{Cat.tech[cat]}</Link>
-              <LinedButton key={idx} type="link" href={`/work?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
+              <LinedButton key={idx} type="link" href={`/work?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
             ))}
           </InfoStyle>
           <ContentsStyle>

@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
+import useMouseHover from '~/utils/useMouseHover'
 
 const LinedStyle = styled.div`
   display: inline-block;
@@ -54,11 +56,13 @@ const LinedStyle = styled.div`
 
 const LinedButton = ({ type, style = 'filled', title, onClick, href, direction = 'right', children, className }) => {
   // style: filled / lined
+  const ref = useRef(null)
+  const mouseEvent = useMouseHover(ref)
 
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <LinedStyle color={color.currColor.color} className={`${style}`} direction={direction}>
+        <LinedStyle ref={ref} color={color.currColor.color} className={`${style}`} direction={direction}>
           {type === 'button' ? (
             <button onClick={onClick} className={`lined-text lined-button ${className}`}>
               {title}

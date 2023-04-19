@@ -3,9 +3,6 @@ import Vars from '../data/Variables'
 
 const GlobalStyle = createGlobalStyle`
   /* common */
-  * {
-    box-sizing: border-box;
-  }
   html {
     font-size: 1px;
     // ${Vars.media.l`
@@ -42,7 +39,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     border: 0;
     background: transparent;
-    cursor: pointer;
+    // cursor: pointer;
   }
   a {
     text-decoration: none;
@@ -51,6 +48,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: auto;
     vertical-align: middle;
+  }
+  * {
+    box-sizing: border-box;
+    cursor: none;
   }
 
   /* color mode (palette) */
@@ -68,7 +69,6 @@ const GlobalStyle = createGlobalStyle`
       }
     `
   )}
-
 
   /* layout */
   body[data-page-name='list'] {

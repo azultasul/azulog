@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Date from '~/components/Date'
@@ -5,8 +6,9 @@ import LinedButton from '~/components/LinedButton'
 import Tag from '~/components/Tag'
 import useDate from '~/utils/useDate'
 import Vars from '~/data/Variables'
-import styled from 'styled-components'
 import ColorContext from '~/store/ColorContext'
+import useMouseHover from '~/utils/useMouseHover'
+import styled from 'styled-components'
 
 const CardWrapStyle = styled.div`
   margin-top: 18px;
@@ -101,13 +103,15 @@ const ContentsStyle = styled.div`
 const PostCard = ({ type, data, href, tech, className }) => {
   const [startDate] = useDate(data.date)
   const [endDate] = useDate(type === 'work' ? data.endDate : null)
+  const ref = useRef(null)
+  const mouseEvent = useMouseHover(ref)
 
   return (
     <ColorContext.Consumer>
       {(color) => (
         <CardWrapStyle>
           <Link href={href}>
-            <CardStyle color={color.currColor.color}>
+            <CardStyle ref={ref} color={color.currColor.color}>
               {data.thumb && (
                 <div className="image">
                   <Image src={type === 'work' ? `/images/${type}/${data.id}/thumb.jpeg` : data.thumb} className="thumb" alt="alt" unoptimized width="100" height="100" />

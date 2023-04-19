@@ -119,7 +119,7 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
           <InfoStyle color={color.currColor.color}>
             <div className="date">{startDate.ko}</div>
             {blogData.tech.map((cat, idx) => (
-              <LinedButton key={idx} type="link" href={`/blog?tag=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
+              <LinedButton key={idx} type="link" href={`/blog?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
             ))}
           </InfoStyle>
           <MarkdownStyle>

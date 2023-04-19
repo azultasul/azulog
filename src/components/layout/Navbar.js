@@ -18,7 +18,7 @@ const NavStyle = styled.div`
   left: 0;
   right: 0;
   height: ${Vars.frameTop}px;
-  z-index: 999;
+  z-index: 990;
   .nav-inner {
     position: relative;
     display: flex;

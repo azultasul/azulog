@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import Tag from '~/components/Tag'
 import styled from 'styled-components'
 import Vars from '~/data/Variables'
+import useMouseHover from '~/utils/useMouseHover'
 
 import { useInstantSearch, Hits, InfiniteHits, Highlight } from 'react-instantsearch-hooks-web'
 
@@ -84,12 +85,13 @@ const ResultsStyle = styled.div`
     }
     &__date {
       font-size: 10px;
-      margin-top: 5px;
+      margin-top: 8px;
     }
     &__tech {
       font-size: 12px;
       span {
         padding: 3px 8px;
+        margin-top: 8px;
       }
     }
   }
@@ -117,10 +119,13 @@ const ResultsStyle = styled.div`
   }
 `
 const Hit = ({ hit }) => {
+  const ref = useRef(null)
+  const mouseEvent = useMouseHover(ref)
+
   return (
     <>
       {hit?.type && <div className="hit__type">{hit.type}</div>}
-      <Link href={`/${hit?.type}/${hit.id}`} className="hit">
+      <Link href={`/${hit?.type}/${hit.id}`} className="hit" ref={ref}>
         {hit?.thumb && (
           <div className="hit__image">
             {/* <Image src={hit.thumb} className="hit__thumb" alt="alt" unoptimized width="100" height="100" /> */}
