@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import useWindow from '~/utils/useWindow'
 
 const useMousePos = () => {
-  const [mousePos, setMousePos] = useState({ x: null, y: null, sy: null })
+  const [windowSize] = useWindow()
+  const [mousePos, setMousePos] = useState({ x: windowSize.w / 2, y: windowSize.h / 2, sy: null })
 
   useEffect(() => {
     const mouseMoveHandler = (event) => {

@@ -37,3 +37,5 @@ yarn-error.log*
 
 # algolia index
 index-*.mjs
+
+test*
