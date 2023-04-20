@@ -3,7 +3,7 @@ import useWindow from '~/utils/useWindow'
 
 const useMousePos = () => {
   const [windowSize] = useWindow()
-  const [mousePos, setMousePos] = useState({ x: windowSize.w / 2, y: windowSize.h / 2, sy: null })
+  const [mousePos, setMousePos] = useState({ x: windowSize.w / 2, y: windowSize.h / 2 })
   const [delta, setDelta] = useState({ x: null, y: null })
   const [speed, setSpeed] = useState(0)
   const [lastState, setLastState] = useState({ x: null, y: null, t: null })
@@ -14,12 +14,6 @@ const useMousePos = () => {
     const { clientX, clientY } = event
     setMousePos((prev) => {
       return { ...prev, x: clientX, y: clientY }
-    })
-  }, [])
-
-  const scrollHandler = useCallback((event) => {
-    setMousePos((prev) => {
-      return { ...prev, sy: window.scrollY }
     })
   }, [])
 
@@ -54,11 +48,9 @@ const useMousePos = () => {
 
   useEffect(() => {
     document.addEventListener('mousemove', mouseMoveHandler)
-    document.addEventListener('scroll', scrollHandler)
 
     return () => {
       document.removeEventListener('mousemove', mouseMoveHandler)
-      document.removeEventListener('scroll', scrollHandler)
     }
   }, [])
 

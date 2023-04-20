@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import ColorContext from '~/store/ColorContext'
 import useMousePos from '~/utils/useMousePos'
+import useWindow from '~/utils/useWindow'
 
 const MouseStyle = styled.div`
   position: absolute;
@@ -29,12 +30,13 @@ const MouseStyle = styled.div`
 
 const Cursor = () => {
   const [mousePos] = useMousePos()
+  const [windowSize, windowScroll] = useWindow()
   const cursorRef = useRef(null)
 
   useEffect(() => {
     cursorRef.current.style.left = `${mousePos.x}px`
-    cursorRef.current.style.top = `${mousePos.y + mousePos.sy}px`
-  }, [mousePos])
+    cursorRef.current.style.top = `${mousePos.y + windowScroll.y}px`
+  }, [mousePos, windowScroll])
 
   useEffect(() => {
     document.querySelectorAll('a, button, [data-hover="click"]').forEach((element) => {
@@ -45,6 +47,17 @@ const Cursor = () => {
         cursorRef.current.classList.remove('click')
       })
     })
+
+    return () => {
+      document.querySelectorAll('a, button, [data-hover="click"]').forEach((element) => {
+        element.removeEventListener('mouseover', () => {
+          cursorRef.current.classList.add('click')
+        })
+        element.removeEventListener('mouseout', () => {
+          cursorRef.current.classList.remove('click')
+        })
+      })
+    }
   }, [])
 
   return <ColorContext.Consumer>{(color) => <MouseStyle ref={cursorRef} className="c-cursor"></MouseStyle>}</ColorContext.Consumer>
