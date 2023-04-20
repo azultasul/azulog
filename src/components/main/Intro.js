@@ -7,6 +7,7 @@ import ColorContext from '~/store/ColorContext'
 
 import useMousePos from '~/utils/useMousePos'
 import useWindow from '~/utils/useWindow'
+import { useState } from 'react'
 
 const IntroStyle = styled.section`
   position: relative;
@@ -24,8 +25,9 @@ const IntroStyle = styled.section`
   // }
   .text {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: transparent;
     // -webkit-text-stroke: ${(props) => `1px ${props.color}`};
     // -webkit-text-stroke: 1px #005ffc;
@@ -33,7 +35,7 @@ const IntroStyle = styled.section`
     // -webkit-text-stroke: 1px #0f4c81;
 
     will-change: transform;
-    transition: transform 50ms linear;
+    transition: transform 0.05 linear;
     &:last-child {
       // position: static;
       // color: ${(props) => props.color};
@@ -117,22 +119,45 @@ const IntroStyle = styled.section`
     &.text_15 > span {
       animation-delay: 1.5s;
     }
-    &.text_16 > span {
-      animation-delay: 1.6s;
-    }
   }
 `
 
 const Intro = ({}) => {
   const ref = useRef(null)
-  const [mousePos] = useMousePos()
+  const [mousePos, delta, speed] = useMousePos()
   const [windowSize] = useWindow()
+  const [inter, setInter] = useState([])
 
   useEffect(() => {
+    console.log('mousePos', delta, speed, inter)
+    inter.forEach((el) => {
+      clearInterval(el)
+    })
+    setInter([])
+    const ratioW = mousePos.x / windowSize.w
+    const ratioH = mousePos.y / windowSize.h
+    let x = Math.abs(delta.x)
+    let y = Math.abs(delta.y)
     ref.current.querySelectorAll('.text').forEach((el, index) => {
-      const wRatio = mousePos.x / windowSize.w
-      const hRatio = mousePos.y / windowSize.h
-      el.style.transform = `translate(${mousePos.x}px, ${mousePos.y}px) translate(-${wRatio * 100}%, -${hRatio * 100}%) rotate(${(0.5 - wRatio) * 20}deg)`
+      let transPosX = mousePos.x * (1 + ((index - 15) * delta.x) / 1000)
+      let transPosY = mousePos.y * (1 + ((index - 15) * delta.y) / 1000)
+      el.style.transform = `translate(${transPosX - windowSize.w / 2}px, ${transPosY - windowSize.h / 2}px) translate(-${ratioW * 100}%, -${ratioH * 100}%) rotate(${(0.5 - ratioW) * 30}deg)`
+
+      // if (x < 50 || y < 50) return
+      const interval = setInterval(() => {
+        transPosX = mousePos.x * (1 + ((index - 15) * x--) / 3000)
+        transPosY = mousePos.y * (1 + ((index - 15) * y--) / 3000)
+
+        if (x < 0 || y < 0) {
+          transPosX = mousePos.x
+          transPosY = mousePos.y
+
+          clearInterval(interval)
+        }
+        el.style.transform = `translate(${transPosX - windowSize.w / 2}px, ${transPosY - windowSize.h / 2}px) translate(-${ratioW * 100}%, -${ratioH * 100}%) rotate(${(0.5 - ratioW) * 30}deg)`
+      }, 50)
+
+      setInter((prev) => [...prev, interval])
     })
   }, [mousePos])
   return (
