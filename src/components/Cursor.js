@@ -29,15 +29,19 @@ const MouseStyle = styled.div`
   }
 `
 
-const Cursor = () => {
+const Cursor = ({ loadState, setLoadState }) => {
   const router = useRouter()
   const [mousePos] = useMousePos()
   const [windowSize, windowScroll] = useWindow()
   const cursorRef = useRef(null)
 
+  // useEffect(() => {
+  //   cursorRef.current.classList.remove('click')
+  // }, [router.pathname])
+
   useEffect(() => {
-    cursorRef.current.classList.remove('click')
-  }, [router.pathname])
+    setLoadState(true)
+  }, [])
 
   useEffect(() => {
     cursorRef.current.style.left = `${mousePos.x}px`
@@ -45,26 +49,30 @@ const Cursor = () => {
   }, [mousePos, windowScroll])
 
   useEffect(() => {
-    document.querySelectorAll('a, button').forEach((element) => {
-      element.addEventListener('mouseover', () => {
+    if (!loadState) return
+    cursorRef.current.classList.remove('click')
+
+    document.querySelectorAll('a, button').forEach((el) => {
+      el.addEventListener('mouseover', () => {
         cursorRef.current.classList.add('click')
       })
-      element.addEventListener('mouseout', () => {
+      el.addEventListener('mouseout', () => {
         cursorRef.current.classList.remove('click')
       })
     })
+    setLoadState(false)
 
     return () => {
-      document.querySelectorAll('a, button').forEach((element) => {
-        element.removeEventListener('mouseover', () => {
+      document.querySelectorAll('a, button').forEach((el) => {
+        el.removeEventListener('mouseover', () => {
           cursorRef.current.classList.add('click')
         })
-        element.removeEventListener('mouseout', () => {
+        el.removeEventListener('mouseout', () => {
           cursorRef.current.classList.remove('click')
         })
       })
     }
-  }, [])
+  }, [loadState])
 
   return <ColorContext.Consumer>{(color) => <MouseStyle ref={cursorRef} className="c-cursor"></MouseStyle>}</ColorContext.Consumer>
 }

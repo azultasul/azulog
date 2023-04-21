@@ -109,6 +109,7 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
 
   useEffect(() => {
     document.body.dataset.pageName = 'detail'
+    document.body.dataset.pageType = 'blog'
   }, [])
 
   return (

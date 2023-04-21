@@ -36,7 +36,7 @@ const BlogList = ({ allPostsData }) => {
         top={`${Vars.frameTop}px`}
         left="50%"
         fontSize={['150px', '70px']}
-        topGap="20px"
+        topGap="10px"
         lineHeight="1"
         setTitleTotalH={(el) => setTitleTotalH(el)}
         page="list"

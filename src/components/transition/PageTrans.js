@@ -6,28 +6,28 @@ import { SwitchTransition, Transition, CSSTransition } from 'react-transition-gr
 import gsap from 'gsap'
 
 const PageTransStyle = styled.div`
-  .card-inner {
+  .trans-inner {
     transition: opacity 0.3s;
   }
-  &.rotate-enter .card-inner {
+  &.rotate-enter .trans-inner {
     opacity: 0;
   }
-  &.rotate-enter-active .card-inner {
+  &.rotate-enter-active .trans-inner {
     opacity: 1;
   }
-  // &.rotate-enter-done .card-inner {
+  // &.rotate-enter-done .trans-inner {
   //   opacity: 1;
   // }
-  &.rotate-exit .card-inner {
+  &.rotate-exit .trans-inner {
     opacity: 0;
   }
-  &.rotate-exit-active .card-inner {
+  &.rotate-exit-active .trans-inner {
     opacity: 0;
   }
 `
 
 // exit -> enter -> enter-done
-const PageTrans = ({ transKey, transTimeout = 400, children }) => {
+const PageTrans = ({ transKey, transTimeout = 400, setLoadState, type = 'normal', children }) => {
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition
@@ -38,6 +38,9 @@ const PageTrans = ({ transKey, transTimeout = 400, children }) => {
         timeout={transTimeout}
         addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}
         classNames="rotate"
+        onEntered={() => {
+          type === 'normal' && setLoadState(true)
+        }}
       >
         <PageTransStyle>{children}</PageTransStyle>
       </CSSTransition>

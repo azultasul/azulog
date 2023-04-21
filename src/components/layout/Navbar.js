@@ -3,14 +3,16 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import Search from '~/components/search/Search'
+import LinedButton from '~/components/LinedButton'
+import useWindow from '~/utils/useWindow'
 import styled from 'styled-components'
 import Vars from '~/data/Variables'
 import SearchIcon from '~/assets/icons/search.svg'
-import LinedButton from '~/components/LinedButton'
 
 import Github from '~/assets/icons/github.svg'
 import Home from '~/assets/icons/home.svg'
 import HomeFilled from '~/assets/icons/home-filled.svg'
+import { useRef } from 'react'
 
 const NavStyle = styled.div`
   position: fixed;
@@ -19,16 +21,31 @@ const NavStyle = styled.div`
   right: 0;
   height: ${Vars.frameTop}px;
   z-index: 990;
-  .nav-inner {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    max-width: ${Vars.sizes.l}px;
-    height: 100%;
-    margin: 0 auto;
-    padding-left: ${Vars.frame}px;
-    padding-right: ${Vars.frame}px;
+  backdrop-filter: blur(5px);
+  .nav {
+    &-inner {
+      position: relative;
+      display: flex;
+      // align-items: flex-end;
+      align-items: center;
+      justify-content: space-between;
+      max-width: ${Vars.sizes.l}px;
+      height: 100%;
+      margin: 0 auto;
+      padding-left: ${Vars.frame}px;
+      padding-right: ${Vars.frame}px;
+      padding-top: 7px;
+    }
+    &__progress {
+      position: absolute;
+      top: 100%;
+      left: 0%;
+      width: 0%;
+      // width: ${(props) => props.scrollP}%;
+      height: 2px;
+      background: ${(props) => props.color};
+      opacity: 0.6;
+    }
   }
 `
 
@@ -136,11 +153,29 @@ const LinkStyle = styled.ul`
 
 const Navbar = ({ themeColor, setThemeColor }) => {
   const router = useRouter()
+  const progressRef = useRef(null)
   const [routeIndex, setRouteIndex] = useState(0)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [scrollP, setScrollP] = useState(0)
+  const [windowSize, windowScroll] = useWindow()
   const logo = 'AZULOG'
 
   useEffect(() => {
+    progressRef.current.style.width = `${scrollP * 100}%`
+  }, [scrollP])
+
+  useEffect(() => {
+    const isDetailPage = document.body.dataset.pageName === 'detail'
+    const isBlogPage = document.body.dataset.pageType === 'blog'
+    if (isDetailPage && isBlogPage) {
+      const totalScroll = document.body.scrollHeight - windowSize.h
+      const progress = windowScroll.y / totalScroll
+      setScrollP(progress)
+    }
+  }, [windowSize, windowScroll])
+
+  useEffect(() => {
+    setScrollP(0)
     const path = router.route.split('/')[1]
     switch (path) {
       case 'work':
@@ -190,6 +225,7 @@ const Navbar = ({ themeColor, setThemeColor }) => {
           </li>
         </LinkStyle>
       </div>
+      <div className="nav__progress" ref={progressRef}></div>
     </NavStyle>
   )
 }

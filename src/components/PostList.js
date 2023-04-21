@@ -19,7 +19,7 @@ const ContentsStyle = styled.div`
   // gap: ${Vars.gap}px;
   gap: 30px;
   // gap: 44px;
-  height: ${(props) => `calc(100vh - ${props.titleTotalH + 40}px)`};
+  height: ${(props) => `calc(100vh - ${props.titleTotalH + Vars.frameTop}px)`};
   padding-right: ${Vars.frame}px;
   padding-left: ${Vars.frame}px;
   overflow: scroll;
@@ -35,6 +35,8 @@ const ContentsStyle = styled.div`
       flex: 2.3;
       padding-left: ${(props) => `${props.contentsMargin}px`};
     }
+  }
+  .trans {
     &-inner {
       padding-bottom: 30px;
       ${Vars.media.md`
@@ -136,8 +138,8 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
       {(color) => (
         <ContentsStyle ref={contentsRef} titleTotalH={titleTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
-            <PageTrans transKey={router.asPath}>
-              <div className="card-inner">
+            <PageTrans transKey={router.asPath} type="list">
+              <div className="trans-inner">
                 {sortedData.length > 0 ? (
                   sortedData.map((data) => {
                     const techList = data.tech?.map((el) => Cat.tech[el])

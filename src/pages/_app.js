@@ -12,7 +12,7 @@ import '~/styles/fonts.css'
 export default function App({ Component, pageProps }) {
   // const [themeColor, setThemeColor] = useState(6);
   const [themeColor, setThemeColor] = useState({ color: '#252525', index: 5 })
-  useEffect(() => {}, [])
+  const [loadState, setLoadState] = useState(false)
 
   return (
     <>
@@ -24,13 +24,11 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ColorContext.Provider value={{ currColor: themeColor }}>
         {/* <Reset /> */}
-        <Cursor></Cursor>
+        <Cursor loadState={loadState} setLoadState={setLoadState} />
         <GlobalStyle />
-        {/* <Navbar themeColor={themeColor} setThemeColor={setThemeColor}></Navbar> */}
-        <Layout themeColor={themeColor} setThemeColor={setThemeColor}>
+        <Layout themeColor={themeColor} setThemeColor={setThemeColor} setLoadState={setLoadState}>
           <Component {...pageProps} />
         </Layout>
-        {/* <Footer></Footer> */}
       </ColorContext.Provider>
     </>
   )
