@@ -76,9 +76,14 @@ const GlobalStyle = createGlobalStyle`
       display: none;
     }
   }
-  body[data-page-name='home'] .layout {
-    padding-top: 0px;
-  }
+  body[data-page-name='home'] {
+    .layout {
+      padding-top: 0px;
+    }
+    .c-nav {
+      backdrop-filter: blur(0px);
+    }
+  } 
   .c-container {
     max-width: 1400px;
     margin: 0 auto;

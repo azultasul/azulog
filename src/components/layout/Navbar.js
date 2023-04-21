@@ -194,7 +194,7 @@ const Navbar = ({ themeColor, setThemeColor }) => {
   }, [themeColor])
 
   return (
-    <NavStyle color={themeColor.color}>
+    <NavStyle className="c-nav" color={themeColor.color}>
       <div className="nav-inner">
         <PaletteStyle>
           {Object.keys(Vars.textColor).map((el, idx) => (
