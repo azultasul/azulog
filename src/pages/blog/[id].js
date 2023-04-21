@@ -125,7 +125,7 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
           </InfoStyle>
           <MarkdownStyle>
             <ReactMarkdown
-              children={blogData?.contentHtml}
+              // children={blogData?.contentHtml}
               remarkPlugins={[remarkGfm, remarkHeadingId]}
               components={{
                 code({ node, inline, className, children, ...props }) {
@@ -139,7 +139,9 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
                   )
                 },
               }}
-            />
+            >
+              {blogData?.contentHtml}
+            </ReactMarkdown>
           </MarkdownStyle>
           <PostButtonStyle>
             <div className="prev">

@@ -18,6 +18,6 @@ const useMouseEvent = (ref) => {
         cursor?.classList.remove('click')
       })
     }
-  }, [])
+  }, [ref])
 }
 export default useMouseEvent

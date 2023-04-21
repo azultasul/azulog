@@ -23,7 +23,7 @@ const useWindow = () => {
       window.removeEventListener('resize', resizeHandler)
       document.removeEventListener('scroll', scrollHandler)
     }
-  }, [])
+  }, [resizeHandler, scrollHandler])
   return [windowSize, windowScroll]
 }
 export default useWindow

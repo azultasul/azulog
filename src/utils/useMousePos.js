@@ -35,7 +35,7 @@ const useMousePos = () => {
         clearTimeout(timeout)
       }, delay)
     }
-  }, [delta])
+  }, [timeCheck, lastState.t, delta])
 
   useEffect(() => {
     setDelta((prev) => {
@@ -44,7 +44,7 @@ const useMousePos = () => {
     setLastState((prev) => {
       return { ...prev, x: mousePos.x, y: mousePos.y }
     })
-  }, [mousePos])
+  }, [mousePos, lastState.x, lastState.y])
 
   useEffect(() => {
     document.addEventListener('mousemove', mouseMoveHandler)
@@ -52,7 +52,7 @@ const useMousePos = () => {
     return () => {
       document.removeEventListener('mousemove', mouseMoveHandler)
     }
-  }, [])
+  }, [mouseMoveHandler])
 
   return [mousePos, delta, speed]
 }

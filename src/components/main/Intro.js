@@ -143,7 +143,7 @@ const Intro = ({}) => {
 
       el.style.transform = `translate(${transPosX}px, ${transPosY}px) translate(-50%, -50%) rotate(${(0.5 - ratioW) * 30}deg)`
     })
-  }, [mousePos])
+  }, [mousePos, windowSize])
 
   return (
     <ColorContext.Consumer>

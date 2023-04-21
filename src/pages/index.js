@@ -44,7 +44,7 @@ const Home = ({ latestBlogData }) => {
             <div>
               <div>Frontend</div>
               <div>Developer</div>
-              <div>DASOL's blog</div>
+              <div>DASOL{`'`}s blog</div>
             </div>
           </AboutStyle>
           <BlogStyle>

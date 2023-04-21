@@ -159,7 +159,7 @@ const Intro = ({}) => {
 
       setInter((prev) => [...prev, interval])
     })
-  }, [mousePos])
+  }, [mousePos, delta, inter, speed, windowSize])
   return (
     <ColorContext.Consumer>
       {(color) => (
