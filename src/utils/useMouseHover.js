@@ -9,18 +9,12 @@ const useMouseEvent = (ref) => {
     ref?.current?.addEventListener('mouseout', () => {
       cursor?.classList.remove('click')
     })
-    ref?.current?.addEventListener('click', () => {
-      cursor?.classList.remove('click')
-    })
 
     return () => {
       ref?.current?.removeEventListener('mouseover', () => {
         cursor?.classList.add('click')
       })
       ref?.current?.removeEventListener('mouseout', () => {
-        cursor?.classList.remove('click')
-      })
-      ref?.current?.removeEventListener('click', () => {
         cursor?.classList.remove('click')
       })
     }

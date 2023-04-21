@@ -1,6 +1,7 @@
-import { useState, useEffect, createContext, Children } from 'react'
+import { useState, useRef, useEffect, createContext, Children } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import useMouseHover from '~/utils/useMouseHover'
 import Vars from '~/data/Variables'
 import ColorContext from '~/store/ColorContext'
 import CloseIcon from '~/assets/icons/close.svg'
@@ -85,14 +86,16 @@ const OpenContentsStyle = styled.div`
 `
 
 const OpenContents = ({ button, children }) => {
+  const ref = useRef(null)
   const [isOpen, setIsOpen] = useState(false)
+  const mouseEvent = useMouseHover(ref)
 
   return (
     <ColorContext.Consumer>
       {(color) => (
         <OpenContentsStyle isOpen={isOpen} color={color.currColor.color}>
           <div className="inner">
-            <button className="button" onClick={() => setIsOpen(!isOpen)}>
+            <button className="button" onClick={() => setIsOpen(!isOpen)} ref={ref}>
               {isOpen ? <CloseIcon width={18} height={18} viewBox="0 0 24 24" /> : button}
               {/* {isOpen ? 'Close' : 'Open'} */}
             </button>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import ColorContext from '~/store/ColorContext'
@@ -29,9 +30,14 @@ const MouseStyle = styled.div`
 `
 
 const Cursor = () => {
+  const router = useRouter()
   const [mousePos] = useMousePos()
   const [windowSize, windowScroll] = useWindow()
   const cursorRef = useRef(null)
+
+  useEffect(() => {
+    cursorRef.current.classList.remove('click')
+  }, [router.pathname])
 
   useEffect(() => {
     cursorRef.current.style.left = `${mousePos.x}px`
@@ -39,7 +45,7 @@ const Cursor = () => {
   }, [mousePos, windowScroll])
 
   useEffect(() => {
-    document.querySelectorAll('a, button, [data-hover="click"]').forEach((element) => {
+    document.querySelectorAll('a, button').forEach((element) => {
       element.addEventListener('mouseover', () => {
         cursorRef.current.classList.add('click')
       })
@@ -49,7 +55,7 @@ const Cursor = () => {
     })
 
     return () => {
-      document.querySelectorAll('a, button, [data-hover="click"]').forEach((element) => {
+      document.querySelectorAll('a, button').forEach((element) => {
         element.removeEventListener('mouseover', () => {
           cursorRef.current.classList.add('click')
         })
