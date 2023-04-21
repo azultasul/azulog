@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Falling from '~/components/Falling'
 import FilledTitle from '~/components/FilledTitle'
 import Intro from '~/components/main/Intro'
-import IntroTest from '~/components/main/IntroTest'
 import Marquee from '~/components/Marquee'
 import styled from 'styled-components'
 
@@ -40,8 +39,7 @@ const Home = ({ latestBlogData }) => {
     <ColorContext.Consumer>
       {(color) => (
         <MainStyle>
-          {/* <Intro></Intro> */}
-          <IntroTest></IntroTest>
+          <Intro></Intro>
           <AboutStyle className="c-container">
             <div>
               <div>Frontend</div>

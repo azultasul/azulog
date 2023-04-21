@@ -13,16 +13,17 @@ const IntroStyle = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
-  // .back {
-  //   position: absolute;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-55.6%, -50%);
-  //   font-family: 'chab';
-  //   font-size: 77vw;
-  //   line-height: 1;
-  //   letter-spacing: -10vw;
-  // }
+  margin-bottom: ${(props) => props.marginB}px;
+  .back {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55.6%, -50%);
+    font-family: 'chab';
+    font-size: 77vw;
+    line-height: 1;
+    letter-spacing: -10vw;
+  }
   .text {
     position: absolute;
     top: 50%;
@@ -126,45 +127,28 @@ const Intro = ({}) => {
   const ref = useRef(null)
   const [mousePos, delta, speed] = useMousePos()
   const [windowSize] = useWindow()
-  const [inter, setInter] = useState([])
+  const [marginB, setMarginB] = useState()
 
   useEffect(() => {
-    console.log('mousePos', delta, speed, inter)
-    inter.forEach((el) => {
-      clearInterval(el)
-    })
-    setInter([])
+    if (windowSize.h) {
+      setMarginB(Math.tan((13 * Math.PI) / 180) * windowSize.w)
+    }
+  }, [windowSize])
+
+  useEffect(() => {
     const ratioW = mousePos.x / windowSize.w
-    const ratioH = mousePos.y / windowSize.h
-    let x = Math.abs(delta.x)
-    let y = Math.abs(delta.y)
     ref.current.querySelectorAll('.text').forEach((el, index) => {
-      let transPosX = mousePos.x * (1 + ((index - 15) * delta.x) / 1000)
-      let transPosY = mousePos.y * (1 + ((index - 15) * delta.y) / 1000)
-      el.style.transform = `translate(${transPosX - windowSize.w / 2}px, ${transPosY - windowSize.h / 2}px) translate(-${ratioW * 100}%, -${ratioH * 100}%) rotate(${(0.5 - ratioW) * 30}deg)`
+      let transPosX = ((windowSize.w / 2 - mousePos.x) * index) / 40
+      let transPosY = ((windowSize.h / 2 - mousePos.y) * index) / 40
 
-      // if (x < 50 || y < 50) return
-      const interval = setInterval(() => {
-        transPosX = mousePos.x * (1 + ((index - 15) * x--) / 3000)
-        transPosY = mousePos.y * (1 + ((index - 15) * y--) / 3000)
-
-        if (x < 0 || y < 0) {
-          transPosX = mousePos.x
-          transPosY = mousePos.y
-
-          clearInterval(interval)
-        }
-        el.style.transform = `translate(${transPosX - windowSize.w / 2}px, ${transPosY - windowSize.h / 2}px) translate(-${ratioW * 100}%, -${ratioH * 100}%) rotate(${(0.5 - ratioW) * 30}deg)`
-      }, 50)
-
-      setInter((prev) => [...prev, interval])
+      el.style.transform = `translate(${transPosX}px, ${transPosY}px) translate(-50%, -50%) rotate(${(0.5 - ratioW) * 30}deg)`
     })
   }, [mousePos])
+
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <IntroStyle color={color.currColor.color}>
-          {/* <div className="back">23</div> */}
+        <IntroStyle color={color.currColor.color} marginB={marginB}>
           <div className="text-wrap" ref={ref}>
             {Array(16)
               .fill()
@@ -180,7 +164,7 @@ const Intro = ({}) => {
                 </div>
               ))}
           </div>
-          <Marquee></Marquee>
+          <Marquee text="FE Dev. DASOL's blog" emoji="🌀"></Marquee>
         </IntroStyle>
       )}
     </ColorContext.Consumer>

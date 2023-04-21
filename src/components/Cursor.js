@@ -13,7 +13,7 @@ const MouseStyle = styled.div`
   height: 13px;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: #3d88ed;
+  background: #008ce9;
   z-index: 999;
   pointer-events: none;
 
@@ -21,7 +21,7 @@ const MouseStyle = styled.div`
     width: 30px;
     height: 30px;
     background: transparent;
-    border: 2px solid #3d88ed;
+    border: 2px solid #008ce9;
 
     transition-property: width, height;
     transition-duration: 0.2s;
