@@ -27,13 +27,14 @@ const PageTransStyle = styled.div`
 `
 
 // exit -> enter -> enter-done
-const PageTrans = ({ transKey, transTimeout = 400, setLoadState, type = 'normal', children }) => {
+const PageTrans = ({ transKey, transTimeout = 400, setLoadState, type = 'normal', onEnterHandler, children }) => {
   return (
     <SwitchTransition mode="out-in">
       <CSSTransition
         key={transKey}
         onEnter={() => {
           window.scrollTo(0, 0)
+          onEnterHandler && onEnterHandler()
         }}
         timeout={transTimeout}
         addEndListener={(node, done) => node.addEventListener('transitionend', done, false)}

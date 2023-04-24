@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useRef, useState, useContext, createContext } from 'react'
+import { useEffect, useRef, useState, useCallback, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import LinedButton from '~/components/LinedButton'
 import PostCard from '~/components/PostCard'
@@ -94,11 +94,14 @@ const SortStyle = styled.div`
 const PostList = ({ post, data, titleTotalH, catName }) => {
   const router = useRouter()
   const contentsRef = useRef(null)
+  const infiniteRef = useRef(null)
   const [contentsMargin, setContentsMargin] = useState(0)
+  const [page, setPage] = useState(0)
 
   const [sortNumByDate, setSortNumByDate] = useState(0)
   const [sortedDataByCat, setSortedDataByCat] = useState([])
   const [sortedData, setSortedData] = useState([])
+  const [viewedData, setViewedData] = useState([])
 
   const [windowSize] = useWindow()
 
@@ -110,6 +113,36 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
 
     return sortedDataByDate
   }
+
+  const handleObserver = useCallback(
+    (entries) => {
+      const target = entries[0]
+      if (target.isIntersecting && sortedData.length > 0) {
+        setPage((prev) => prev + 1)
+      }
+    },
+    [sortedData]
+  )
+
+  useEffect(() => {
+    setPage(0)
+  }, [router])
+
+  useEffect(() => {
+    setViewedData(sortedData.slice(0, page * 10))
+  }, [sortedData, page])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      root: contentsRef.current,
+      threshold: 0.5,
+    })
+    infiniteRef.current && observer.observe(infiniteRef.current)
+
+    return () => {
+      observer && observer.disconnect()
+    }
+  }, [handleObserver])
 
   useEffect(() => {
     setSortedData([...sortDataByDate(sortedData)])
@@ -138,10 +171,16 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
       {(color) => (
         <ContentsStyle ref={contentsRef} titleTotalH={titleTotalH} contentsMargin={contentsMargin}>
           <div className="card-wrap">
-            <PageTrans transKey={router.asPath} type="list">
+            <PageTrans
+              transKey={[sortedDataByCat, sortNumByDate]}
+              type="list"
+              onEnterHandler={() => {
+                contentsRef.current.scrollTop = 0
+              }}
+            >
               <div className="trans-inner">
                 {sortedData.length > 0 ? (
-                  sortedData.map((data) => {
+                  viewedData.map((data) => {
                     const techList = data.tech?.map((el) => Cat.tech[el])
                     return <PostCard type={post} data={data} href={`/${post}/${data.id}`} tech={techList} key={data.id}></PostCard>
                   })
@@ -152,6 +191,7 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
                 )}
               </div>
             </PageTrans>
+            <div ref={infiniteRef} className="target"></div>
           </div>
           {windowSize.w > Vars.sizes.md ? (
             <SortStyle color={color.currColor.color} contentsMargin={contentsMargin}>
