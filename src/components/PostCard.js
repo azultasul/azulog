@@ -110,7 +110,7 @@ const PostCard = ({ type, data, href, tech, className }) => {
     <ColorContext.Consumer>
       {(color) => (
         <CardWrapStyle>
-          <Link href={href}>
+          <Link href={href} scroll={false}>
             <CardStyle ref={ref} color={color.currColor.color}>
               {data.thumb && (
                 <div className="image">

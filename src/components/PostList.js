@@ -96,7 +96,7 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
   const contentsRef = useRef(null)
   const infiniteRef = useRef(null)
   const [contentsMargin, setContentsMargin] = useState(0)
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(1)
 
   const [sortNumByDate, setSortNumByDate] = useState(0)
   const [sortedDataByCat, setSortedDataByCat] = useState([])
@@ -125,7 +125,7 @@ const PostList = ({ post, data, titleTotalH, catName }) => {
   )
 
   useEffect(() => {
-    setPage(0)
+    setPage(1)
   }, [router])
 
   useEffect(() => {
