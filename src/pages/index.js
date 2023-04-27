@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 import Falling from '~/components/Falling'
 import FilledTitle from '~/components/FilledTitle'
 import Intro from '~/components/main/Intro'
@@ -31,6 +32,24 @@ export async function getStaticProps() {
   }
 }
 const Home = ({ latestBlogData }) => {
+  const NEXT_SEO = {
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: 'https://azulog.vercel.app/',
+      title: 'Azulog',
+      site_name: 'Azulog',
+      images: [
+        {
+          url: 'https://azulog.vercel.app/images/thumb/azulog.jpg',
+          width: 400,
+          height: 400,
+          alt: '아쑬로그 이미지',
+        },
+      ],
+    },
+  }
+
   useEffect(() => {
     document.body.dataset.pageName = 'home'
   }, [])
@@ -38,30 +57,33 @@ const Home = ({ latestBlogData }) => {
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <MainStyle>
-          <Intro></Intro>
-          <AboutStyle className="c-container">
-            <div>
-              <div>Frontend</div>
-              <div>Developer</div>
-              <div>DASOL{`'`}s blog</div>
-            </div>
-          </AboutStyle>
-          <BlogStyle>
-            {latestBlogData.map((blog, index) => (
-              <Link href={`/blog/${blog.id}`} key={index} scroll={false}>
-                {blog.title}
-              </Link>
-            ))}
-          </BlogStyle>
-          <WorkStyle>
-            {Works.filter((el) => el.star).map((work, index) => (
-              <Link href={`/work/${work.id}`} key={index} scroll={false}>
-                {work.title}
-              </Link>
-            ))}
-          </WorkStyle>
-        </MainStyle>
+        <>
+          <NextSeo {...NEXT_SEO} />
+          <MainStyle>
+            <Intro></Intro>
+            <AboutStyle className="c-container">
+              <div>
+                <div>Frontend</div>
+                <div>Developer</div>
+                <div>DASOL{`'`}s blog</div>
+              </div>
+            </AboutStyle>
+            <BlogStyle>
+              {latestBlogData.map((blog, index) => (
+                <Link href={`/blog/${blog.id}`} key={index} scroll={false}>
+                  {blog.title}
+                </Link>
+              ))}
+            </BlogStyle>
+            <WorkStyle>
+              {Works.filter((el) => el.star).map((work, index) => (
+                <Link href={`/work/${work.id}`} key={index} scroll={false}>
+                  {work.title}
+                </Link>
+              ))}
+            </WorkStyle>
+          </MainStyle>
+        </>
       )}
     </ColorContext.Consumer>
   )

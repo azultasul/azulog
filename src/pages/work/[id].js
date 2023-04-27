@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
+import { NextSeo } from 'next-seo'
 import LinedButton from '~/components/LinedButton'
 import ColorContext from '~/store/ColorContext'
 
@@ -60,7 +61,7 @@ const ContentsStyle = styled(MarkdownStyle)`
   }
   .work {
     display: flex;
-    align-items: center;
+    // align-items: center;
     margin-top: 50px;
     ${Vars.media.md`
       flex-direction: column-reverse;
@@ -126,8 +127,10 @@ const ContentsStyle = styled(MarkdownStyle)`
           &-wrap {
             padding-left: 0px;
             padding-right: 24px;
+            padding-top: 24px;
             ${Vars.media.md`
               padding-right: 0px;
+              padding-top: 0px;
             `};
           }
         }
@@ -167,6 +170,24 @@ const WorkDetail = ({ work }) => {
   const [endDate] = useDate(work.endDate)
   const [term] = useDate(work.date, work.endDate)
 
+  const NEXT_SEO = {
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: `https://azulog.vercel.app/work/${work.id}`,
+      title: `${work.title}`,
+      site_name: 'Azulog',
+      images: [
+        {
+          url: work.thumb ? `https://azulog.vercel.app/images/work/${work.id}/thumb.jpeg` : 'https://azulog.vercel.app/images/thumb/azulog.jpg',
+          width: 400,
+          height: 400,
+          alt: '작업물 대표 이미지',
+        },
+      ],
+    },
+  }
+
   useEffect(() => {
     document.body.dataset.pageName = 'detail'
   }, [])
@@ -174,72 +195,74 @@ const WorkDetail = ({ work }) => {
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <WorkStyle>
-          <FilledTitle title={work.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
-          <InfoStyle>
-            {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
-            <br />
-            {work.tech?.map((cat, idx) => (
-              <LinedButton key={idx} type="link" href={`/work?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
-            ))}
-          </InfoStyle>
-          <ContentsStyle>
-            <h1>설명</h1>
-            <hr />
-            <div className="info-wrap">
-              <div className="info">
-                <span className="info__title">📚 기간</span> | {`${startDate.ko} ~ ${endDate ? `${endDate.ko} (${term.termMonth}개월)` : ''} `}
-              </div>
-              <div className="info">
-                <span className="info__title">📚 클라이언트</span> | {work.client}
-              </div>
-              <div className="info">
-                <span className="info__title">📚 설명</span> | {work.desc}
-              </div>
-              <div className="info">
-                <span className="info__title">📚 배운점</span>
-                <ul className="info__learn">
-                  {work.learn.map((el, idx) => (
-                    // <li key={idx}>{el}</li>
-                    <li key={idx} dangerouslySetInnerHTML={{ __html: el }} />
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {work.work && (
-              <>
-                <h1>작업 내용</h1>
-                <hr />
-                <div className="work-wrap">
-                  {work.work.map((el, idx) => (
-                    <div className="work" key={idx}>
-                      {el.text ? (
-                        <div className="work__text">{el.text}</div>
-                      ) : (
-                        <>
-                          <div className="work__image">
-                            {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
-                            {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" unoptimized width="100" height="100" />}
-                          </div>
-                          <div className="work__desc-wrap">
-                            {el.title && (
-                              <h2 className="work__title">
-                                {el.number && <span className="work__number">{el.number}</span>}
-                                {el.title}
-                              </h2>
-                            )}
-                            {el.desc && <div className="work__desc">{el.desc}</div>}
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  ))}
+        <>
+          <NextSeo {...NEXT_SEO} />
+          <WorkStyle>
+            <FilledTitle title={work.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
+            <InfoStyle>
+              {work.url && <LinedButton type="link" href={work.url} style="lined" title="사이트 보기" className="site"></LinedButton>}
+              <br />
+              {work.tech?.map((cat, idx) => (
+                <LinedButton key={idx} type="link" href={`/work?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
+              ))}
+            </InfoStyle>
+            <ContentsStyle>
+              <h1>설명</h1>
+              <hr />
+              <div className="info-wrap">
+                <div className="info">
+                  <span className="info__title">📚 기간</span> | {`${startDate.ko} ~ ${endDate ? `${endDate.ko} (${term.termMonth}개월)` : ''} `}
                 </div>
-              </>
-            )}
-          </ContentsStyle>
-        </WorkStyle>
+                <div className="info">
+                  <span className="info__title">📚 클라이언트</span> | {work.client}
+                </div>
+                <div className="info">
+                  <span className="info__title">📚 설명</span> | {work.desc}
+                </div>
+                <div className="info">
+                  <span className="info__title">📚 배운점</span>
+                  <ul className="info__learn">
+                    {work.learn.map((el, idx) => (
+                      // <li key={idx}>{el}</li>
+                      <li key={idx} dangerouslySetInnerHTML={{ __html: el }} />
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              {work.work && (
+                <>
+                  <h1>작업 내용</h1>
+                  <hr />
+                  <div className="work-wrap">
+                    {work.work.map((el, idx) => (
+                      <div className="work" key={idx}>
+                        {el.text ? (
+                          <div className="work__text">{el.text}</div>
+                        ) : (
+                          <>
+                            <div className="work__image">
+                              {el.video && <video src={`/images/work/${work.id}/${el.video}`} autoPlay muted loop playsInline width="100%"></video>}
+                              {el.image && <Image src={`/images/work/${work.id}/${el.image}`} alt="alt" unoptimized width="100" height="100" />}
+                            </div>
+                            <div className="work__desc-wrap">
+                              {el.title && (
+                                <h2 className="work__title">
+                                  {el.number && <span className="work__number">{el.number}</span>}
+                                  {el.title}
+                                </h2>
+                              )}
+                              {el.desc && <div className="work__desc">{el.desc}</div>}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </ContentsStyle>
+          </WorkStyle>
+        </>
       )}
     </ColorContext.Consumer>
   )

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useContext, createContext } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 import LinedButton from '~/components/LinedButton'
 import ColorContext from '~/store/ColorContext'
 import ReactMarkdown from 'react-markdown'
@@ -107,6 +108,24 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
   const [startDate] = useDate(blogData.date)
   // console.log('allPostsData', allPostsData)
 
+  const NEXT_SEO = {
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: `https://azulog.vercel.app/blog/${blogData.id}`,
+      title: `${blogData.title}`,
+      site_name: 'Azulog',
+      images: [
+        {
+          url: blogData.thumb ? `https://azulog.vercel.app${blogData.thumb}` : 'https://azulog.vercel.app/images/thumb/azulog.jpg',
+          width: 400,
+          height: 400,
+          alt: '블로그 대표 이미지',
+        },
+      ],
+    },
+  }
+
   useEffect(() => {
     document.body.dataset.pageName = 'detail'
     document.body.dataset.pageType = 'blog'
@@ -115,57 +134,60 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
   return (
     <ColorContext.Consumer>
       {(color) => (
-        <BlogStyle>
-          <FilledTitle title={blogData.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
-          <InfoStyle color={color.currColor.color}>
-            <div className="date">{startDate.ko}</div>
-            {blogData.tech.map((cat, idx) => (
-              <LinedButton key={idx} type="link" href={`/blog?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
-            ))}
-          </InfoStyle>
-          <MarkdownStyle>
-            <ReactMarkdown
-              // children={blogData?.contentHtml}
-              remarkPlugins={[remarkGfm, remarkHeadingId]}
-              components={{
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '')
-                  return !inline && match ? (
-                    <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={oneLight}>
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code {...props}>{children}</code>
-                  )
-                },
-              }}
-            >
-              {blogData?.contentHtml}
-            </ReactMarkdown>
-          </MarkdownStyle>
-          <PostButtonStyle>
-            <div className="prev">
-              {currPostsIndex > 0 && (
-                <Link href={`/blog/${allPostsData[currPostsIndex - 1].id}`} scroll={false}>
-                  <LinedButton style="filled" title="이전 글" direction="left">
-                    <div className="title">{allPostsData[currPostsIndex - 1].title}</div>
-                  </LinedButton>
-                </Link>
-              )}
-            </div>
-            <div className="next">
-              {currPostsIndex < allPostsData.length - 1 && (
-                <Link href={`/blog/${allPostsData[currPostsIndex + 1].id}`} scroll={false}>
-                  <LinedButton style="filled" title="다음 글">
-                    <div className="title">{allPostsData[currPostsIndex + 1].title}</div>
-                  </LinedButton>
-                </Link>
-              )}
-            </div>
-          </PostButtonStyle>
-          <Comments></Comments>
-          <TableOfContents toc={blogData.toc} />
-        </BlogStyle>
+        <>
+          <NextSeo {...NEXT_SEO} />
+          <BlogStyle>
+            <FilledTitle title={blogData.title} fontSize={['50px', '34px']} topGap="0px" lineHeight="1.5" />
+            <InfoStyle color={color.currColor.color}>
+              <div className="date">{startDate.ko}</div>
+              {blogData.tech.map((cat, idx) => (
+                <LinedButton key={idx} type="link" href={`/blog?tech=${cat}`} style="filled" title={`#${Cat.tech[cat]}`}></LinedButton>
+              ))}
+            </InfoStyle>
+            <MarkdownStyle>
+              <ReactMarkdown
+                // children={blogData?.contentHtml}
+                remarkPlugins={[remarkGfm, remarkHeadingId]}
+                components={{
+                  code({ node, inline, className, children, ...props }) {
+                    const match = /language-(\w+)/.exec(className || '')
+                    return !inline && match ? (
+                      <SyntaxHighlighter language={match[1]} PreTag="div" {...props} style={oneLight}>
+                        {String(children).replace(/\n$/, '')}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code {...props}>{children}</code>
+                    )
+                  },
+                }}
+              >
+                {blogData?.contentHtml}
+              </ReactMarkdown>
+            </MarkdownStyle>
+            <PostButtonStyle>
+              <div className="prev">
+                {currPostsIndex > 0 && (
+                  <Link href={`/blog/${allPostsData[currPostsIndex - 1].id}`} scroll={false}>
+                    <LinedButton style="filled" title="이전 글" direction="left">
+                      <div className="title">{allPostsData[currPostsIndex - 1].title}</div>
+                    </LinedButton>
+                  </Link>
+                )}
+              </div>
+              <div className="next">
+                {currPostsIndex < allPostsData.length - 1 && (
+                  <Link href={`/blog/${allPostsData[currPostsIndex + 1].id}`} scroll={false}>
+                    <LinedButton style="filled" title="다음 글">
+                      <div className="title">{allPostsData[currPostsIndex + 1].title}</div>
+                    </LinedButton>
+                  </Link>
+                )}
+              </div>
+            </PostButtonStyle>
+            <Comments></Comments>
+            <TableOfContents toc={blogData.toc} />
+          </BlogStyle>
+        </>
       )}
     </ColorContext.Consumer>
   )

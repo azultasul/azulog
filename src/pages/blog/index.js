@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useRef, useState, useContext, createContext } from 'react'
+import { NextSeo } from 'next-seo'
 import FilledTitle from '~/components/FilledTitle'
 import PostList from '~/components/PostList'
 
@@ -23,26 +24,48 @@ const PageStyle = styled.div`
 const BlogList = ({ allPostsData }) => {
   const [titleTotalH, setTitleTotalH] = useState(null)
 
+  const NEXT_SEO = {
+    canonical: 'https://azulog.vercel.app/blog',
+    openGraph: {
+      type: 'website',
+      locale: 'ko_KR',
+      url: `https://azulog.vercel.app/blog`,
+      title: '블로그 리스트~',
+      site_name: 'Azulog',
+      images: [
+        {
+          url: 'https://azulog.vercel.app/images/thumb/azulog.jpg',
+          width: 400,
+          height: 400,
+          alt: '블로그 리스트 이미지',
+        },
+      ],
+    },
+  }
+
   useEffect(() => {
     document.body.dataset.pageName = 'list'
   }, [])
 
   return (
-    <PageStyle titleTotalH={titleTotalH}>
-      <FilledTitle
-        type="lined"
-        title="BLOG"
-        position="fixed"
-        top={`${Vars.frameTop}px`}
-        left="50%"
-        fontSize={['150px', '70px']}
-        topGap="10px"
-        lineHeight="1"
-        setTitleTotalH={(el) => setTitleTotalH(el)}
-        page="list"
-      />
-      <PostList post="blog" data={allPostsData} titleTotalH={titleTotalH} catName={['tech', 'series']} />
-    </PageStyle>
+    <>
+      <NextSeo {...NEXT_SEO} />
+      <PageStyle titleTotalH={titleTotalH}>
+        <FilledTitle
+          type="lined"
+          title="BLOG"
+          position="fixed"
+          top={`${Vars.frameTop}px`}
+          left="50%"
+          fontSize={['150px', '70px']}
+          topGap="10px"
+          lineHeight="1"
+          setTitleTotalH={(el) => setTitleTotalH(el)}
+          page="list"
+        />
+        <PostList post="blog" data={allPostsData} titleTotalH={titleTotalH} catName={['tech', 'series']} />
+      </PageStyle>
+    </>
   )
 }
 
