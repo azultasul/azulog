@@ -109,6 +109,7 @@ const BlogDetail = ({ blogData, allPostsData, currPostsIndex }) => {
   // console.log('allPostsData', allPostsData)
 
   const NEXT_SEO = {
+    description: '아쑬로그 블로그 글',
     openGraph: {
       type: 'website',
       locale: 'ko_KR',

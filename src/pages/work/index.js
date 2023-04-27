@@ -15,12 +15,13 @@ const WorkList = () => {
   const [titleTotalH, setTitleTotalH] = useState(null)
 
   const NEXT_SEO = {
+    description: '아쑬로그 작업물 리스트',
     canonical: 'https://azulog.vercel.app/work',
     openGraph: {
       type: 'website',
       locale: 'ko_KR',
       url: `https://azulog.vercel.app/work/`,
-      title: '작업물 리스트~',
+      title: 'Work list',
       site_name: 'Azulog',
       images: [
         {

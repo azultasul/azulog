@@ -25,12 +25,13 @@ const BlogList = ({ allPostsData }) => {
   const [titleTotalH, setTitleTotalH] = useState(null)
 
   const NEXT_SEO = {
+    description: '아쑬로그 블로그 리스트',
     canonical: 'https://azulog.vercel.app/blog',
     openGraph: {
       type: 'website',
       locale: 'ko_KR',
       url: `https://azulog.vercel.app/blog`,
-      title: '블로그 리스트~',
+      title: 'Blog list',
       site_name: 'Azulog',
       images: [
         {

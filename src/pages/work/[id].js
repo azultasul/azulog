@@ -171,6 +171,7 @@ const WorkDetail = ({ work }) => {
   const [term] = useDate(work.date, work.endDate)
 
   const NEXT_SEO = {
+    description: `${work.desc}`,
     openGraph: {
       type: 'website',
       locale: 'ko_KR',

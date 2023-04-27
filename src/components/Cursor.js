@@ -17,6 +17,9 @@ const MouseStyle = styled.div`
   background: #0736ea;
   z-index: 999;
   pointer-events: none;
+  ${Vars.media.sm`
+    display: none;
+  `};
 
   &.click {
     width: 30px;

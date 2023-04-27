@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
 
   const DEFAULT_SEO = {
     title: 'Azulog',
-    description: `AzulTasul's blog`,
+    description: `AzulTasul's blog / 따술의 블로그, 아쑬로그`,
     twitter: {
       handle: '@AzulTasul',
       site: '@Azulog',
