@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
+import Vars from '~/data/Variables'
 import ColorContext from '~/store/ColorContext'
 import useMousePos from '~/utils/useMousePos'
 import useWindow from '~/utils/useWindow'
