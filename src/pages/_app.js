@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react'
+import Head from 'next/head'
 import { DefaultSeo } from 'next-seo'
 import GlobalStyle from '~/styles/GlobalStyle'
 import { Reset } from 'styled-reset'
@@ -26,6 +27,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <link rel="icon" href="/images/thumb/azulog.png" />
+      </Head>
       <DefaultSeo {...DEFAULT_SEO} />
       <ColorContext.Provider value={{ currColor: themeColor }}>
         {/* <Reset /> */}
